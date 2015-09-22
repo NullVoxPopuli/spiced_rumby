@@ -1,3 +1,9 @@
+## Spiced Gracken Specific
+settings.json
+serverlist.json
+
+
+## default ruby git ignore
 *.gem
 *.rbc
 /.config
