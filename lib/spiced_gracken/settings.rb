@@ -25,14 +25,14 @@ module SpicedGracken
       begin
         @settings.merge!(JSON.parse(f))
       rescue Exception => e
-        ap e.message
-        ap "writing defaults..."
+        puts e.message.colorize(:red)
+        puts "writing defaults..."
         save
       end
     end
 
     def display
-      ap @settings
+      puts @settings.inspect
     end
 
     def as_hash

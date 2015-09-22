@@ -17,8 +17,8 @@ module SpicedGracken
               message = nil
               # figure out what to do
               case type
-              when "text"
-                message = Message::Text.new
+              when Message::CHAT
+                message = Message::Chat.new
                 message.payload = data
               else
                 puts "message recieved and not recognized...".colorize(:red)

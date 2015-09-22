@@ -1,9 +1,7 @@
 module SpicedGracken
   module Message
-    class Text
+    class Chat
     	include Encryptor
-
-    	TYPE = "text"
 
     	attr_accessor :payload, :time_recieved
 
@@ -13,7 +11,7 @@ module SpicedGracken
     		location: "localhost")
 
     		@payload = {
-    			"type" => TYPE,
+    			"type" => CHAT,
     			"message" => message,
     			"client" => SpicedGracken::NAME,
     			"client_version" => SpicedGracken::VERSION,
