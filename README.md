@@ -1,4 +1,5 @@
-# Spiced Gracken, a Rum Client by NullVoxPopuli
+# Spiced Gracken
+a [RUM](https://github.com/NullVoxPopuli/Rum) client in Ruby
 
 # Installation
 
