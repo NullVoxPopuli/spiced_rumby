@@ -1,7 +1,8 @@
 module SpicedGracken
   class CLI
     class Input
-
+      WHISPER = '@'
+      COMMAND = '/'
       attr_accessor :_input, :_cli, :_settings
 
       class << self
@@ -9,6 +10,8 @@ module SpicedGracken
           klass =
             if is_command(input)
               CLI::Command
+            elsif is_whisper?(input)
+              CLI::Whisper
             else
               CLI::Input
             end
@@ -17,7 +20,11 @@ module SpicedGracken
         end
 
         def is_command(input)
-          input[0,1] == "/"
+          input[0,1] == COMMAND
+        end
+
+        def is_whisper?(input)
+          input[0,1] == WHISPER
         end
       end
 
@@ -28,18 +35,27 @@ module SpicedGracken
       end
 
       def handle
-        if _cli.client and !_cli.client.socket.closed?
+        servers = SpicedGracken.server_list.servers
+        if !servers.empty?
+        # if _cli.client and !_cli.client.socket.closed?
           m = Message::Chat.new(
             message: _input,
-            name_of_sender: _settings[:alias]
+            name_of_sender: _settings[:alias],
+            location: _cli.server_address
           )
           m.display
           data = m.render
 
-          _cli.client.send(message: data)
-          print "\n"
+          # if sending to all, iterate thorugh list of
+          # servers, and send to each one
+          servers.each do |entry|
+            Http::Client.send_to_and_close(
+              address: entry['address'],
+              payload: data
+            )
+          end
         else
-          puts "start listening, and then start a chat".colorize(:yellow)
+          puts "you have no servers".colorize(:yellow)
         end
       end
     end

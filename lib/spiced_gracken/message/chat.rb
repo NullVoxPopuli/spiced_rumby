@@ -1,9 +1,7 @@
 module SpicedGracken
   module Message
-    class Chat
+    class Chat < Base
     	include Encryptor
-
-    	attr_accessor :payload, :time_recieved
 
     	def initialize(
     		message: "",
@@ -25,18 +23,11 @@ module SpicedGracken
     	end
 
     	def display
-    		time_recieved = @time_recieved.strftime("%e/%m/%y %H:%I:%M").colorize(:magenta)
+    		time_recieved = @time_recieved.strftime("%e/%m/%y %H:%I:%M").colorize(:light_magenta)
     		s = "#{time_recieved} "
     		s << "#{payload["sender"]["name"].colorize(:cyan)} > "
     		s << "#{payload["message"]}"
     		puts s
-    	end
-
-    	# this message should be called immediately
-    	# before sending to the whomever
-    	def render
-    		@payload[:time_sent] = Time.now
-    		@payload.to_json
     	end
     end
   end

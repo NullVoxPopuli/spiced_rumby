@@ -7,7 +7,7 @@ module SpicedGracken
     DEFAULT_SETTINGS = {
       "alias" => "alias",
       "port" => "2008",
-      "default_host" => "localhost"
+      "ip" => "localhost"
     }
 
     def initialize
@@ -21,7 +21,7 @@ module SpicedGracken
     end
 
     def load
-      f = File.read(FILENAME)
+      f = File.read(filename)
       begin
         @settings.merge!(JSON.parse(f))
       rescue Exception => e
@@ -41,11 +41,11 @@ module SpicedGracken
 
     def save
       # backup
-      File.rename(FILENAME, FILENAME + ".bak") if exists = exists?
+      File.rename(filename, filename + ".bak") if exists = exists?
       # write
-      File.open( FILENAME, "w" ){ |f| f.syswrite(@settings.to_json); f.close }
+      File.open(filename, "w" ){ |f| f.syswrite(@settings.to_json); f.close }
       # remove backup
-      File.delete( FILENAME + ".bak") if exists
+      File.delete(filename + ".bak") if exists
     end
 
     def set(key, with: value)
@@ -55,7 +55,11 @@ module SpicedGracken
     end
 
     def exists?
-      File.exist?(FILENAME)
+      File.exist?(filename)
+    end
+
+    def filename
+      FILENAME
     end
   end
 end

@@ -11,13 +11,47 @@ module SpicedGracken
       EXIT = 'exit'
       QUIT = 'quit'
       LISTEN = 'listen'
+      STOP_LISTENING = 'stoplistening'
       CONNECT = 'connect'
       CHAT = 'chat'
+      ADD = 'add'
+      REMOVE = 'remove'
+      RM = 'rm'
+      SERVERS = 'servers'
+      SERVER = 'server'
+      WHO = 'who'
 
 
       def handle
         # these could even be split up in to classes if they needed to be
         case command
+        when STOP_LISTENING
+          _cli.close_server
+        when SERVERS, SERVER
+          case config_command
+          when ADD
+            if is_valid_add_command?
+              address = command_args[2]
+
+              SpicedGracken.server_list.add(address)
+            else
+              puts "add requires an address and port"
+            end
+          when REMOVE, RM
+            if is_valid_remove_command?
+              field, value = config_set_args
+
+              SpicedGracken.server_list.remove(field, value)
+            else
+              puts "requires address or alias. ex: /server rm alias evan"
+            end
+          else
+            if command_args.length > 0
+              SpicedGracken.server_list.display_addresses
+            else
+              puts "server command not implemented...".colorize(:red)
+            end
+          end
         when CONFIG
           case config_command
           when SET
@@ -68,6 +102,14 @@ module SpicedGracken
 
       def is_valid_set_command?
         config_command == SET && command_args.length == 4
+      end
+
+      def is_valid_add_command?
+        config_command == ADD && command_args.length == 3
+      end
+
+      def is_valid_remove_command?
+        (config_command == REMOVE || config_command == RM) && command_args.length == 4
       end
 
     end
