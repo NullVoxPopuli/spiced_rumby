@@ -6,6 +6,7 @@ require 'colorize'
 
 require 'spiced_gracken/version'
 require 'spiced_gracken/help'
+require 'spiced_gracken/hash_file'
 require 'spiced_gracken/settings'
 require 'spiced_gracken/server_list'
 require 'spiced_gracken/room'

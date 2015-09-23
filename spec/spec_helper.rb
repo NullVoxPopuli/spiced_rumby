@@ -6,9 +6,7 @@ require "pry-byebug" # binding.pry to debug!
 # Coverage
 require "codeclimate-test-reporter"
 ENV['CODECLIMATE_REPO_TOKEN'] = ""
-CodeClimate::TestReporter.start
-
-require 'rspec/autorun'
+# CodeClimate::TestReporter.start
 
 # This Gem
 require "spiced_gracken"
@@ -24,7 +22,6 @@ Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each {|file|
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
 

@@ -1,37 +1,17 @@
 module SpicedGracken
-  class ServerList
+  class ServerList < HashFile
     FILENAME = "serverlist.json"
     DEFAULT_SETTINGS = { 'servers' => [] }
 
+    attr_accessor :_active_servers
+
     def initialize
-      @settings = DEFAULT_SETTINGS
-      # check if the file exists
-      exists? ? load : save
+      @default_settings = DEFAULT_SETTINGS
+      @filename = FILENAME
 
-      @active_servers = @settings['servers']
-    end
+      super
 
-    def [](key)
-      @settings[key.to_s]
-    end
-
-    def load
-      f = File.read(filename)
-      begin
-        @settings.merge!(JSON.parse(f))
-      rescue Exception => e
-        puts e.message.colorize(:red)
-        puts "writing defaults..."
-        save
-      end
-    end
-
-    def display
-      puts @settings.inspect
-    end
-
-    def as_hash
-      @settings
+      @active_servers = self['servers']
     end
 
     def servers
@@ -39,7 +19,7 @@ module SpicedGracken
     end
 
     def active_servers
-      @active_servers || []
+      _active_servers || []
     end
 
     def inactive!(address)
@@ -51,37 +31,7 @@ module SpicedGracken
         new_servers << entry unless match
       end
 
-      @active_servers = new_servers
-    end
-
-    def load
-      f = File.read(filename)
-      begin
-        @settings.merge!(JSON.parse(f))
-      rescue Exception => e
-        puts e.message.colorize(:red)
-        puts "writing defaults..."
-        save
-      end
-    end
-
-    def save
-      # backup
-      File.rename(filename, filename + ".bak") if exists = exists?
-      # write
-      File.open(filename, "w" ){ |f| f.syswrite(@settings.to_json); f.close }
-      # remove backup
-      File.delete(filename + ".bak") if exists
-    end
-
-    def set(key, with: value)
-      @settings[key] = with
-      save
-      puts "#{key} set to #{with}\n"
-    end
-
-    def exists?
-      File.exist?(filename)
+      self._active_servers = new_servers
     end
 
     # @param [string] address ip:port
@@ -143,10 +93,6 @@ module SpicedGracken
 
     def server_exists?(address)
       !!find_by(address: address)
-    end
-
-    def filename
-      FILENAME
     end
 
     def display_addresses
