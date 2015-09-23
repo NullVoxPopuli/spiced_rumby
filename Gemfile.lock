@@ -1,14 +1,12 @@
 PATH
   remote: .
   specs:
-    spiced_gracken (0.1)
-      awesome_print
+    spiced_gracken (0.1.1)
       colorize
 
 GEM
   remote: https://rubygems.org/
   specs:
-    awesome_print (1.6.1)
     byebug (5.0.0)
       columnize (= 0.9.0)
     codeclimate-test-reporter (0.4.8)
@@ -57,4 +55,4 @@ DEPENDENCIES
   spiced_gracken!
 
 BUNDLED WITH
-   1.10.3
+   1.10.6

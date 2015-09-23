@@ -11,9 +11,10 @@ module SpicedGracken
     }
 
     def initialize
-      @settings = DEFAULT_SETTINGS
       # check if the file exists
       exists? ? load : save
+      
+      @settings ||= DEFAULT_SETTINGS
     end
 
     def [](key)
