@@ -4,18 +4,18 @@ module SpicedGracken
     class ActiveServerList
       attr_accessor :_list
 
+      delegate :count, to: :_list
+      delegate :first, to: :_list
+      delegate :last, to: :_list
+
       def initialize
-        servers = SpicedGracken.server_list.servers
+        servers = SpicedGracken.server_list.as_entries
         self._list = servers
       end
 
       def clear!
         self._list ||= []
         self._list.clear
-      end
-
-      def count
-        _list.count
       end
 
       def remove(address: nil, alias_name: nil, uid: nil)
@@ -56,7 +56,7 @@ module SpicedGracken
       end
 
       def contains?(alias_name: nil, address: nil, uid: nil)
-        _list.each do |entry|
+        _list.each  do |entry|
           found = (
             (alias_name && entry.alias_name == alias_name) ||
             (address && entry.address == address) ||

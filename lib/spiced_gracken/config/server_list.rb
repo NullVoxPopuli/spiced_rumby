@@ -4,8 +4,6 @@ module SpicedGracken
       FILENAME = 'serverlist.json'
       DEFAULT_SETTINGS = { 'servers' => [] }
 
-      attr_accessor :_active_servers
-
       def initialize
         @default_settings = DEFAULT_SETTINGS
         @filename = FILENAME
@@ -20,6 +18,21 @@ module SpicedGracken
 
       def servers
         self['servers'] ||= []
+      end
+
+      def as_entries
+        unless @entries
+          @entries = servers.map do |s|
+            Entry.new(
+              address: s['address'],
+              alias_name: s['alias_name'],
+              uid: s['uid'],
+              public_key: s['public_key']
+            )
+          end
+        end
+
+        @entries
       end
 
       # @param [Entry] entry

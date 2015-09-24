@@ -5,9 +5,12 @@ describe SpicedGracken::Config::ActiveServerList do
   let(:list){ klass.new }
 
   before(:each) do
+    allow_any_instance_of(klass).to receive(:load){}
     allow(SpicedGracken).to receive(:server_list) do
       SpicedGracken::Config::ServerList.new
     end
+
+    list.clear!
   end
 
   context 'as_array' do
@@ -63,7 +66,18 @@ describe SpicedGracken::Config::ActiveServerList do
   end
 
   context 'add' do
+    it 'adds an entry' do
+      entry = {
+        address: '10.10.10.10:1010',
+        alias_name: 'test',
+        uid: '1234',
+        public_key: 'abcde'
+      }
+      list.add(entry)
 
+      expect(list.count).to eq 1
+      expect(list.first.attributes).to eq entry
+    end
   end
 
   context 'update' do

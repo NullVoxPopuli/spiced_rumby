@@ -3,6 +3,7 @@ require 'socket'
 require 'json'
 require 'date'
 require 'colorize'
+require 'active_support/core_ext/module/delegation'
 
 require 'spiced_gracken/version'
 require 'spiced_gracken/help'
