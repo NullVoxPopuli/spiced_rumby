@@ -25,7 +25,7 @@ module SpicedGracken
         end
       end
 
-      def add(address: nil, alias_name: nil, uid: nil, public_key: nil)
+      def add(address: nil, alias_name: nil, uid: nil, public_key: nil, entry: nil)
         if contains?(uid: uid)
           update(uid, address: address, alias_name: alias_name)
         else
@@ -34,7 +34,7 @@ module SpicedGracken
             address: address,
             uid: uid,
             public_key: public_key
-          )
+          ) unless entry
 
           _list << entry
         end

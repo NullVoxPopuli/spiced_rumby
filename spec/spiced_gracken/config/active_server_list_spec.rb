@@ -78,6 +78,23 @@ describe SpicedGracken::Config::ActiveServerList do
       expect(list.count).to eq 1
       expect(list.first.attributes).to eq entry
     end
+
+    it 'updates an existing entry' do
+      entry = SpicedGracken::Config::Entry.new(
+          address: '10.10.10.10:1010',
+          alias_name: 'test',
+          uid: '1234',
+          public_key: 'abcde'
+        )
+
+      list.add(uid: entry.uid, entry: entry)
+
+      entry.alias_name = 'test2'
+      list.add(uid: entry.uid, entry: entry)
+
+      expect(list.count).to eq 1
+      expect(list.first.alias_name).to eq 'test2'
+    end
   end
 
   context 'update' do
