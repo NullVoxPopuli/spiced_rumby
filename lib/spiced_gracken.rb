@@ -25,6 +25,7 @@ module SpicedGracken
   def start
     @@settings = Config::Settings.new
     @@server_list = Config::ServerList.new
+    @@active_servers = Config::ActiveServerList.new
 
     # start the user interface
     # interfaces are responsible for creating the client and server
@@ -38,5 +39,9 @@ module SpicedGracken
 
   def self.server_list
     @@server_list
+  end
+
+  def active_server_list
+    @@active_servers
   end
 end

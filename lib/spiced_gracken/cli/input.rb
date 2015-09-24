@@ -41,13 +41,16 @@ module SpicedGracken
           m = Message::Chat.new(
             message: _input,
             name_of_sender: _settings[:alias],
-            location: _cli.server_address
+            location: _cli.server_address,
+            uid: _settings[:uid]
           )
           m.display
           data = m.render
 
           # if sending to all, iterate thorugh list of
           # servers, and send to each one
+          # TODO: do this async so that one server doesn't block
+          # the rest of the servers from receiving the messages
           servers.each do |entry|
             Http::Client.send_to_and_close(
               address: entry['address'],

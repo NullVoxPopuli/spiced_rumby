@@ -1,6 +1,6 @@
 module SpicedGracken
   module Message
-    class Authorize
+    class Authorization
     end
   end
 end

@@ -4,7 +4,9 @@ module SpicedGracken
       def display
         address = @payload['sender']['location']
         last_alias = @payload['sender']['name']
-        SpicedGracken.server_list.add(address, last_alias)
+        SpicedGracken.active_server_list.add(
+          address: address,
+          alias_name: last_alias)
       end
     end
   end

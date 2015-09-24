@@ -6,7 +6,8 @@ module SpicedGracken
       def initialize(
         message: '',
         name_of_sender: '',
-        location: 'localhost')
+        location: 'localhost',
+        uid: '')
 
         @payload = {
           'type' => CHAT,
@@ -16,7 +17,8 @@ module SpicedGracken
           'time_sent' => nil, # not yet sent
           'sender' => {
             'name' => name_of_sender,
-            'location' => location
+            'location' => location,
+            'uid' => uid
           }
         }
         @time_recieved = Time.now

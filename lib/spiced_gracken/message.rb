@@ -1,5 +1,5 @@
 require 'spiced_gracken/message/base'
-require 'spiced_gracken/message/authorize'
+require 'spiced_gracken/message/authorization'
 require 'spiced_gracken/message/chat'
 require 'spiced_gracken/message/connection'
 require 'spiced_gracken/message/disconnection'

@@ -29,7 +29,9 @@ module SpicedGracken
           client.close
         rescue Errno::ECONNREFUSED, Errno::ETIMEDOUT
           puts "#{address} is not available"
-          SpicedGracken.server_list.inactive!(address)
+          SpicedGracken.active_server_list.remove(
+            address: address
+          )
         end
       end
     end

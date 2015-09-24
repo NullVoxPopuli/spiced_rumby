@@ -31,21 +31,25 @@ module SpicedGracken
             if is_valid_add_command?
               address = command_args[2]
 
-              SpicedGracken.server_list.add(address)
+              SpicedGracken.active_server_list.add(
+                address: address
+              )
             else
               puts 'add requires an address and port'
             end
+          when WHO
+            puts SpicedGracken.active_server_list.who
           when REMOVE, RM
             if is_valid_remove_command?
               field, value = config_set_args
 
-              SpicedGracken.server_list.remove(field, value)
+              SpicedGracken.active_server_list.remove_by(field, value)
             else
               puts 'requires address or alias. ex: /server rm alias evan'
             end
           else
             if command_args.length > 0
-              SpicedGracken.server_list.display_addresses
+              SpicedGracken.active_server_list.display_addresses
             else
               puts 'server command not implemented...'.colorize(:red)
             end

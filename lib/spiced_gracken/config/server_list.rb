@@ -82,10 +82,6 @@ module SpicedGracken
       def uid_exists?(uid)
         !!find_by(uid: uid)
       end
-
-      def display_addresses
-        puts servers.inspect
-      end
     end
   end
 end

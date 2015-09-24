@@ -23,6 +23,17 @@ module SpicedGracken
         _list.delete(entry) if entry
       end
 
+      def remove_by(field, value)
+        case field
+        when 'address'
+          remove(address: value)
+        when 'alias'
+          remove(alias: value)
+        when 'uid'
+          remove(uid: value)
+        end
+      end
+
       def add(address: nil, alias_name: nil, uid: nil, public_key: nil, entry: nil)
         if contains?(uid: uid)
           update(uid, address: address, alias_name: alias_name)
@@ -65,6 +76,16 @@ module SpicedGracken
         end
 
         nil # not found
+      end
+
+      def display_addresses
+        _list.each do |entry|
+          puts "#{entry.alias_name}@#{entry.address}".colorize(:light_black)
+        end
+      end
+
+      def who
+        puts _list.map{ |e| e.alias_name }.join(', ').colorize(:light_black)
       end
     end
   end
