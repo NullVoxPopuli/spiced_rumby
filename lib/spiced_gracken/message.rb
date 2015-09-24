@@ -13,12 +13,19 @@ module SpicedGracken
     DISCONNECTION = 'disconnection'
     AUTHORIZATION = 'authorization'
 
+    SERVER_LIST = 'serverlist'
+    SERVER_LIST_HASH = 'serverlisthash'
+    SERVER_LIST_DIFF = 'serverlistdiff'
+
     TYPES = [
       CHAT,
       WHISPER,
       CONNECTION,
       DISCONNECTION,
-      AUTHORIZATION
+      AUTHORIZATION,
+      SERVER_LIST,
+      SERVER_LIST_DIFF,
+      SERVER_LIST_HASH
     ]
   end
 end

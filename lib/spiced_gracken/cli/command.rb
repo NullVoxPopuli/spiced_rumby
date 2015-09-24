@@ -23,6 +23,8 @@ module SpicedGracken
       def handle
         # these could even be split up in to classes if they needed to be
         case command
+        when WHO
+          puts SpicedGracken.active_server_list.who
         when STOP_LISTENING
           _cli.close_server
         when SERVERS, SERVER

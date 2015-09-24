@@ -35,7 +35,7 @@ module SpicedGracken
       end
 
       def handle
-        servers = SpicedGracken.server_list.servers
+        servers = SpicedGracken.active_server_list.all
         if !servers.empty?
           # if _cli.client and !_cli.client.socket.closed?
           m = Message::Chat.new(
@@ -52,10 +52,12 @@ module SpicedGracken
           # TODO: do this async so that one server doesn't block
           # the rest of the servers from receiving the messages
           servers.each do |entry|
-            Http::Client.send_to_and_close(
-              address: entry['address'],
-              payload: data
-            )
+            Thread.new(entry, data) do |entry, data|
+              Http::Client.send_to_and_close(
+                address: entry.address,
+                payload: data
+              )
+            end
           end
         else
           puts 'you have no servers'.colorize(:yellow)

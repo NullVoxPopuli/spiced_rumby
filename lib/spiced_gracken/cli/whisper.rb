@@ -11,7 +11,7 @@ module SpicedGracken
       end
 
       def handle
-        server = SpicedGracken.server_list.find_by(last_alias: target)
+        server = SpicedGracken.active_server_list.find(alias_name: target)
 
         if server
           # if _cli.client and !_cli.client.socket.closed?

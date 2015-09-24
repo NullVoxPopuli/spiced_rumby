@@ -60,6 +60,10 @@ module SpicedGracken
         _list.find { |l| l.uid == uid }
       end
 
+      def all
+        as_array
+      end
+
       def as_array
         _list
       end
@@ -77,6 +81,8 @@ module SpicedGracken
 
         nil # not found
       end
+
+      alias_method :find, :contains?
 
       def display_addresses
         _list.each do |entry|
