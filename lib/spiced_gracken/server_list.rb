@@ -8,14 +8,18 @@ module SpicedGracken
     def initialize
       @default_settings = DEFAULT_SETTINGS
       @filename = FILENAME
-
       super
 
       @active_servers = self['servers']
     end
 
     def clear!
-      @hash = default_settings
+      self._hash ||= {}
+      self._active_servers ||= []
+      self._hash.clear
+      self._active_servers.clear
+      self._hash = { 'servers' => [] }
+      self._active_servers = []
     end
 
     def servers
@@ -39,15 +43,15 @@ module SpicedGracken
     end
 
     # @param [string] address ip:port
-    def add(address, last_alias = '')
+    def add(address, alias_name = '')
 
       unless server_exists?(address)
         entry = {
-          'last_alias' => last_alias,
+          'alias' => alias_name,
           'address' => address
         }
-        @hash['servers'] << entry
-        @active_servers << entry
+        _hash['servers'] << entry
+        _active_servers << entry
         save
         puts "added #{address} to server list!".colorize(:green)
       else
@@ -56,25 +60,25 @@ module SpicedGracken
     end
 
     def remove_by(args)
-      last_alias = args['last_alias']
+      alias_name = args['alias']
       address = args['address']
 
       new_servers = []
 
       servers.each do |entry|
         match = (
-          last_alias && entry['last_alias'] == last_alias ||
+          alias_name && entry['alias'] == alias_name ||
           address && entry['address'] == address
         )
 
         if match
-          puts "removed #{entry['last_alias']}@#{entry['address']}"
+          puts "removed #{entry['alias']}@#{entry['address']}"
         else
           new_servers << entry
         end
       end
 
-      @hash['servers'] = new_servers
+      _hash['servers'] = new_servers
       save
     end
 
@@ -82,10 +86,10 @@ module SpicedGracken
       remove_by(field => value)
     end
 
-    def find_by(last_alias: nil, address: nil)
+    def find_by(alias_name: nil, address: nil)
       servers.each do |entry|
         found = (
-          (last_alias && entry['last_alias'] == last_alias) ||
+          (alias_name && entry['alias'] == alias_name) ||
           (address && entry['address'] == address)
         )
 
