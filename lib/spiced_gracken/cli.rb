@@ -79,7 +79,8 @@ module SpicedGracken
     def shutdown
       # close_server
       puts 'saving config...'
-      @settings.save
+      SpicedGracken.settings.save
+      SpicedGracken.active_server_list.save
       abort "\n\nGoodbye.  "
     end
   end

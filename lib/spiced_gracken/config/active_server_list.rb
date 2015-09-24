@@ -51,17 +51,24 @@ module SpicedGracken
 
       def update(uid, address: nil, alias_name: nil)
         entry = find_by_uid(uid)
+        return add(uid: uid, address: address, alias_name: alias_name) unless entry
 
         entry.address = address if address
         entry.alias_name = alias_name if alias_name
       end
 
       def find_by_uid(uid)
-        _list.find { |l| l.uid == uid }
+        contains?(uid: uid)
       end
 
       def all
         as_array
+      end
+
+      def save
+        # for now, just output everything to severs list
+        SpicedGracken.server_list.servers = _list.map(&:as_json)
+        SpicedGracken.server_list.save
       end
 
       def as_array

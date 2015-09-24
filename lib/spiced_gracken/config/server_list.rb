@@ -20,15 +20,23 @@ module SpicedGracken
         self['servers'] ||= []
       end
 
+      def servers=(new_list)
+        self['servers'] = new_list
+      end
+
       def as_entries
         unless @entries
-          @entries = servers.map do |s|
-            Entry.new(
+          @entries = []
+          servers.each do |s|
+            entry = Entry.new(
               address: s['address'],
               alias_name: s['alias_name'],
               uid: s['uid'],
               public_key: s['public_key']
             )
+            next unless entry.valid?
+
+            @entries << entry
           end
         end
 

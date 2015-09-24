@@ -15,6 +15,9 @@ module SpicedGracken
               while (input = connection.gets)
                 data = JSON.parse(input)
 
+                update_sender_info(data)
+
+
                 type = data['type']
                 message = nil
                 # figure out what to do
@@ -48,6 +51,16 @@ module SpicedGracken
             end
           end
         end
+      end
+
+      def update_sender_info(data)
+        sender = data['sender']
+
+        SpicedGracken.active_server_list.update(
+          sender['uid'],
+          address: sender['location'],
+          alias_name: sender['name']
+        )
       end
 
       def address

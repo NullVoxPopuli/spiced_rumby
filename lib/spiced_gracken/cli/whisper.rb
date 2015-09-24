@@ -26,7 +26,7 @@ module SpicedGracken
           m.display
 
           Http::Client.send_to_and_close(
-            address: server['address'],
+            address: server.address,
             payload: data
           )
 
