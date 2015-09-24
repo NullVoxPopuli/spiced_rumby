@@ -28,9 +28,8 @@ module SpicedGracken
         }
       end
 
-      def [](key)
-        attributes[key]
-      end
+      delegate :[], to: :attributes
+
     end
   end
 end
