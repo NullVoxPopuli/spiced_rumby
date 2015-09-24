@@ -2,6 +2,9 @@ require 'spiced_gracken/http/client'
 require 'spiced_gracken/http/server'
 require 'spiced_gracken/cli/input'
 require 'spiced_gracken/cli/command'
+require 'spiced_gracken/cli/config'
+require 'spiced_gracken/cli/ping'
+require 'spiced_gracken/cli/server'
 require 'spiced_gracken/cli/whisper'
 
 module SpicedGracken

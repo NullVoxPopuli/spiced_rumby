@@ -20,8 +20,13 @@ module SpicedGracken
 
         s = "#{time_recieved} "
         s << "#{payload['sender']['name'].colorize(:light_black)}"
-        s << "#{'->'.colorize(:light_black)}"
-        s << "#{_to.colorize(:light_black)} > "
+
+        if _to.present?
+          s << "#{'->'.colorize(:light_black)}"
+          s << "#{_to.colorize(:light_black)}"
+        end
+
+        s << ' > '
         s << "#{payload['message']}"
         puts s
       end

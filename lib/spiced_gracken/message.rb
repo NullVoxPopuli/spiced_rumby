@@ -1,6 +1,8 @@
 require 'spiced_gracken/message/base'
 require 'spiced_gracken/message/authorization'
 require 'spiced_gracken/message/chat'
+require 'spiced_gracken/message/ping'
+require 'spiced_gracken/message/ping_reply'
 require 'spiced_gracken/message/connection'
 require 'spiced_gracken/message/disconnection'
 require 'spiced_gracken/message/whisper'
@@ -8,6 +10,8 @@ require 'spiced_gracken/message/whisper'
 module SpicedGracken
   module Message
     CHAT = 'chat'
+    PING = 'ping'
+    PING_REPLY = 'pingreply'
     WHISPER = 'whisper'
     CONNECTION = 'connection'
     DISCONNECTION = 'disconnection'
@@ -23,6 +27,8 @@ module SpicedGracken
       CONNECTION,
       DISCONNECTION,
       AUTHORIZATION,
+      PING,
+      PING_REPLY,
       SERVER_LIST,
       SERVER_LIST_DIFF,
       SERVER_LIST_HASH

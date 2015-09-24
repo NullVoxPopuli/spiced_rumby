@@ -4,6 +4,8 @@ require 'json'
 require 'date'
 require 'colorize'
 require 'active_support/core_ext/module/delegation'
+require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/object/try'
 
 require 'spiced_gracken/version'
 require 'spiced_gracken/help'

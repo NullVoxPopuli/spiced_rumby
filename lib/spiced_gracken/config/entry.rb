@@ -31,8 +31,8 @@ module SpicedGracken
       def valid?
         @alias_name.present? &&
         @address.present? &&
-        @uid.present? &&
-        @public_key.present?
+        @uid.present? #&&
+        # @public_key.present?
       end
 
       delegate :[], to: :attributes

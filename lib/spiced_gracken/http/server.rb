@@ -34,8 +34,17 @@ module SpicedGracken
                 when Message::DISCONNECTION
                   message = Message::Disconnection.new
                   message.payload = data
+                when Message::PING
+                  message = Message::Ping.new
+                  message.payload = data
+                  # immediately respond
+                  message.respond
+                when Message::PING_REPLY
+                  message = Message::PingReply.new
+                  message.payload = data
                 when Message::Authorization, Message::SERVER_LIST, Message::SERVER_LIST_HASH, Message::SERVER_LIST_DIFF
-                  puts 'not yet implemented...'
+                  puts input
+                  puts 'not yet implemented...'.colorize(:red)
                 else
                   puts 'message recieved and not recognized...'.colorize(:red)
                   puts input

@@ -28,11 +28,12 @@ module SpicedGracken
         unless @entries
           @entries = []
           servers.each do |s|
+
             entry = Entry.new(
               address: s['address'],
-              alias_name: s['alias_name'],
+              alias_name: s['alias'],
               uid: s['uid'],
-              public_key: s['public_key']
+              public_key: s['publicKey']
             )
             next unless entry.valid?
 
