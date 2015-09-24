@@ -14,6 +14,10 @@ module SpicedGracken
       @active_servers = self['servers']
     end
 
+    def clear!
+      @hash = default_settings
+    end
+
     def servers
       active_servers
     end
@@ -35,14 +39,14 @@ module SpicedGracken
     end
 
     # @param [string] address ip:port
-    def add(address, last_alias)
+    def add(address, last_alias = '')
 
       unless server_exists?(address)
         entry = {
           'last_alias' => last_alias,
           'address' => address
         }
-        @settings['servers'] << entry
+        @hash['servers'] << entry
         @active_servers << entry
         save
         puts "added #{address} to server list!".colorize(:green)
@@ -70,7 +74,7 @@ module SpicedGracken
         end
       end
 
-      @settings['servers'] = new_servers
+      @hash['servers'] = new_servers
       save
     end
 
@@ -96,7 +100,7 @@ module SpicedGracken
     end
 
     def display_addresses
-      puts @settings['servers'].inspect
+      puts servers.inspect
     end
   end
 end

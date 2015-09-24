@@ -42,7 +42,24 @@ describe SpicedGracken::ServerList do
   end
 
   context 'add' do
+    it 'add without alias' do
+      server_list.clear!
+      server_list.add('10.10.0.1:8080')
 
+      result = server_list.servers
+      expected = [
+        {
+          alias: '',
+          address: '10.10.0.1:8080'
+        }
+      ]
+
+      expect(result).to eq expected
+    end
+
+    it 'add with alias' do
+      server_list.add('10.10.0.1:8080', 'test')
+    end
   end
 
   context 'remove_by' do
