@@ -20,9 +20,7 @@ module SpicedGracken
 
       def remove(address: nil, alias_name: nil, uid: nil)
         entry = contains?(address: address, alias_name: alias_name, uid: uid)
-        if entry
-          _list.delete(entry)
-        end
+        _list.delete(entry) if entry
       end
 
       def add(address: nil, alias_name: nil, uid: nil, public_key: nil, entry: nil)
@@ -48,7 +46,7 @@ module SpicedGracken
       end
 
       def find_by_uid(uid)
-        _list.select{ |l| l.uid == uid }.first
+        _list.find { |l| l.uid == uid }
       end
 
       def as_array
@@ -56,7 +54,7 @@ module SpicedGracken
       end
 
       def contains?(alias_name: nil, address: nil, uid: nil)
-        _list.each  do |entry|
+        _list.each do |entry|
           found = (
             (alias_name && entry.alias_name == alias_name) ||
             (address && entry.address == address) ||
@@ -68,7 +66,6 @@ module SpicedGracken
 
         nil # not found
       end
-
     end
   end
 end

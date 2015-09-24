@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe SpicedGracken::Config::ActiveServerList do
-  let(:klass){ SpicedGracken::Config::ActiveServerList }
-  let(:list){ klass.new }
+  let(:klass) { SpicedGracken::Config::ActiveServerList }
+  let(:list) { klass.new }
 
   before(:each) do
-    allow_any_instance_of(klass).to receive(:load){}
+    allow_any_instance_of(klass).to receive(:load) {}
     allow(SpicedGracken).to receive(:server_list) do
       SpicedGracken::Config::ServerList.new
     end
@@ -81,11 +81,11 @@ describe SpicedGracken::Config::ActiveServerList do
 
     it 'updates an existing entry' do
       entry = SpicedGracken::Config::Entry.new(
-          address: '10.10.10.10:1010',
-          alias_name: 'test',
-          uid: '1234',
-          public_key: 'abcde'
-        )
+        address: '10.10.10.10:1010',
+        alias_name: 'test',
+        uid: '1234',
+        public_key: 'abcde'
+      )
 
       list.add(uid: entry.uid, entry: entry)
 
@@ -98,11 +98,8 @@ describe SpicedGracken::Config::ActiveServerList do
   end
 
   context 'update' do
-
   end
 
   context 'contains?' do
-
   end
-
 end

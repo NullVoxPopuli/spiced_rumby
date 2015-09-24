@@ -20,11 +20,11 @@ module SpicedGracken
         end
 
         def is_command(input)
-          input[0,1] == COMMAND
+          input[0, 1] == COMMAND
         end
 
         def is_whisper?(input)
-          input[0,1] == WHISPER
+          input[0, 1] == WHISPER
         end
       end
 
@@ -37,7 +37,7 @@ module SpicedGracken
       def handle
         servers = SpicedGracken.server_list.servers
         if !servers.empty?
-        # if _cli.client and !_cli.client.socket.closed?
+          # if _cli.client and !_cli.client.socket.closed?
           m = Message::Chat.new(
             message: _input,
             name_of_sender: _settings[:alias],
@@ -55,7 +55,7 @@ module SpicedGracken
             )
           end
         else
-          puts "you have no servers".colorize(:yellow)
+          puts 'you have no servers'.colorize(:yellow)
         end
       end
     end

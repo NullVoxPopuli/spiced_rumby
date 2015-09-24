@@ -4,19 +4,19 @@ module SpicedGracken
       attr_accessor :payload, :time_recieved
 
       def initialize(
-        message: "",
-        name_of_sender: "",
-        location: "localhost")
+        message: '',
+        name_of_sender: '',
+        location: 'localhost')
 
         self.payload = {
-          "type" => WHISPER,
-          "message" => message,
-          "client" => SpicedGracken::NAME,
-          "client_version" => SpicedGracken::VERSION,
-          "time_sent" => Time.now.to_s, # not yet sent
-          "sender" => {
-            "name" => name_of_sender,
-            "location" => location
+          'type' => WHISPER,
+          'message' => message,
+          'client' => SpicedGracken::NAME,
+          'client_version' => SpicedGracken::VERSION,
+          'time_sent' => Time.now.to_s, # not yet sent
+          'sender' => {
+            'name' => name_of_sender,
+            'location' => location
           }
         }
       end

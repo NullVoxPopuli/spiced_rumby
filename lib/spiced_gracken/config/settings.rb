@@ -1,12 +1,12 @@
 module SpicedGracken
   module Config
     class Settings < HashFile
-      FILENAME = "settings.json"
+      FILENAME = 'settings.json'
 
       DEFAULT_SETTINGS = {
-        "alias" => "alias",
-        "port" => "2008",
-        "ip" => "localhost"
+        'alias' => 'alias',
+        'port' => '2008',
+        'ip' => 'localhost'
       }
 
       def initialize
@@ -14,8 +14,6 @@ module SpicedGracken
         @filename = FILENAME
         super
       end
-
-
     end
   end
 end

@@ -14,10 +14,9 @@ module SpicedGracken
     def decrypt(message, with: key)
       e = OpenSSL::Cipher::Cipher.new 'DES-EDE3-CBC'
       e.decrypt key
-      s = message.to_a.pack("H*").unpack("C*").pack("c*")
+      s = message.to_a.pack('H*').unpack('C*').pack('c*')
       s = e.update s
       s << e.final
     end
-
   end
 end

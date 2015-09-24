@@ -1,7 +1,6 @@
 module SpicedGracken
   class CLI
     class Whisper < CLI::Command
-
       def target
         # get first arg
         command_args[0]
@@ -15,7 +14,7 @@ module SpicedGracken
         server = SpicedGracken.server_list.find_by(last_alias: target)
 
         if server
-        # if _cli.client and !_cli.client.socket.closed?
+          # if _cli.client and !_cli.client.socket.closed?
           m = Message::Whisper.new(
             message: message,
             name_of_sender: _settings[:alias],
@@ -36,7 +35,6 @@ module SpicedGracken
           puts "server for #{target} not found or is not online".colorize(:yellow)
         end
       end
-
     end
   end
 end

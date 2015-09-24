@@ -1,15 +1,15 @@
-require "rubygems"
-require "bundler/setup"
+require 'rubygems'
+require 'bundler/setup'
 
-require "pry-byebug" # binding.pry to debug!
+require 'pry-byebug' # binding.pry to debug!
 
 # Coverage
-require "codeclimate-test-reporter"
-ENV['CODECLIMATE_REPO_TOKEN'] = "18ddab0ec2f7be2430569f2ffc7dee169da139b792172d3992a6aacba1f50877"
+require 'codeclimate-test-reporter'
+ENV['CODECLIMATE_REPO_TOKEN'] = '18ddab0ec2f7be2430569f2ffc7dee169da139b792172d3992a6aacba1f50877'
 CodeClimate::TestReporter.start
 
 # This Gem
-require "spiced_gracken"
+require 'spiced_gracken'
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each {|file|
   require file

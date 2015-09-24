@@ -18,7 +18,7 @@ require 'spiced_gracken/encryptor'
 require 'spiced_gracken/message'
 
 module SpicedGracken
-  NAME = "Spiced Gracken"
+  NAME = 'Spiced Gracken'
 
   module_function
 

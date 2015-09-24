@@ -1,21 +1,17 @@
 # but not of a school
-# 
+#
 # a room would keep track of a single person
 # or a group of persons
 #
-# 
-class Room 
-	attr_accessor :recipients, :name
+#
+class Room
+  attr_accessor :recipients, :name
 
-	# send to the room's recipients
-	def broadcast(msg)
+  # send to the room's recipients
+  def broadcast(_msg)
+  end
 
-	end
-
-	# recieved from the net
-	def display(msg)
-
-	end
-
-
+  # recieved from the net
+  def display(_msg)
+  end
 end

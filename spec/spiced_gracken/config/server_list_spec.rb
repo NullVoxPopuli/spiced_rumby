@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe SpicedGracken::Config::ServerList do
-  let(:klass){ SpicedGracken::Config::ServerList }
-  let(:server_list){ klass.new }
-  let(:active){
+  let(:klass) { SpicedGracken::Config::ServerList }
+  let(:server_list) { klass.new }
+  let(:active) do
     [
       {
         'name' => 'evan',
@@ -14,11 +14,11 @@ describe SpicedGracken::Config::ServerList do
         'address' => 'somethingelse:82'
       }
     ]
-  }
+  end
 
   before(:each) do
-    allow_any_instance_of(klass).to receive(:filename){ 'blegh' }
-    allow_any_instance_of(klass).to receive(:save){}
+    allow_any_instance_of(klass).to receive(:filename) { 'blegh' }
+    allow_any_instance_of(klass).to receive(:save) {}
   end
 
   context 'servers' do
@@ -44,23 +44,21 @@ describe SpicedGracken::Config::ServerList do
     it 'clears the main hash' do
       server_list.clear!
 
-      expect(server_list._hash).to eq({ 'servers' => [] })
+      expect(server_list._hash).to eq('servers' => [])
     end
   end
 
   context 'inactive!' do
-
   end
 
   context 'add' do
-
     before(:each) do
       server_list.clear!
     end
 
     it 'add without alias' do
       server_list.add(SpicedGracken::Config::Entry.new(
-        address: '10.10.0.1:8080'
+                        address: '10.10.0.1:8080'
       ))
       result = server_list.servers
       expected = [
@@ -79,8 +77,8 @@ describe SpicedGracken::Config::ServerList do
 
     it 'add with alias' do
       server_list.add(SpicedGracken::Config::Entry.new(
-        alias_name: 'test',
-        address: '10.10.0.1:8080'
+                        alias_name: 'test',
+                        address: '10.10.0.1:8080'
       ))
 
       result = server_list.servers
@@ -107,23 +105,17 @@ describe SpicedGracken::Config::ServerList do
 
       expect(server_list.servers.count).to eq 1
     end
-
   end
 
   context 'remove_by' do
-
   end
 
   context 'remove' do
-
   end
 
   context 'find_by' do
-
   end
 
   context 'server_exists?' do
-
   end
-
 end

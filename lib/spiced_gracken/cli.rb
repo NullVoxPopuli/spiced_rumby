@@ -5,7 +5,6 @@ require 'spiced_gracken/cli/command'
 require 'spiced_gracken/cli/whisper'
 
 module SpicedGracken
-
   # A user interface is responsible for for creating a client
   # and sending messages to that client
   class CLI
@@ -23,7 +22,7 @@ module SpicedGracken
     end
 
     def listen_for_commands
-      while (@client.nil?  or !@client.socket.closed?)
+      while @client.nil? || !@client.socket.closed?
         begin
           msg = gets
           # clean the line
@@ -45,23 +44,22 @@ module SpicedGracken
         end
       end
 
-      puts "client not running".colorize(:red)
+      puts 'client not running'.colorize(:red)
     end
-
 
     def start_server
       @server = Queue.new
-      #start the server thread
-      server = Thread.new(@settings) { |settings|
-        @server << Http::Server.new(port: settings["port"])
-      }
+      # start the server thread
+      Thread.new(@settings) do |settings|
+        @server << Http::Server.new(port: settings['port'])
+      end
     end
 
     def close_server
-      puts "shutting down server"
+      puts 'shutting down server'
       server = @server.pop
       server.try(:server).try(:close)
-      puts "no longer listening..."
+      puts 'no longer listening...'
     end
 
     def server_address
@@ -69,28 +67,20 @@ module SpicedGracken
     end
 
     def check_startup_settings
-      if settings['autolisten']
-        start_server
-      end
+      start_server if settings['autolisten']
     end
 
-    # def start_interactive_chat
-    #   @client = Http::Client.new(address: @settings["default_host"], port: @settings["port"])
-    # end
-
     def display_welcome
-      welcome = Help.welcome(texts: {configuration: @settings.as_hash})
+      welcome = Help.welcome(texts: { configuration: @settings.as_hash })
       puts welcome
     end
 
     # save config and exit
     def shutdown
       # close_server
-      puts "saving config..."
+      puts 'saving config...'
       @settings.save
       abort "\n\nGoodbye.  "
     end
-
   end
-
 end

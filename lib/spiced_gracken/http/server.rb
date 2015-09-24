@@ -15,7 +15,7 @@ module SpicedGracken
               while (input = connection.gets)
                 data = JSON.parse(input)
 
-                type = data["type"]
+                type = data['type']
                 message = nil
                 # figure out what to do
                 case type
@@ -32,9 +32,9 @@ module SpicedGracken
                   message = Message::Disconnection.new
                   message.payload = data
                 when Message::Authorization
-                  puts "not yet implemented..."
+                  puts 'not yet implemented...'
                 else
-                  puts "message recieved and not recognized...".colorize(:red)
+                  puts 'message recieved and not recognized...'.colorize(:red)
                   puts input
                 end
 
@@ -48,8 +48,6 @@ module SpicedGracken
             end
           end
         end
-
-
       end
 
       def address

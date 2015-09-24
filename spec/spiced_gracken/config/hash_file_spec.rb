@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe SpicedGracken::Config::HashFile do
-
-  let(:klass){ SpicedGracken::Config::HashFile }
+  let(:klass) { SpicedGracken::Config::HashFile }
 
   before(:each) do
-    allow_any_instance_of(klass).to receive(:filename){ 'blegh' }
-    allow_any_instance_of(klass).to receive(:save){}
+    allow_any_instance_of(klass).to receive(:filename) { 'blegh' }
+    allow_any_instance_of(klass).to receive(:save) {}
   end
 
   it 'sets the default if there is no settings file' do
@@ -16,7 +15,7 @@ describe SpicedGracken::Config::HashFile do
   end
 
   describe 'instance methods' do
-    let(:instance){ klass.new }
+    let(:instance) { klass.new }
 
     it 'sets like a hash of indifferent access' do
       instance[:key] = 'value'
@@ -25,7 +24,7 @@ describe SpicedGracken::Config::HashFile do
     end
 
     it 'returns the underlying hash' do
-      instance._hash = hash = {key: :value}
+      instance._hash = hash = { key: :value }
       expect(instance.as_hash).to eq hash
     end
 
@@ -34,6 +33,4 @@ describe SpicedGracken::Config::HashFile do
       expect(instance['key']).to eq 'value'
     end
   end
-
-
 end

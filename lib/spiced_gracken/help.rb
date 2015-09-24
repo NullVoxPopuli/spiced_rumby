@@ -3,7 +3,7 @@ module SpicedGracken
     module_function
 
     def welcome(texts: {})
-      text = %Q{
+      text = %{
 
 Welcome to Rum!
 to begin, set your username!
@@ -20,7 +20,7 @@ to begin chatting:
 current configuration:
   #{texts[:configuration]}
 }
-      return text
+      text
     end
   end
 end

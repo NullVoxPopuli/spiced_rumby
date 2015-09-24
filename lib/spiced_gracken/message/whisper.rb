@@ -1,13 +1,12 @@
 module SpicedGracken
   module Message
     class Whisper < Base
-
       attr_accessor :_to
 
       def initialize(
         message: '',
         name_of_sender: '',
-        location: "localhost",
+        location: 'localhost',
         to: '')
         super(message: message, name_of_sender: name_of_sender, location: location)
 

@@ -37,7 +37,6 @@ module SpicedGracken
 
       # @param [Entry] entry
       def add(entry)
-
         unless server_exists?(entry.address)
           _hash['servers'] << entry.as_json
           save
@@ -51,12 +50,9 @@ module SpicedGracken
         alias_name = args['alias']
         address = args['address']
 
-
         entry = find_by(alias_name: alias_name, address: address)
 
-        if entry
-          self['servers'].remove(entry)
-        end
+        self['servers'].remove(entry) if entry
 
         save
       end

@@ -9,10 +9,10 @@ module SpicedGracken
       def initialize(address: '', port: '', silent: false)
         puts "connecting to #{address} on #{port}...".colorize(:yellow) unless silent
         @socket = TCPSocket.new(address, port)
-				puts "connected!".colorize(:green) unless silent
+        puts 'connected!'.colorize(:green) unless silent
       end
 
-      def send(message: '' )
+      def send(message: '')
         @socket.puts message
       end
 
@@ -32,7 +32,6 @@ module SpicedGracken
           SpicedGracken.server_list.inactive!(address)
         end
       end
-
     end
   end
 end

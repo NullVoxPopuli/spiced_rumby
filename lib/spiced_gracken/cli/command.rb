@@ -1,7 +1,6 @@
 module SpicedGracken
   class CLI
     class Command < CLI::Input
-
       attr_accessor :_input
 
       # Commands
@@ -21,7 +20,6 @@ module SpicedGracken
       SERVER = 'server'
       WHO = 'who'
 
-
       def handle
         # these could even be split up in to classes if they needed to be
         case command
@@ -35,7 +33,7 @@ module SpicedGracken
 
               SpicedGracken.server_list.add(address)
             else
-              puts "add requires an address and port"
+              puts 'add requires an address and port'
             end
           when REMOVE, RM
             if is_valid_remove_command?
@@ -43,13 +41,13 @@ module SpicedGracken
 
               SpicedGracken.server_list.remove(field, value)
             else
-              puts "requires address or alias. ex: /server rm alias evan"
+              puts 'requires address or alias. ex: /server rm alias evan'
             end
           else
             if command_args.length > 0
               SpicedGracken.server_list.display_addresses
             else
-              puts "server command not implemented...".colorize(:red)
+              puts 'server command not implemented...'.colorize(:red)
             end
           end
         when CONFIG
@@ -60,12 +58,12 @@ module SpicedGracken
 
               _settings.set(key, with: value)
             else
-              puts "set requires a key and a value".colorize(:red)
+              puts 'set requires a key and a value'.colorize(:red)
             end
           when DISPLAY
             _settings.display
           else
-            puts "config command not implemented....".colorize(:red)
+            puts 'config command not implemented....'.colorize(:red)
           end
         when EXIT, QUIT
           _cli.shutdown
@@ -74,7 +72,7 @@ module SpicedGracken
         when CONNECT, CHAT
           _cli.start_interactive_chat
         else
-          puts "not implemented...".colorize(:red)
+          puts 'not implemented...'.colorize(:red)
         end
       end
 
@@ -85,7 +83,7 @@ module SpicedGracken
       end
 
       def command_args
-        command_string.split(" ")
+        command_string.split(' ')
       end
 
       def command
@@ -111,7 +109,6 @@ module SpicedGracken
       def is_valid_remove_command?
         (config_command == REMOVE || config_command == RM) && command_args.length == 4
       end
-
     end
   end
 end

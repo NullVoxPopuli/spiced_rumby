@@ -15,9 +15,8 @@ Gem::Specification.new do |s|
   s.summary     = "SpicedGracken-#{SpicedGracken::VERSION}"
   s.description = 'A RUM Client in Ruby'
 
-
-  s.files         = `git ls-files`.split($/)
-  s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
+  s.executables   = s.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
 
@@ -26,9 +25,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activesupport'
   s.add_runtime_dependency 'colorize'
 
-
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'codeclimate-test-reporter'
-
+  s.add_development_dependency 'rubocop'
 end

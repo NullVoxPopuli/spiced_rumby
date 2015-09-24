@@ -25,7 +25,7 @@ module SpicedGracken
         rescue Exception => e
           puts e.message.colorize(:red)
           self._hash = default_settings
-          puts "writing defaults..."
+          puts 'writing defaults...'
           save
         end
       end
@@ -40,11 +40,11 @@ module SpicedGracken
 
       def save
         # backup
-        File.rename(filename, filename + ".bak") if exists = exists?
+        File.rename(filename, filename + '.bak') if exists = exists?
         # write
-        File.open(filename, "w" ){ |f| f.syswrite(_hash.to_json); f.close }
+        File.open(filename, 'w') { |f| f.syswrite(_hash.to_json); f.close }
         # remove backup
-        File.delete(filename + ".bak") if exists
+        File.delete(filename + '.bak') if exists
       end
 
       def set(key, with: value)
@@ -59,7 +59,7 @@ module SpicedGracken
 
       def filename
         return @filename if @filename
-        raise 'filename must be set'
+        fail 'filename must be set'
       end
 
       def default_settings
