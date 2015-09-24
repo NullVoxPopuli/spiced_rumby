@@ -1,6 +1,6 @@
 module SpicedGracken
   class ServerList < HashFile
-    FILENAME = "serverlist.json"
+    FILENAME = 'serverlist.json'
     DEFAULT_SETTINGS = { 'servers' => [] }
 
     attr_accessor :_active_servers
