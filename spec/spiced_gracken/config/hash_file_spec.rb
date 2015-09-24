@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe SpicedGracken::HashFile do
+describe SpicedGracken::Config::HashFile do
 
-  let(:klass){ SpicedGracken::HashFile }
+  let(:klass){ SpicedGracken::Config::HashFile }
 
   before(:each) do
     allow_any_instance_of(klass).to receive(:filename){ 'blegh' }

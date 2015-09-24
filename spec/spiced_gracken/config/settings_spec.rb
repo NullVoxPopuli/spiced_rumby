@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SpicedGracken::Settings do
-  let(:klass){SpicedGracken::Settings}
+describe SpicedGracken::Config::Settings do
+  let(:klass){SpicedGracken::Config::Settings}
 
   before(:each) do
     allow_any_instance_of(klass).to receive(:filename){ 'blegh' }

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SpicedGracken::ServerList do
-  let(:klass){ SpicedGracken::ServerList }
+describe SpicedGracken::Config::ServerList do
+  let(:klass){ SpicedGracken::Config::ServerList }
   let(:server_list){ klass.new }
   let(:active){
     [
@@ -27,14 +27,6 @@ describe SpicedGracken::ServerList do
 
       expect(result).to eq []
     end
-
-    it 'gets the active servers' do
-      server_list._active_servers = expected = [
-        {}, {}, {}
-      ]
-      result = server_list.servers
-      expect(result).to eq expected
-    end
   end
 
   context 'clear' do
@@ -52,13 +44,7 @@ describe SpicedGracken::ServerList do
     it 'clears the main hash' do
       server_list.clear!
 
-      expect(server_list._hash).to eq server_list.default_settings
-    end
-
-    it 'clears the active servers' do
-      server_list.clear!
-
-      expect(server_list._active_servers).to eq []
+      expect(server_list._hash).to eq({ 'servers' => [] })
     end
   end
 
@@ -73,12 +59,16 @@ describe SpicedGracken::ServerList do
     end
 
     it 'add without alias' do
-      server_list.add('10.10.0.1:8080')
+      server_list.add(SpicedGracken::Config::Entry.new(
+        address: '10.10.0.1:8080'
+      ))
       result = server_list.servers
       expected = [
         {
           alias: '',
-          address: '10.10.0.1:8080'
+          address: '10.10.0.1:8080',
+          uid: '',
+          publicKey: ''
         }
       ]
 
@@ -88,13 +78,18 @@ describe SpicedGracken::ServerList do
     end
 
     it 'add with alias' do
-      server_list.add('10.10.0.1:8080', 'test')
+      server_list.add(SpicedGracken::Config::Entry.new(
+        alias_name: 'test',
+        address: '10.10.0.1:8080'
+      ))
 
       result = server_list.servers
       expected = [
         {
           alias: 'test',
-          address: '10.10.0.1:8080'
+          address: '10.10.0.1:8080',
+          uid: '',
+          publicKey: ''
         }
       ]
 
@@ -104,8 +99,11 @@ describe SpicedGracken::ServerList do
     end
 
     it 'does not add duplicates' do
-      server_list.add('10.10.0.1:8080', 'test')
-      server_list.add('10.10.0.1:8080', 'test')
+      entry = SpicedGracken::Config::Entry.new(
+        address: '10.10.0.1:8000'
+      )
+      server_list.add(entry)
+      server_list.add(entry)
 
       expect(server_list.servers.count).to eq 1
     end

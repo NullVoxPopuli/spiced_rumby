@@ -6,9 +6,11 @@ require 'colorize'
 
 require 'spiced_gracken/version'
 require 'spiced_gracken/help'
-require 'spiced_gracken/hash_file'
-require 'spiced_gracken/settings'
-require 'spiced_gracken/server_list'
+require 'spiced_gracken/config/entry'
+require 'spiced_gracken/config/hash_file'
+require 'spiced_gracken/config/settings'
+require 'spiced_gracken/config/server_list'
+require 'spiced_gracken/config/active_server_list'
 require 'spiced_gracken/room'
 require 'spiced_gracken/cli'
 require 'spiced_gracken/encryptor'
@@ -20,8 +22,8 @@ module SpicedGracken
   module_function
 
   def start
-    @@settings = Settings.new
-    @@server_list = ServerList.new
+    @@settings = Config::Settings.new
+    @@server_list = Config::ServerList.new
 
     # start the user interface
     # interfaces are responsible for creating the client and server
