@@ -14,6 +14,10 @@ module SpicedGracken
         raise 'overload this method'
       end
 
+      def log(msg)
+        raise 'overload this method'
+      end
+
     end
   end
 end

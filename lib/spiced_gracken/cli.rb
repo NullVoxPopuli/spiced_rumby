@@ -75,7 +75,7 @@ module SpicedGracken
     end
 
     def server_address
-      "#{settings['ip']}:#{settings['port']}"
+      "#{SpicedGracken.settings['ip']}:#{SpicedGracken.settings['port']}"
     end
 
     def check_startup_settings
