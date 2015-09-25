@@ -24,6 +24,7 @@ module SpicedGracken
         s = "#{name}@#{location} pinged you.".colorize(:light_black)
 
         puts s
+        s
       end
 
       def respond

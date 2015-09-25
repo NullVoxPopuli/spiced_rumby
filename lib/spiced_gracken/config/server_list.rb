@@ -43,54 +43,6 @@ module SpicedGracken
 
         @entries
       end
-
-      # @param [Entry] entry
-      def add(entry)
-        unless server_exists?(entry.address)
-          _hash['servers'] << entry.as_json
-          save
-          puts "added #{entry.address} to server list!".colorize(:green)
-        else
-          puts "#{entry.address} already exists and will not be added"
-        end
-      end
-
-      def remove_by(args)
-        alias_name = args['alias']
-        address = args['address']
-
-        entry = find_by(alias_name: alias_name, address: address)
-
-        self['servers'].remove(entry) if entry
-
-        save
-      end
-
-      def remove(field, value)
-        remove_by(field => value)
-      end
-
-      def find_by(alias_name: nil, address: nil)
-        servers.each do |entry|
-          found = (
-            (alias_name && entry['alias'] == alias_name) ||
-            (address && entry['address'] == address) ||
-            (uid && entry['uid'] == uid)
-          )
-
-          return entry if found
-        end
-
-        nil
-      end
-
-      def server_exists?(address)
-        !!find_by(address: address)
-      end
-
-      def uid_exists?(uid)
-        !!find_by(uid: uid)
-      end
     end
   end
 end

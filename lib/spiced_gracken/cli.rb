@@ -11,10 +11,9 @@ module SpicedGracken
   # A user interface is responsible for for creating a client
   # and sending messages to that client
   class CLI
-    attr_accessor :client, :settings, :server
+    attr_accessor :client, :server
 
-    def initialize(settings: nil)
-      @settings = settings
+    def initialize
       display_welcome
 
       check_startup_settings
@@ -31,13 +30,8 @@ module SpicedGracken
           # clean the line
           print "\r\e[K"
 
-          handler = Input.create(
-            msg,
-            cli: self,
-            settings: @settings)
-
+          handler = Input.create(msg, cli: self)
           handler.handle
-
         rescue SystemExit, Interrupt
           shutdown
         rescue Exception => e
@@ -53,7 +47,7 @@ module SpicedGracken
     def start_server
       @server = Queue.new
       # start the server thread
-      Thread.new(@settings) do |settings|
+      Thread.new(SpicedGracken.settings) do |settings|
         @server << Http::Server.new(port: settings['port'])
       end
     end
@@ -74,7 +68,7 @@ module SpicedGracken
     end
 
     def display_welcome
-      welcome = Help.welcome(texts: { configuration: @settings.as_hash })
+      welcome = Help.welcome(texts: { configuration: SpicedGracken.settings.as_hash })
       puts welcome
     end
 

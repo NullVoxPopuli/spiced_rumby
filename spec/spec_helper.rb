@@ -3,9 +3,10 @@ require 'bundler/setup'
 
 require 'pry-byebug' # binding.pry to debug!
 
+
 # Coverage
-require 'codeclimate-test-reporter'
 ENV['CODECLIMATE_REPO_TOKEN'] = '18ddab0ec2f7be2430569f2ffc7dee169da139b792172d3992a6aacba1f50877'
+require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 
 # This Gem
@@ -30,4 +31,11 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+
+  config.before(:each) do
+    File.delete('test-serverlist') if File.exists?('test-serverlist')
+    File.delete('test-hashfile') if File.exists?('test-hashfile')
+    File.delete('test-settings') if File.exists?('test-settings')
+    File.delete('test-activeserverlist') if File.exists?('test-activeserverlist')
+  end
 end

@@ -3,11 +3,6 @@ require 'spec_helper'
 describe SpicedGracken::Config::Settings do
   let(:klass) { SpicedGracken::Config::Settings }
 
-  before(:each) do
-    allow_any_instance_of(klass).to receive(:filename) { 'blegh' }
-    allow_any_instance_of(klass).to receive(:save) {}
-  end
-
   it 'sets the default if there is no settings file' do
     allow_any_instance_of(klass).to receive(:exists?) { false }
 

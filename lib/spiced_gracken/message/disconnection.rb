@@ -6,7 +6,8 @@ module SpicedGracken
         name = payload['sender']['name']
         SpicedGracken.active_server_list.remove(
           address: address)
-        puts "#{name} (#{address}) has disconnected".colorize(:light_black)
+        puts s = "#{name}@#{address} has disconnected".colorize(:light_black)
+        s
       end
     end
   end

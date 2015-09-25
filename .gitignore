@@ -1,7 +1,9 @@
 ## Spiced Gracken Specific
 settings.json
 serverlist.json
-
+test-settings
+test-activeserverlist
+test-hashfile
 
 ## default ruby git ignore
 *.gem
