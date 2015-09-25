@@ -28,7 +28,8 @@ module SpicedGracken
           client.send(message: payload)
           client.close
         rescue Errno::ECONNREFUSED, Errno::ETIMEDOUT
-          puts "#{address} is not available"
+          s = "#{address} is not available".colorize(:light_black)
+          SpicedGracken.display.add_line(s)
           SpicedGracken.active_server_list.remove(
             address: address
           )

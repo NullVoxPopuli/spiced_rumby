@@ -18,7 +18,7 @@ module SpicedGracken
       end
 
       def display
-        puts 'ping successful'.colorize(:light_black)
+        'ping successful'.colorize(:light_black)
       end
 
     end

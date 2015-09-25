@@ -29,7 +29,7 @@ module SpicedGracken
         s = "#{time_recieved} "
         s << "#{payload['sender']['name'].colorize(:cyan)} > "
         s << "#{payload['message']}"
-        puts s
+        s
       end
     end
   end

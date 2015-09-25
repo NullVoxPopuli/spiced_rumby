@@ -44,7 +44,7 @@ module SpicedGracken
             location: _cli.server_address,
             uid: SpicedGracken.settings[:uid]
           )
-          m.display
+          SpicedGracken.display.add_line(m.display)
           data = m.render
 
           # if sending to all, iterate thorugh list of
@@ -60,7 +60,9 @@ module SpicedGracken
             end
           end
         else
-          puts 'you have no servers'.colorize(:yellow)
+          s = 'you have no servers'.colorize(:yellow)
+          SpicedGracken.display.add_line(s)
+
         end
       end
     end

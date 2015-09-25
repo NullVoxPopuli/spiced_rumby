@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/spiced_gracken'
+current_dir = File.dirname(__FILE__)
+require current_dir + '/lib/spiced_gracken'
 
 SpicedGracken.start

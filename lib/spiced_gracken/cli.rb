@@ -14,8 +14,6 @@ module SpicedGracken
     attr_accessor :client, :server
 
     def initialize
-      display_welcome
-
       check_startup_settings
 
       # this will allow our listener / server to print exceptions,
@@ -24,24 +22,41 @@ module SpicedGracken
     end
 
     def listen_for_commands
-      while @client.nil? || !@client.socket.closed?
-        begin
-          msg = gets
-          # clean the line
-          print "\r\e[K"
-
-          handler = Input.create(msg, cli: self)
-          handler.handle
-        rescue SystemExit, Interrupt
-          shutdown
-        rescue Exception => e
-          puts e.class.name
-          puts e.message.colorize(:red)
-          puts e.backtrace.join("\n").colorize(:red)
-        end
+      while client_active?
+        process_input
       end
 
       puts 'client not running'.colorize(:red)
+    end
+
+    def process_input
+      begin
+        msg = get_input
+        create_input(msg)
+      rescue SystemExit, Interrupt
+        shutdown
+      rescue Exception => e
+        puts e.class.name
+        puts e.message.colorize(:red)
+        puts e.backtrace.join("\n").colorize(:red)
+      end
+    end
+
+    def create_input(msg)
+      handler = Input.create(msg, cli: self)
+      handler.handle
+    end
+
+    def get_input
+      msg = gets
+      # clean the line
+      print "\r\e[K"
+
+      msg
+    end
+
+    def client_active?
+      @client.nil? || !@client.socket.closed?
     end
 
     def start_server
@@ -64,12 +79,7 @@ module SpicedGracken
     end
 
     def check_startup_settings
-      start_server if settings['autolisten']
-    end
-
-    def display_welcome
-      welcome = Help.welcome(texts: { configuration: SpicedGracken.settings.as_hash })
-      puts welcome
+      start_server if SpicedGracken.settings['autolisten']
     end
 
     # save config and exit

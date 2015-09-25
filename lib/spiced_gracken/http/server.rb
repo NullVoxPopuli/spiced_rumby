@@ -5,7 +5,7 @@ module SpicedGracken
 
       # instantiate!
       def initialize(port: '')
-        puts "listening on #{port}...".colorize(:green)
+        SpicedGracken.display.add_line("listening on #{port}...".colorize(:green))
         @server = TCPServer.new(port)
 
         loop do
@@ -50,7 +50,7 @@ module SpicedGracken
                   puts input
                 end
 
-                message.display
+                SpicedGracken.display.add_line(message.display)
               end
             rescue => e
               puts e.message.colorize(:red)

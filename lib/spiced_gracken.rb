@@ -3,12 +3,14 @@ require 'socket'
 require 'json'
 require 'date'
 require 'colorize'
+require "curses"
+
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/object/try'
 
 require 'spiced_gracken/version'
-require 'spiced_gracken/help'
+require 'spiced_gracken/display/manager'
 require 'spiced_gracken/config/entry'
 require 'spiced_gracken/config/hash_file'
 require 'spiced_gracken/config/settings'
@@ -31,8 +33,9 @@ module SpicedGracken
 
     # start the user interface
     # interfaces are responsible for creating the client and server
-    cli = CLI.new(settings: settings)
-    cli.listen_for_commands
+    @@cli = CLI.new
+    @@display = Display::Manager.new(Display::Bash::UI)
+    @@display.start
   end
 
   def self.settings
@@ -45,5 +48,13 @@ module SpicedGracken
 
   def active_server_list
     @@active_servers
+  end
+
+  def display
+    @@display
+  end
+
+  def cli
+    @@cli
   end
 end

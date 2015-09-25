@@ -28,7 +28,6 @@ module SpicedGracken
 
         s << ' > '
         s << "#{payload['message']}"
-        puts s
         s
       end
     end
