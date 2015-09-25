@@ -1,6 +1,6 @@
 require 'spiced_gracken/display/help'
 require 'spiced_gracken/display/base'
-require 'spiced_gracken/display/curses/ui'
+require 'spiced_gracken/display/terminal_curses/ui'
 require 'spiced_gracken/display/bash/ui'
 
 module SpicedGracken

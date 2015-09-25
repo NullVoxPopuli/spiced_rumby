@@ -1,6 +1,6 @@
 module SpicedGracken
   module Display
-    module Curses
+    module TerminalCurses
       class Output
         attr_accessor :_window
         attr_accessor :_chat
