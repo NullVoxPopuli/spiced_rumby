@@ -5,6 +5,7 @@ module SpicedGracken
         address = @payload['sender']['location']
         last_alias = @payload['sender']['name']
         uid = @payload['sender']['uid']
+
         SpicedGracken.active_server_list.add(
           uid: uid,
           address: address,

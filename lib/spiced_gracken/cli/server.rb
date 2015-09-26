@@ -5,13 +5,18 @@ module SpicedGracken
         case sub_command
         when ADD
           if is_valid_add_command?
-            address = command_args[2]
+            info = command_args[2]
+            alias_name, info = info.split('@')
+            address, uid = info.split('#')
+
 
             SpicedGracken.active_server_list.add(
-              address: address
+              address: address,
+              alias_name: alias_name,
+              uid: uid
             )
           else
-            s = 'add requires an address and port'
+            s = 'add requires alias@ip:port#uid'
             SpicedGracken.display.alert(s)
           end
         when REMOVE, RM
@@ -35,7 +40,9 @@ module SpicedGracken
       end
 
       def is_valid_add_command?
-        sub_command == ADD && command_args.length == 3
+        sub_command == ADD && command_args.length == 3 &&
+        command_args[2].include?('@') && command_args[2].include?(':') &&
+        command_args[2].include?('#')
       end
 
       def is_valid_remove_command?

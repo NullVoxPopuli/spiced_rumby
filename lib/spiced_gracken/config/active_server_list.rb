@@ -19,7 +19,7 @@ module SpicedGracken
       end
 
       def remove(address: nil, alias_name: nil, uid: nil)
-        entry = contains?(address: address, alias_name: alias_name, uid: uid)
+        entry = find(address: address, alias_name: alias_name, uid: uid)
         _list.delete(entry) if entry
       end
 
@@ -90,6 +90,17 @@ module SpicedGracken
       end
 
       alias_method :find, :contains?
+
+      def find_all(alias_name: nil, address: nil)
+        _list.each_with_object([]) do |entry, entries|
+          found = (
+            (alias_name && entry.alias_name == alias_name) ||
+            (address && entry.address == address)
+          )
+
+          entries << entry if found
+        end
+      end
 
       def display_addresses
         list = _list.map do |entry|

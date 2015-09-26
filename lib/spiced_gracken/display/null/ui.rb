@@ -3,12 +3,17 @@ module SpicedGracken
     # for testing!
     module Null
       class UI < Display::Base
-        def start; end
-        def add_line; end
-        def info; end
-        def alert; end
-        def success; end
-        def chat; end
-        def whisper; end
-        def warning; end
-        def log; end
+        def start(*); end
+        def add_line(*); end
+        def info(*); end
+        def alert(*); end
+        def success(*); end
+        def chat(*); end
+        def whisper(*); end
+        def warning(*); end
+        def log(*); end
+        def error(*); end
+      end
+    end
+  end
+end

@@ -26,10 +26,10 @@ module SpicedGracken
 
       def display
         time_recieved = @time_recieved.strftime('%e/%m/%y %H:%I:%M')
-        s = "#{time_recieved} "
-        s << "#{payload['sender']['name']} > "
-        s << "#{payload['message']}"
-        s
+        name = payload['sender']['name']
+        message = payload['message']
+
+        "#{time_recieved} #{name} > #{message}"
       end
     end
   end

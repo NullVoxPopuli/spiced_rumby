@@ -13,6 +13,9 @@ module SpicedGracken
           Thread.start(@server.accept) do |connection|
             begin
               while (input = connection.gets)
+                SpicedGracken.ui.debug 'server received message:'
+                SpicedGracken.ui.debug input
+
                 data = JSON.parse(input)
 
                 update_sender_info(data)
@@ -43,10 +46,8 @@ module SpicedGracken
                   message = Message::PingReply.new
                   message.payload = data
                 when Message::Authorization, Message::SERVER_LIST, Message::SERVER_LIST_HASH, Message::SERVER_LIST_DIFF
-                  SpicedGracken.ui.debug input
                   SpicedGracken.ui.alert 'not yet implemented...'
                 else
-                  SpicedGracken.ui.debug input
                   SpicedGracken.ui.alert 'message recieved and not recognized...'
                 end
 
@@ -64,17 +65,17 @@ module SpicedGracken
                 end
               end
             rescue => e
-              puts e.message.colorize(:red)
-              puts e.backtrace.join("\n").colorize(:red)
-
-              puts input.inspect
+              # rescue here so that the server doesn't stop listening
+              SpicedGracken.ui.alert e.message
+              SpicedGracken.ui.fatal e.message
+              SpicedGracken.ui.fatal e.backtrace.join("\n")
             end
           end
         end
       rescue => e
         SpicedGracken.ui.alert e.message
         SpicedGracken.ui.fatal e.message
-        SpicedGracken.ui.fatal e.backtrace
+        SpicedGracken.ui.fatal e.backtrace.join("\n")
       end
 
       def update_sender_info(data)

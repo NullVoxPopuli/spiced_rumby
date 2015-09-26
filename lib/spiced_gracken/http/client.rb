@@ -13,6 +13,8 @@ module SpicedGracken
       end
 
       def send(message: '')
+        SpicedGracken.ui.debug 'client sent message:'
+        SpicedGracken.ui.debug message
         @socket.puts message
       end
 

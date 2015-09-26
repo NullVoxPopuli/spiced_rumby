@@ -38,9 +38,7 @@ module SpicedGracken
     end
 
     def create_input(msg)
-      SpicedGracken.ui.debug 'handling input...'
       handler = Input.create(msg, cli: self)
-      SpicedGracken.ui.debug "msg of type #{handler.class.name} created"
       handler.handle
     rescue => e
       SpicedGracken.ui.error e.message
@@ -48,11 +46,7 @@ module SpicedGracken
     end
 
     def get_input
-      SpicedGracken.ui.debug 'waiting for input...'
-      msg = gets
-      # # clean the line
-      # print "\r\e[K"
-      msg
+      gets
     end
 
     def client_active?
