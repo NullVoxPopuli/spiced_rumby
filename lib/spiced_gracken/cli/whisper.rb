@@ -1,9 +1,10 @@
 module SpicedGracken
   class CLI
     class Whisper < CLI::Command
+      require 'pry-byebug'
       def target
         # get first arg
-        command_args[0]
+        command
       end
 
       def message

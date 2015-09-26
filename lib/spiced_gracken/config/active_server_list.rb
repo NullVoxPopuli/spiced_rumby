@@ -35,8 +35,8 @@ module SpicedGracken
       end
 
       def add(address: nil, alias_name: nil, uid: nil, public_key: nil, entry: nil)
-        if contains?(uid: uid)
-          update(uid, address: address, alias_name: alias_name)
+        if e = contains?(uid: uid, address: address)
+          update(e.uid, address: address, alias_name: alias_name, entry: e)
         else
           entry = Entry.new(
             alias_name: alias_name,
@@ -49,8 +49,8 @@ module SpicedGracken
         end
       end
 
-      def update(uid, address: nil, alias_name: nil)
-        entry = find_by_uid(uid)
+      def update(uid, address: nil, alias_name: nil, entry: nil)
+        entry = entry || find_by_uid(uid)
         return add(uid: uid, address: address, alias_name: alias_name) unless entry
 
         entry.address = address if address

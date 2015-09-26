@@ -42,9 +42,9 @@ module SpicedGracken
           name = words[2]
           message = words[3..words.length]
 
-          output_with_color(time.join(' ') + ' ', TerminalCurses::UI.time)
-          output_with_color(name + ' ', TerminalCurses::UI.sender)
-          output_with_color(message.join(' '), TerminalCurses::UI.text)
+          output_with_color(time.join(' ') + ' ', TerminalCurses::UI.time, intensity: Curses::A_BOLD)
+          output_with_color(name + ' ', TerminalCurses::UI.sender, intensity: Curses::A_BOLD)
+          output_with_color(message.join(' '), TerminalCurses::UI.text, intensity: Curses::A_BOLD)
           _window.addstr("\n")
           refresh
         end
@@ -57,8 +57,8 @@ module SpicedGracken
           name = words[2]
           message = words[3..words.length]
 
-          output_with_color(time.join(' ') + ' ', TerminalCurses::UI.whisper_time, intensity: Curses::A_DIM)
-          output_with_color(name + ' ', TerminalCurses::UI.whisper_sender, intensity: Curses::A_DIM)
+          output_with_color(time.join(' ') + ' ', TerminalCurses::UI.time, intensity: Curses::A_DIM)
+          output_with_color(name + ' ', TerminalCurses::UI.sender, intensity: Curses::A_DIM)
           output_with_color(message.join(' '), TerminalCurses::UI.text, intensity: Curses::A_DIM)
           _window.addstr("\n")
           refresh

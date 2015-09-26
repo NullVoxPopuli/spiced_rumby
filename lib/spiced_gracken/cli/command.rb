@@ -48,25 +48,23 @@ module SpicedGracken
       protected
 
       def command_string
-        _input[1, _input.length]
+        @command_string ||= _input[1, _input.length]
       end
 
       def command_args
-        command_string.split(' ')
+        @command_args ||= command_string.split(' ')
       end
 
       def command
-        command_args.first
+        @command ||= command_args.first
       end
 
       def sub_command_args
-        command_args[2..3]
+        @sub_command_args ||= command_args[2..3]
       end
 
-      private
-
       def sub_command
-        command_args[1]
+        @sub_command ||= command_args[1]
       end
     end
   end

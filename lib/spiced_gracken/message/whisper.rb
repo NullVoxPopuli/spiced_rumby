@@ -17,17 +17,11 @@ module SpicedGracken
         time_sent = payload['time_sent']
         time = Date.parse(time_sent)
         time_recieved = time.strftime('%e/%m/%y %H:%I:%M')
+        sender = payload['sender']['name']
+        message = payload['message']
 
-        s = "#{time_recieved} "
-        s << "#{payload['sender']['name']}"
-
-        if _to.present?
-          s << "->#{_to}"
-        end
-
-        s << ' > '
-        s << "#{payload['message']}"
-        s
+        to = _to.present? ? "->#{_to}" : ''
+        "#{time_recieved} #{sender}#{to} > #{message}"
       end
     end
   end
