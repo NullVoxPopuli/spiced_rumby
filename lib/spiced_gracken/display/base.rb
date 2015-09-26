@@ -10,6 +10,10 @@ module SpicedGracken
         raise 'overload this method'
       end
 
+      def whisper(line)
+        raise 'overload this method'
+      end
+
       def message_from_gracken(msg)
         raise 'overload this method'
       end

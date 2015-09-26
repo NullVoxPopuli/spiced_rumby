@@ -92,13 +92,14 @@ module SpicedGracken
       alias_method :find, :contains?
 
       def display_addresses
-        _list.each do |entry|
-          puts "#{entry.alias_name}@#{entry.address}".colorize(:light_black)
+        list = _list.map do |entry|
+          "#{entry.alias_name}@#{entry.address}"
         end
+        list.join("\n").presence || 'no active nodes'
       end
 
       def who
-        puts _list.map{ |e| e.alias_name }.join(', ').colorize(:light_black)
+        _list.map{ |e| e.alias_name }.join(', ').presence || "no one is online"
       end
     end
   end

@@ -12,8 +12,12 @@ module SpicedGracken
           puts line
         end
 
-        def message_from_gracken(msg)
+        def info(msg)
           puts msg.colorize(:light_black)
+        end
+
+        def warning(msg)
+          puts msg.colorize(:red)
         end
       end
     end

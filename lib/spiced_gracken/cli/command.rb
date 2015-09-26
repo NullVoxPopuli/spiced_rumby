@@ -27,7 +27,7 @@ module SpicedGracken
         when PING
           CLI::Ping.new(_input, cli: _cli).handle
         when WHO
-          puts SpicedGracken.active_server_list.who
+          SpicedGracken.ui.info(SpicedGracken.active_server_list.who)
         when STOP_LISTENING
           _cli.close_server
         when SERVERS, SERVER
@@ -39,9 +39,9 @@ module SpicedGracken
         when LISTEN
           _cli.start_server
         when CONNECT, CHAT
-          puts 'not implemented...'.colorize(:red)
+          SpicedGracken.ui.warning('not implemented...')
         else
-          puts 'not implemented...'.colorize(:red)
+          SpicedGracken.ui.warning('not implemented...')
         end
       end
 

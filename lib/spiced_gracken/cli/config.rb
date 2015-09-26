@@ -9,12 +9,14 @@ module SpicedGracken
 
             SpicedGracken.settings.set(key, with: value)
           else
-            puts 'set requires a key and a value'.colorize(:red)
+            SpicedGracken.ui.warning('set requires a key and a value')
           end
         when DISPLAY
           SpicedGracken.settings.display
         else
-          puts 'config command not implemented....'.colorize(:red)
+          SpicedGracken.ui.warning(
+            'config command not implemented....'
+          )
         end
       end
 

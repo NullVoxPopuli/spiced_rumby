@@ -6,6 +6,7 @@ module SpicedGracken
     module TerminalCurses
       class UI < Display::Base
         # http://ruby-doc.org/stdlib-2.0.0/libdoc/curses/rdoc/Curses.html
+        include Curses
 
         attr_accessor :_current_input
         attr_accessor :_chat_input
@@ -61,6 +62,14 @@ module SpicedGracken
 
         def add_line(line)
           _chat_output.add_line(line)
+        end
+
+        def info(msg)
+          add_line(msg)
+        end
+
+        def warning(msg)
+          add_line(msg)
         end
 
       end

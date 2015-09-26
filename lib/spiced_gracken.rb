@@ -60,6 +60,10 @@ module SpicedGracken
     @@display
   end
 
+  def ui
+    display
+  end
+
   def cli
     @@cli
   end

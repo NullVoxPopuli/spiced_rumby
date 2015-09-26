@@ -12,7 +12,8 @@ module SpicedGracken
               address: address
             )
           else
-            puts 'add requires an address and port'
+            s = 'add requires an address and port'
+            SpicedGracken.display.warning(s)
           end
         when REMOVE, RM
           if is_valid_remove_command?
@@ -20,13 +21,16 @@ module SpicedGracken
 
             SpicedGracken.active_server_list.remove_by(field, value)
           else
-            puts 'requires address or alias. ex: /server rm alias evan'
+            s = 'requires address or alias. ex: /server rm alias evan'
+            SpicedGracken.display.warning(s)
           end
         else
           if command_args.length > 0
-            SpicedGracken.active_server_list.display_addresses
+            s = SpicedGracken.active_server_list.display_addresses
+            SpicedGracken.display.info(s)
           else
-            puts 'server command not implemented...'.colorize(:red)
+            s = 'server command not implemented...'
+            SpicedGracken.display.warning(s)
           end
         end
       end
