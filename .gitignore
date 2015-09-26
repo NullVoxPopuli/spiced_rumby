@@ -4,6 +4,7 @@ serverlist.json
 test-settings
 test-activeserverlist
 test-hashfile
+debug.log
 
 ## default ruby git ignore
 *.gem
