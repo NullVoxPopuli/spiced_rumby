@@ -46,5 +46,4 @@ describe SpicedGracken::Config::ServerList do
       expect(server_list._hash).to eq('servers' => [])
     end
   end
-
 end

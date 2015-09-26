@@ -3,7 +3,6 @@ require 'spec_helper'
 describe SpicedGracken::Message::Disconnection do
   let(:klass) { SpicedGracken::Message::Disconnection }
 
-
   before(:each) do
     allow_any_instance_of(SpicedGracken::Config::ServerList).to receive(:filename) { 'test-serverlist' }
     allow(SpicedGracken).to receive(:server_list) do
@@ -40,5 +39,4 @@ describe SpicedGracken::Message::Disconnection do
       expect(msg.display).to include('me@here has disconnected')
     end
   end
-
 end

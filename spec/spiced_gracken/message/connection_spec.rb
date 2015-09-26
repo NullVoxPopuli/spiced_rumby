@@ -7,7 +7,6 @@ describe SpicedGracken::Message::Connection do
     mock_settings_objects
   end
 
-
   context 'instantiation' do
     it 'sets a default payload' do
       msg = klass.new

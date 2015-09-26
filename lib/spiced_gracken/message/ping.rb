@@ -1,8 +1,7 @@
 module SpicedGracken
   module Message
     class Ping < Base
-
-      def initialize(*args)
+      def initialize(*_args)
         self.payload = {
           'type' => PING,
           'message' => '',

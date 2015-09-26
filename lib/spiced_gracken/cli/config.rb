@@ -9,17 +9,16 @@ module SpicedGracken
 
             SpicedGracken.settings.set(key, with: value)
           else
-            SpicedGracken.ui.warning('set requires a key and a value')
+            SpicedGracken.ui.alert('set requires a key and a value')
           end
         when DISPLAY
           SpicedGracken.settings.display
         else
-          SpicedGracken.ui.warning(
+          SpicedGracken.ui.alert(
             'config command not implemented....'
           )
         end
       end
-
 
       def config_set_args
         command_args[2..3]

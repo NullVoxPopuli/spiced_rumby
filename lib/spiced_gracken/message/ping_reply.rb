@@ -1,8 +1,7 @@
 module SpicedGracken
   module Message
     class PingReply < Base
-
-      def initialize(*args)
+      def initialize(*_args)
         self.payload = {
           'type' => PING_REPLY,
           'message' => '',
@@ -20,7 +19,6 @@ module SpicedGracken
       def display
         'ping successful'.colorize(:light_black)
       end
-
     end
   end
 end

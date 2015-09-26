@@ -99,7 +99,7 @@ module SpicedGracken
       end
 
       def who
-        _list.map{ |e| e.alias_name }.join(', ').presence || "no one is online"
+        _list.map(&:alias_name).join(', ').presence || 'no one is online'
       end
     end
   end

@@ -12,6 +12,7 @@ module SpicedGracken
       delegate :add_line, to: :_ui
       delegate :info, to: :_ui
       delegate :warning, to: :_ui
+      delegate :alert, to: :_ui
 
       def initialize(ui_klass)
         self._ui = ui_klass.new

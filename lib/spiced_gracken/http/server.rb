@@ -17,7 +17,6 @@ module SpicedGracken
 
                 update_sender_info(data)
 
-
                 type = data['type']
                 message = nil
                 # figure out what to do

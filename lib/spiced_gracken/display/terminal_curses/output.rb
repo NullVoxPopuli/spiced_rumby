@@ -16,18 +16,39 @@ module SpicedGracken
             0,
             0)
           self._chat = []
-          refresh
         end
 
         def refresh
-          _window.clear
-          _window.addstr(_chat.join("\n"))
+          # _window.clear
+          # _window.addstr(_chat.join("\n"))
           _window.refresh
         end
 
         def add_line(line)
-          self._chat << line
+          # _chat << line
+          # _screen.update
+          _window.addstr(line)
           refresh
+        end
+
+        def info(msg)
+          _window.attron(TerminalCurses::UI::SENDER|Curses::A_NORMAL)  {
+            _window.addstr(msg)
+           }
+           refresh
+        end
+
+        def warning(msg)
+          _window.attron(TerminalCurses::UI::WARNING|Curses::A_NORMAL) {
+            _window.addstr(msg)
+           }
+           refresh
+        end
+
+        def alert(msg)
+          _window.attron(TerminalCurses::UI::ALERT|Curses::A_NORMAL) {
+            _window.addstr(msg)
+           }
         end
       end
     end

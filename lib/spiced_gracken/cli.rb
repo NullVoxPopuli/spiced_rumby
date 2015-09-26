@@ -22,36 +22,39 @@ module SpicedGracken
     end
 
     def listen_for_commands
-      while client_active?
-        process_input
-      end
+      process_input while client_active?
 
-      puts 'client not running'.colorize(:red)
+      SpicedGracken.ui.alert(
+        'client not running'
+      )
     end
 
     def process_input
-      begin
-        msg = get_input
-        create_input(msg)
-      rescue SystemExit, Interrupt
-        shutdown
-      rescue Exception => e
-        puts e.class.name
-        puts e.message.colorize(:red)
-        puts e.backtrace.join("\n").colorize(:red)
-      end
+      msg = get_input
+      create_input(msg)
+    rescue SystemExit, Interrupt
+      shutdown
+    rescue Exception => e
+      puts e.class.name
+      puts e.message.colorize(:red)
+      puts e.backtrace.join("\n").colorize(:red)
     end
 
     def create_input(msg)
+      puts 'handling input...'
+      if msg.nil?
+        SpicedGracken.ui.alert('no input captured')
+        return
+      end
       handler = Input.create(msg, cli: self)
       handler.handle
     end
 
     def get_input
+      puts 'waiting for input...'
       msg = gets
-      # clean the line
-      print "\r\e[K"
-
+      # # clean the line
+      # print "\r\e[K"
       msg
     end
 

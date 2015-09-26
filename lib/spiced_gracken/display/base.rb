@@ -1,27 +1,25 @@
 module SpicedGracken
   module Display
     class Base
-
       def start
-        raise 'overload this method'
+        fail 'overload this method'
       end
 
-      def add_line(line)
-        raise 'overload this method'
+      def add_line(_line)
+        fail 'overload this method'
       end
 
-      def whisper(line)
-        raise 'overload this method'
+      def whisper(_line)
+        fail 'overload this method'
       end
 
-      def message_from_gracken(msg)
-        raise 'overload this method'
+      def message_from_gracken(_msg)
+        fail 'overload this method'
       end
 
-      def log(msg)
-        raise 'overload this method'
+      def log(_msg)
+        fail 'overload this method'
       end
-
     end
   end
 end

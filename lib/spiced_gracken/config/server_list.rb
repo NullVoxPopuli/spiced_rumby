@@ -28,7 +28,6 @@ module SpicedGracken
         unless @entries
           @entries = []
           servers.each do |s|
-
             entry = Entry.new(
               address: s['address'],
               alias_name: s['alias'],

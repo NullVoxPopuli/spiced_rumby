@@ -4,6 +4,7 @@ module SpicedGracken
       class UI < Display::Base
         def start
           puts Help.welcome
+          puts "\n"
           SpicedGracken.cli.listen_for_commands
         end
 
@@ -17,6 +18,10 @@ module SpicedGracken
         end
 
         def warning(msg)
+          puts msg.colorize(:yellow)
+        end
+
+        def alert(msg)
           puts msg.colorize(:red)
         end
       end

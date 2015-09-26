@@ -40,9 +40,10 @@ module SpicedGracken
 
       def save
         # backup
-        File.rename(filename, filename + '.bak') if exists = exists?
+        exists = exists?
+        File.rename(filename, filename + '.bak') if exists
         # write
-        File.open(filename, 'w') { |f| f.syswrite(_hash.to_json); f.close }
+        File.open(filename, 'w') { |f| f.syswrite(_hash.to_json) }
         # remove backup
         File.delete(filename + '.bak') if exists
       end

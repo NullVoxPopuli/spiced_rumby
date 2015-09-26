@@ -25,6 +25,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activesupport'
   s.add_runtime_dependency 'colorize'
   s.add_runtime_dependency 'curses'
+  # sudo apt-get install libncursesw5-dev
+  # may be needed ^ :-(
+  # s.add_runtime_dependency 'ncursesw' # in gemfile
 
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'pry-byebug'

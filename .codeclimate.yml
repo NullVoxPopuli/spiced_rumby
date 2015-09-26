@@ -48,3 +48,5 @@ ratings:
 exclude_paths:
 - spec/**/*
 - vendor/**/*
+- lib/spiced_gracken/display/terminal_curses/*
+- lib/spiced_gracken/display/terminal_ncurses/*

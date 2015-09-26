@@ -60,9 +60,9 @@ module SpicedGracken
             end
           end
         else
-          s = 'you have no servers'.colorize(:yellow)
-          SpicedGracken.display.add_line(s)
-
+          SpicedGracken.ui.warning(
+            'you have no servers'
+          )
         end
       end
     end

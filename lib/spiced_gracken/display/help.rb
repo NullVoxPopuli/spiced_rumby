@@ -4,13 +4,12 @@ module SpicedGracken
       module_function
 
       def welcome
-        "Welcome to Spiced Gracken!"
+        'Welcome to Spiced Gracken!'
       end
 
       def hit_key
-        "Hit any key"
+        'Hit any key'
       end
-
     end
   end
 end

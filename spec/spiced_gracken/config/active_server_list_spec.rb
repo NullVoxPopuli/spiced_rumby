@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SpicedGracken::Config::ActiveServerList do
-
   let(:klass) { SpicedGracken::Config::ActiveServerList }
   let(:list) { klass.new }
 
@@ -34,13 +33,13 @@ describe SpicedGracken::Config::ActiveServerList do
   end
 
   context 'remove' do
-    let(:entry){
+    let(:entry) do
       SpicedGracken::Config::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
-    }
+    end
 
     before(:each) do
       list._list = [entry]
@@ -100,13 +99,13 @@ describe SpicedGracken::Config::ActiveServerList do
   end
 
   context 'update' do
-    let(:entry){
+    let(:entry) do
       SpicedGracken::Config::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
-    }
+    end
 
     before(:each) do
       list.add(entry: entry)
@@ -124,13 +123,13 @@ describe SpicedGracken::Config::ActiveServerList do
   end
 
   context 'contains?' do
-    let(:entry){
+    let(:entry) do
       SpicedGracken::Config::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
-    }
+    end
 
     before(:each) do
       list.add(entry: entry)

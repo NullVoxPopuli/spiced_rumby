@@ -7,7 +7,6 @@ describe SpicedGracken::Message::Ping do
     mock_settings_objects
   end
 
-
   context 'instantiation' do
     it 'sets a default payload' do
       msg = klass.new
@@ -30,7 +29,6 @@ describe SpicedGracken::Message::Ping do
   end
 
   context 'respond' do
-
     it 'shoots off a ping reply to the sender of the ping' do
       expect(SpicedGracken::Http::Client).to receive(:send_to_and_close)
 

@@ -3,7 +3,7 @@ require 'socket'
 require 'json'
 require 'date'
 require 'colorize'
-require "curses"
+require 'curses'
 
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/object/blank'
@@ -40,6 +40,9 @@ module SpicedGracken
       ui = Display::TerminalCurses::UI
     end
 
+    # reset the terminal's output
+    system("stty raw opost -echo")
+
     @@display = Display::Manager.new(ui)
     @@display.start
   end
@@ -61,7 +64,7 @@ module SpicedGracken
   end
 
   def ui
-    display
+    @@display
   end
 
   def cli

@@ -39,9 +39,9 @@ module SpicedGracken
         when LISTEN
           _cli.start_server
         when CONNECT, CHAT
-          SpicedGracken.ui.warning('not implemented...')
+          SpicedGracken.ui.alert('not implemented...')
         else
-          SpicedGracken.ui.warning('not implemented...')
+          SpicedGracken.ui.alert('not implemented...')
         end
       end
 
@@ -68,7 +68,6 @@ module SpicedGracken
       def sub_command
         command_args[1]
       end
-
     end
   end
 end

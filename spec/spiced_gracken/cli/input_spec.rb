@@ -3,7 +3,6 @@ require 'spec_helper'
 describe SpicedGracken::CLI::Input do
   let(:klass) { SpicedGracken::CLI::Input }
 
-
   before(:each) do
     mock_settings_objects
   end
