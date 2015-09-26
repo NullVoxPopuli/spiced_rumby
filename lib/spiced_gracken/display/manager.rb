@@ -13,8 +13,17 @@ module SpicedGracken
       delegate :info, to: :_ui
       delegate :warning, to: :_ui
       delegate :alert, to: :_ui
+      delegate :success, to: :_ui
+      delegate :chat, to: :_ui
+      delegate :whisper, to: :_ui
+
+      attr_accessor :_logger
+      delegate :fatal, to: :_logger
+      delegate :debug, to: :_logger
+      delegate :error, to: :_logger
 
       def initialize(ui_klass)
+        self._logger = Logger.new('debug.log')
         self._ui = ui_klass.new
       end
     end

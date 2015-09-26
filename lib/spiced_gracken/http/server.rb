@@ -5,7 +5,7 @@ module SpicedGracken
 
       # instantiate!
       def initialize(port: '')
-        SpicedGracken.display.add_line("listening on #{port}...".colorize(:green))
+        SpicedGracken.display.success "listening on #{port}..."
         @server = TCPServer.new(port)
 
         loop do
@@ -20,6 +20,7 @@ module SpicedGracken
                 type = data['type']
                 message = nil
                 # figure out what to do
+                # TODO: replace with send
                 case type
                 when Message::CHAT
                   message = Message::Chat.new
@@ -42,14 +43,25 @@ module SpicedGracken
                   message = Message::PingReply.new
                   message.payload = data
                 when Message::Authorization, Message::SERVER_LIST, Message::SERVER_LIST_HASH, Message::SERVER_LIST_DIFF
-                  puts input
-                  puts 'not yet implemented...'.colorize(:red)
+                  SpicedGracken.ui.debug input
+                  SpicedGracken.ui.alert 'not yet implemented...'
                 else
-                  puts 'message recieved and not recognized...'.colorize(:red)
-                  puts input
+                  SpicedGracken.ui.debug input
+                  SpicedGracken.ui.alert 'message recieved and not recognized...'
                 end
 
-                SpicedGracken.display.add_line(message.display)
+                # TODO: replace with method_missing?
+                # maybe pass the method object instead?
+                # maybe extract to a render_disributer? idk.
+                SpicedGracken.ui.debug("server:: #{message.class.name}")
+                case message.class.name
+                when SpicedGracken::Message::Chat.name
+                  SpicedGracken.ui.chat message.display
+                when SpicedGracken::Message::Whisper.name
+                  SpicedGracken.ui.whisper message.display
+                else
+                  SpicedGracken.ui.add_line message.display
+                end
               end
             rescue => e
               puts e.message.colorize(:red)
@@ -59,6 +71,10 @@ module SpicedGracken
             end
           end
         end
+      rescue => e
+        SpicedGracken.ui.alert e.message
+        SpicedGracken.ui.fatal e.message
+        SpicedGracken.ui.fatal e.backtrace
       end
 
       def update_sender_info(data)

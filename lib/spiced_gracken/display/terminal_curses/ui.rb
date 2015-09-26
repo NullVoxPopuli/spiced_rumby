@@ -14,22 +14,6 @@ module SpicedGracken
         attr_accessor :_chat
         attr_accessor :_sidebar
 
-        Curses.init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLACK)
-        Curses.init_pair(COLOR_RED, COLOR_RED, COLOR_BLACK)
-        Curses.init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK)
-        Curses.init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLACK)
-        Curses.init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK)
-        Curses.init_pair(COLOR_GREEN, COLOR_GREEN, COLOR_BLACK)
-        Curses.init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLACK)
-
-        WARNING = Curses.color_pair(COLOR_YELLOW)
-        ALERT = Curses.color_pair(COLOR_RED)
-        TIME = Curses.color_pair(COLOR_MAGENTA)
-        SENDER = Curses.color_pair(COLOR_CYAN)
-        TEXT = Curses.color_pair(COLOR_WHITE)
-        WHISPER_SENDER = Curses.color_pair(COLOR_GREEN)
-        WHISPER_TIME = Curses.color_pair(COLOR_BLUE)
-
         # init_pair(id, foreground, background)
         def initialize
           self._chat = []
@@ -39,7 +23,7 @@ module SpicedGracken
         def start
           Curses.init_screen
           Curses.start_color
-
+          self.class.init_colors
           begin
             Curses.crmode
             Curses.noecho
@@ -47,6 +31,8 @@ module SpicedGracken
             #  show_message("Hit any key")
             display_greeting
             display_ui
+            yield if block_given?
+            _chat_input.process_input
 
             # process_input
             Curses.refresh
@@ -71,7 +57,6 @@ module SpicedGracken
           self._chat_output = Output.new(self)
           self._chat_input = ChatInput.new(self)
           update
-          _chat_input.process_input
         end
 
         def update
@@ -84,6 +69,51 @@ module SpicedGracken
         delegate :info, to: :_chat_output
         delegate :warning, to: :_chat_output
         delegate :alert, to: :_chat_output
+        delegate :success, to: :_chat_output
+        delegate :chat, to: :_chat_output
+        delegate :whisper, to: :_chat_output
+
+        def self.init_colors
+          Curses.init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLACK)
+          Curses.init_pair(COLOR_RED, COLOR_RED, COLOR_BLACK)
+          Curses.init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK)
+          Curses.init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLACK)
+          Curses.init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK)
+          Curses.init_pair(COLOR_GREEN, COLOR_GREEN, COLOR_BLACK)
+          Curses.init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLACK)
+        end
+
+        def self.warning
+          Curses.color_pair(COLOR_YELLOW)
+        end
+
+        def self.alert
+          Curses.color_pair(COLOR_RED)
+        end
+
+        def self.time
+          Curses.color_pair(COLOR_MAGENTA)
+        end
+
+        def self.sender
+          Curses.color_pair(COLOR_CYAN)
+        end
+
+        def self.text
+          Curses.color_pair(COLOR_WHITE)
+        end
+
+        def self.success
+          Curses.color_pair(COLOR_GREEN)
+        end
+
+        def self.whisper_sender
+          Curses.color_pair(COLOR_GREEN)
+        end
+
+        def self.whisper_time
+          Curses.color_pair(COLOR_BLUE)
+        end
       end
     end
   end

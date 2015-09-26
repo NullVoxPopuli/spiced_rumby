@@ -31,7 +31,7 @@ module SpicedGracken
       end
 
       def display
-        puts _hash.inspect
+        _hash.inspect
       end
 
       def as_hash
@@ -51,7 +51,7 @@ module SpicedGracken
       def set(key, with: value)
         self[key] = with
         save
-        puts "#{key} set to #{with}\n"
+        "#{key} set to #{with}"
       end
 
       def exists?

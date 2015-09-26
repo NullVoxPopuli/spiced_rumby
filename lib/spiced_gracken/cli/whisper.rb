@@ -17,7 +17,7 @@ module SpicedGracken
           # if _cli.client and !_cli.client.socket.closed?
           m = Message::Whisper.new(
             message: message,
-            name_of_sender: _settings[:alias],
+            name_of_sender: SpicedGracken.settings[:alias],
             location: _cli.server_address,
             to: target
           )
@@ -32,7 +32,7 @@ module SpicedGracken
 
           print "\n"
         else
-          puts "server for #{target} not found or is not online".colorize(:yellow)
+          SpicedGracken.ui.alert "server for #{target} not found or is not online"
         end
       end
     end

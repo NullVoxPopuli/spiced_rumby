@@ -20,7 +20,6 @@ module SpicedGracken
         def refresh
           _window.clrtoeol
           _window.clear
-          # _window.deleteln
           _window.box('|', '-')
           _window.setpos(1, 2)
           _window.refresh
@@ -32,21 +31,24 @@ module SpicedGracken
             input = _window.getch
             # binding.pry
             # TODO: maybe change the text color based on if command or not
-            if input == 10 # Curses::Key::ENTER
+            case input
+            when 10, 13 # Enter
               refresh
               SpicedGracken.cli.create_input(_current_input)
               self._current_input = ''
-            elsif input == 8 # Curses::Key::BACKSPACE
+            when 8 # backspace
               curx = _window.curx
               cury = _window.cury
               _window.setpos(cury, curx - 1)
               _window.delch
               self._current_input = _current_input.chop
-            elsif input.to_s == input
-              _window.addch(input)
-              self._current_input += input
-              # do we ever want to break?
-              # break
+            else
+              if input.to_s == input
+                _window.addch(input)
+                self._current_input += input
+                # do we ever want to break?
+                # break
+              end
             end
           end
         end

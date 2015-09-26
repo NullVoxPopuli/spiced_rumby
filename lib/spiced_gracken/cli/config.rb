@@ -7,12 +7,12 @@ module SpicedGracken
           if is_valid_set_command?
             key, value = config_set_args
 
-            SpicedGracken.settings.set(key, with: value)
+            SpicedGracken.ui.info SpicedGracken.settings.set(key, with: value)
           else
             SpicedGracken.ui.alert('set requires a key and a value')
           end
         when DISPLAY
-          SpicedGracken.settings.display
+          SpicedGracken.ui.info SpicedGracken.settings.display
         else
           SpicedGracken.ui.alert(
             'config command not implemented....'

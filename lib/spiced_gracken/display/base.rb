@@ -1,6 +1,7 @@
 module SpicedGracken
   module Display
     class Base
+
       def start
         fail 'overload this method'
       end
@@ -10,10 +11,6 @@ module SpicedGracken
       end
 
       def whisper(_line)
-        fail 'overload this method'
-      end
-
-      def message_from_gracken(_msg)
         fail 'overload this method'
       end
 

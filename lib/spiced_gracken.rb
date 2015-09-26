@@ -4,6 +4,8 @@ require 'json'
 require 'date'
 require 'colorize'
 require 'curses'
+require 'io/console'
+require 'logger'
 
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/object/blank'
@@ -36,15 +38,19 @@ module SpicedGracken
     @@cli = CLI.new
 
     ui = Display::Bash::UI
-    if !selected_ui.blank? && selected_ui != 'bash'
-      ui = Display::TerminalCurses::UI
+    if !selected_ui.blank?
+      if selected_ui != 'bash'
+        ui = Display::TerminalCurses::UI
+      elsif selected_ui == 'null'
+        ui = Display::Null::UI
+      end
+
     end
 
-    # reset the terminal's output
-    system("stty raw opost -echo")
-
     @@display = Display::Manager.new(ui)
-    @@display.start
+    @@display.start do
+      @@cli.check_startup_settings
+    end
   end
 
   def self.settings

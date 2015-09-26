@@ -16,14 +16,13 @@ module SpicedGracken
       def display
         time_sent = payload['time_sent']
         time = Date.parse(time_sent)
-        time_recieved = time.strftime('%e/%m/%y %H:%I:%M').colorize(:magenta)
+        time_recieved = time.strftime('%e/%m/%y %H:%I:%M')
 
         s = "#{time_recieved} "
-        s << "#{payload['sender']['name'].colorize(:light_black)}"
+        s << "#{payload['sender']['name']}"
 
         if _to.present?
-          s << "#{'->'.colorize(:light_black)}"
-          s << "#{_to.colorize(:light_black)}"
+          s << "->#{_to}"
         end
 
         s << ' > '

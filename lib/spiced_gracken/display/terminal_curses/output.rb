@@ -25,30 +25,81 @@ module SpicedGracken
         end
 
         def add_line(line)
+          SpicedGracken.ui.debug("addline: #{line}")
           # _chat << line
           # _screen.update
-          _window.addstr(line)
+
+          # format / colorize!
+          _window.addstr(line + "\n")
+          refresh
+        end
+
+        def chat(msg)
+          SpicedGracken.ui.debug("chat: #{msg}")
+
+          words = msg.split(' ')
+          time = words[0..1]
+          name = words[2]
+          message = words[3..words.length]
+
+          output_with_color(time.join(' ') + ' ', TerminalCurses::UI.time)
+          output_with_color(name + ' ', TerminalCurses::UI.sender)
+          output_with_color(message.join(' '), TerminalCurses::UI.text)
+          _window.addstr("\n")
+          refresh
+        end
+
+        def whisper(msg)
+          SpicedGracken.ui.debug("whisper: #{msg}")
+
+          words = msg.split(' ')
+          time = words[0..1]
+          name = words[2]
+          message = words[3..words.length]
+
+          output_with_color(time.join(' ') + ' ', TerminalCurses::UI.whisper_time, intensity: Curses::A_DIM)
+          output_with_color(name + ' ', TerminalCurses::UI.whisper_sender, intensity: Curses::A_DIM)
+          output_with_color(message.join(' '), TerminalCurses::UI.text, intensity: Curses::A_DIM)
+          _window.addstr("\n")
+          refresh
+        end
+
+        # does not add a newline
+        def output_with_color(text, color, intensity: Curses::A_NORMAL)
+          _window.attron(color|intensity)  {
+            _window.addstr(text)
+          }
+          refresh
+        end
+
+        def success(msg)
+          SpicedGracken.ui.debug("success: #{msg}")
+          _window.attron(TerminalCurses::UI.success|Curses::A_NORMAL)  {
+            _window.addstr(msg + "\n")
+          }
           refresh
         end
 
         def info(msg)
-          _window.attron(TerminalCurses::UI::SENDER|Curses::A_NORMAL)  {
-            _window.addstr(msg)
-           }
-           refresh
+          SpicedGracken.ui.debug("info: #{msg}")
+          output_with_color(msg + "\n", TerminalCurses::UI.sender)
+          refresh
         end
 
         def warning(msg)
-          _window.attron(TerminalCurses::UI::WARNING|Curses::A_NORMAL) {
-            _window.addstr(msg)
+          SpicedGracken.ui.debug("warning: #{msg}")
+          _window.attron(TerminalCurses::UI.warning|Curses::A_NORMAL) {
+            _window.addstr(msg + "\n")
            }
            refresh
         end
 
         def alert(msg)
-          _window.attron(TerminalCurses::UI::ALERT|Curses::A_NORMAL) {
-            _window.addstr(msg)
+          SpicedGracken.ui.debug("alert: #{msg}")
+          _window.attron(TerminalCurses::UI.alert|Curses::A_NORMAL) {
+            _window.addstr(msg + "\n")
            }
+          refresh
         end
       end
     end

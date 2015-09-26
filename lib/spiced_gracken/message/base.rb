@@ -22,8 +22,8 @@ module SpicedGracken
       end
 
       def display
-        s = 'not implemented... you must implement display'.colorize(:red)
-        SpicedGracken.display.add_line(s)
+        s = 'not implemented... you must implement display'
+        SpicedGracken.ui.alert(s)
       end
 
       # this message should be called immediately

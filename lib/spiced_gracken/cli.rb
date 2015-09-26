@@ -14,7 +14,7 @@ module SpicedGracken
     attr_accessor :client, :server
 
     def initialize
-      check_startup_settings
+      # che/ck_startup_settings
 
       # this will allow our listener / server to print exceptions,
       # rather than  silently fail
@@ -23,10 +23,7 @@ module SpicedGracken
 
     def listen_for_commands
       process_input while client_active?
-
-      SpicedGracken.ui.alert(
-        'client not running'
-      )
+      SpicedGracken.ui.alert 'client not running'
     end
 
     def process_input
@@ -35,23 +32,23 @@ module SpicedGracken
     rescue SystemExit, Interrupt
       shutdown
     rescue Exception => e
-      puts e.class.name
-      puts e.message.colorize(:red)
-      puts e.backtrace.join("\n").colorize(:red)
+      SpicedGracken.ui.error e.class.name
+      SpicedGracken.ui.error e.message.colorize(:red)
+      SpicedGracken.ui.error e.backtrace.join("\n").colorize(:red)
     end
 
     def create_input(msg)
-      puts 'handling input...'
-      if msg.nil?
-        SpicedGracken.ui.alert('no input captured')
-        return
-      end
+      SpicedGracken.ui.debug 'handling input...'
       handler = Input.create(msg, cli: self)
+      SpicedGracken.ui.debug "msg of type #{handler.class.name} created"
       handler.handle
+    rescue => e
+      SpicedGracken.ui.error e.message
+      SpicedGracken.ui.error e.class.name
     end
 
     def get_input
-      puts 'waiting for input...'
+      SpicedGracken.ui.debug 'waiting for input...'
       msg = gets
       # # clean the line
       # print "\r\e[K"

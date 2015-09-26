@@ -25,9 +25,9 @@ module SpicedGracken
       end
 
       def display
-        time_recieved = @time_recieved.strftime('%e/%m/%y %H:%I:%M').colorize(:light_magenta)
+        time_recieved = @time_recieved.strftime('%e/%m/%y %H:%I:%M')
         s = "#{time_recieved} "
-        s << "#{payload['sender']['name'].colorize(:cyan)} > "
+        s << "#{payload['sender']['name']} > "
         s << "#{payload['message']}"
         s
       end

@@ -5,6 +5,7 @@ module SpicedGracken
         def start
           puts Help.welcome
           puts "\n"
+          yield if block_given?
           SpicedGracken.cli.listen_for_commands
         end
 
@@ -23,6 +24,32 @@ module SpicedGracken
 
         def alert(msg)
           puts msg.colorize(:red)
+        end
+
+        def success(msg)
+          puts msg.colorize(:green)
+        end
+
+        def chat(msg)
+          words = msg.split(' ')
+          time = words[0..1]
+          name = words[2]
+          message = words[3..words.length]
+
+          print (time.join(' ') + ' ').colorize(:light_magenta)
+          print (name + ' ').colorize(:cyan)
+          print message.join(' ') + "\n"
+        end
+
+        def whisper(msg)
+          words = msg.split(' ')
+          time = words[0..1]
+          name = words[2]
+          message = words[3..words.length]
+
+          print (time.join(' ') + ' ').colorize(:magenta)
+          print (name + ' ').colorize(:light_black)
+          print message.join(' ') + "\n"
         end
       end
     end
