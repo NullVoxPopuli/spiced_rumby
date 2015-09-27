@@ -23,6 +23,7 @@ module SpicedGracken
             to: target
           )
 
+          SpicedGracken.ui.whisper m.display
           data = m.render
           m.display
 

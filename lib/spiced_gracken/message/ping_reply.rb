@@ -1,8 +1,13 @@
 module SpicedGracken
   module Message
     class PingReply < Base
-      def initialize(*_args)
-        self.payload = {
+      def initialize(
+        message: '',
+        name_of_sender: '',
+        location: 'localhost',
+        payload: nil)
+
+        self.payload = payload || {
           'type' => PING_REPLY,
           'message' => '',
           'client' => SpicedGracken::NAME,

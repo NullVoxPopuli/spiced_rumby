@@ -3,12 +3,17 @@ module SpicedGracken
     class Base
       attr_accessor :payload, :time_recieved
 
+      # @param [String] message
+      # @param [String] name_of_sender
+      # @param [String] location the location of the sender
+      # @param [Hash] payload optionally overrides the default payload
       def initialize(
         message: '',
         name_of_sender: '',
-        location: 'localhost')
+        location: 'localhost',
+        payload: nil)
 
-        self.payload = {
+        self.payload = payload || {
           'type' => WHISPER,
           'message' => message,
           'client' => SpicedGracken::NAME,
@@ -22,8 +27,7 @@ module SpicedGracken
       end
 
       def display
-        s = 'not implemented... you must implement display'
-        SpicedGracken.ui.alert(s)
+        SpicedGracken.ui.alert 'not implemented... you must implement display'
       end
 
       # this message should be called immediately

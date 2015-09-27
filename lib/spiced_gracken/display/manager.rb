@@ -28,6 +28,17 @@ module SpicedGracken
         self._logger = Logger.new('debug.log')
         self._ui = ui_klass.new
       end
+
+      def present_message(message)
+        case message.class.name
+        when Message::Chat.name
+          chat message.display
+        when Message::Whisper.name
+          whisper message.display
+        else
+          add_line message.display
+        end
+      end
     end
   end
 end

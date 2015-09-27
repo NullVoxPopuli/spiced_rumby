@@ -7,10 +7,12 @@ module SpicedGracken
         message: '',
         name_of_sender: '',
         location: 'localhost',
-        to: '')
+        to: '',
+        payload: nil)
         super(message: message, name_of_sender: name_of_sender, location: location)
 
         self._to = to
+        self.payload = payload if payload
       end
 
       def display

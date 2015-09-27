@@ -44,19 +44,8 @@ module SpicedGracken
             location: _cli.server_address,
             uid: SpicedGracken.settings[:uid]
           )
-          # SpicedGracken.display.add_line(m.display)
 
-          # TODO: replace with method_missing?
-          # maybe pass the method object instead?
-          SpicedGracken.ui.debug("server:: #{m.class.name}")
-          case m.class.name
-          when SpicedGracken::Message::Chat.name
-            SpicedGracken.ui.chat m.display
-          when SpicedGracken::Message::Whisper.name
-            SpicedGracken.ui.whisper m.display
-          else
-            SpicedGracken.ui.add_line m.display
-          end
+          SpicedGracken.ui.chat m.display
           data = m.render
 
           # if sending to all, iterate thorugh list of

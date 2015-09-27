@@ -7,9 +7,10 @@ module SpicedGracken
         message: '',
         name_of_sender: '',
         location: 'localhost',
-        uid: '')
+        uid: '',
+        payload: nil)
 
-        @payload = {
+        @payload = payload || {
           'type' => CHAT,
           'message' => message,
           'client' => SpicedGracken::NAME,

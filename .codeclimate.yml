@@ -50,3 +50,5 @@ exclude_paths:
 - vendor/**/*
 - lib/spiced_gracken/display/terminal_curses/*
 - lib/spiced_gracken/display/terminal_ncurses/*
+- lib/spiced_gracken/display/bash/*
+- lib/spiced_gracken/display/null/*

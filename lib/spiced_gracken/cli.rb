@@ -54,6 +54,20 @@ module SpicedGracken
     end
 
     def start_server
+      unless SpicedGracken.settings.valid?
+        SpicedGracken.ui.alert("settings not fully valid\n")
+        errors = SpicedGracken.settings.errors
+        errors.each do |error|
+          SpicedGracken.ui.alert(" - #{error}")
+        end
+
+        if errors.present?
+          SpicedGracken.ui.info('set these with /config set <field> <value>')
+        end
+
+        return
+      end
+
       @server = Queue.new
       # start the server thread
       Thread.new(SpicedGracken.settings) do |settings|
