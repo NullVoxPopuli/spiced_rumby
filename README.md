@@ -17,3 +17,12 @@ $ irb
 require 'spiced_gracken'
 SpicedGracken.start
 ```
+
+Or, if you just download the zip:
+
+```bash
+gem build spiced_gracken.gemspec
+gem install spiced_gracken-___.gem
+./run # for bash interface (the picture on the right, above)
+./run ui # for curses interface (the picture on the left above)
+```
