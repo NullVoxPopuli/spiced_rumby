@@ -26,15 +26,15 @@ module SpicedGracken
             SpicedGracken.active_server_list.remove_by(field, value)
           else
             s = 'requires address or alias. ex: /server rm alias evan'
-            SpicedGracken.ui.alert(s)
+            Display.alert(s)
           end
         else
           if command_args.length > 0
             s = SpicedGracken.active_server_list.display_addresses
-            SpicedGracken.ui.info(s)
+            Display.info(s)
           else
             s = 'server command not implemented...'
-            SpicedGracken.ui.alert(s)
+            Display.alert(s)
           end
         end
       end

@@ -23,7 +23,7 @@ module SpicedGracken
 
     def listen_for_commands
       process_input while client_active?
-      SpicedGracken.ui.alert 'client not running'
+      Display.alert 'client not running'
     end
 
     def process_input
@@ -32,17 +32,17 @@ module SpicedGracken
     rescue SystemExit, Interrupt
       shutdown
     rescue Exception => e
-      SpicedGracken.ui.error e.class.name
-      SpicedGracken.ui.error e.message.colorize(:red)
-      SpicedGracken.ui.error e.backtrace.join("\n").colorize(:red)
+      Display.error e.class.name
+      Display.error e.message.colorize(:red)
+      Display.error e.backtrace.join("\n").colorize(:red)
     end
 
     def create_input(msg)
       handler = Input.create(msg, cli: self)
       handler.handle
     rescue => e
-      SpicedGracken.ui.error e.message
-      SpicedGracken.ui.error e.class.name
+      Display.error e.message
+      Display.error e.class.name
     end
 
     def get_input
@@ -55,14 +55,14 @@ module SpicedGracken
 
     def start_server
       unless SpicedGracken.settings.valid?
-        SpicedGracken.ui.alert("settings not fully valid\n")
+        Display.alert("settings not fully valid\n")
         errors = SpicedGracken.settings.errors
         errors.each do |error|
-          SpicedGracken.ui.alert(" - #{error}")
+          Display.alert(" - #{error}")
         end
 
         if errors.present?
-          SpicedGracken.ui.info('set these with /config set <field> <value>')
+          Display.info('set these with /config set <field> <value>')
         end
 
         return

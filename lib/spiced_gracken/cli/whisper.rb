@@ -23,7 +23,7 @@ module SpicedGracken
             to: target
           )
 
-          SpicedGracken.ui.whisper m.display
+          Display.whisper m.display
           data = m.render
           m.display
 
@@ -34,7 +34,7 @@ module SpicedGracken
 
           print "\n"
         else
-          SpicedGracken.ui.alert "server for #{target} not found or is not online"
+          Display.alert "server for #{target} not found or is not online"
         end
       end
     end

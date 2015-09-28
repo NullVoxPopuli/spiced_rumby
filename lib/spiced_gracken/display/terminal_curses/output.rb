@@ -25,7 +25,7 @@ module SpicedGracken
         end
 
         def add_line(line)
-          SpicedGracken.ui.debug("addline: #{line}")
+          Display.debug("addline: #{line}")
           # _chat << line
           # _screen.update
 
@@ -35,7 +35,7 @@ module SpicedGracken
         end
 
         def chat(msg)
-          SpicedGracken.ui.debug("chat: #{msg}")
+          Display.debug("chat: #{msg}")
 
           words = msg.split(' ')
           time = words[0..1]
@@ -50,7 +50,7 @@ module SpicedGracken
         end
 
         def whisper(msg)
-          SpicedGracken.ui.debug("whisper: #{msg}")
+          Display.debug("whisper: #{msg}")
 
           words = msg.split(' ')
           time = words[0..1]
@@ -73,7 +73,7 @@ module SpicedGracken
         end
 
         def success(msg)
-          SpicedGracken.ui.debug("success: #{msg}")
+          Display.debug("success: #{msg}")
           _window.attron(TerminalCurses::UI.success|Curses::A_NORMAL)  {
             _window.addstr(msg + "\n")
           }
@@ -81,13 +81,13 @@ module SpicedGracken
         end
 
         def info(msg)
-          SpicedGracken.ui.debug("info: #{msg}")
+          Display.debug("info: #{msg}")
           output_with_color(msg + "\n", TerminalCurses::UI.sender)
           refresh
         end
 
         def warning(msg)
-          SpicedGracken.ui.debug("warning: #{msg}")
+          Display.debug("warning: #{msg}")
           _window.attron(TerminalCurses::UI.warning|Curses::A_NORMAL) {
             _window.addstr(msg + "\n")
            }
@@ -95,7 +95,7 @@ module SpicedGracken
         end
 
         def alert(msg)
-          SpicedGracken.ui.debug("alert: #{msg}")
+          Display.debug("alert: #{msg}")
           _window.attron(TerminalCurses::UI.alert|Curses::A_NORMAL) {
             _window.addstr(msg + "\n")
            }

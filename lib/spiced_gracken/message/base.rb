@@ -27,7 +27,7 @@ module SpicedGracken
       end
 
       def display
-        SpicedGracken.ui.alert 'not implemented... you must implement display'
+        Display.alert 'not implemented... you must implement display'
       end
 
       # this message should be called immediately

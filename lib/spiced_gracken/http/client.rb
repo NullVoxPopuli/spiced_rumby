@@ -13,8 +13,8 @@ module SpicedGracken
       end
 
       def send(message: '')
-        SpicedGracken.ui.debug 'client sent message:'
-        SpicedGracken.ui.debug message
+        Display.debug 'client sent message:'
+        Display.debug message
         @socket.puts message
       end
 
@@ -30,7 +30,7 @@ module SpicedGracken
           client.send(message: payload)
           client.close
         rescue Errno::ECONNREFUSED, Errno::ETIMEDOUT
-          SpicedGracken.ui.info "#{address} is not available"
+          Display.info "#{address} is not available"
           SpicedGracken.active_server_list.remove(
             address: address
           )

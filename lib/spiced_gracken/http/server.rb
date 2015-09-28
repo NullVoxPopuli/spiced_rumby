@@ -13,8 +13,8 @@ module SpicedGracken
           Thread.start(@server.accept) do |connection|
             begin
               while (input = connection.gets)
-                SpicedGracken.ui.debug 'server received message:'
-                SpicedGracken.ui.debug input
+                Display.debug 'server received message:'
+                Display.debug input
 
                 data = JSON.parse(input)
                 update_sender_info(data)
@@ -22,16 +22,16 @@ module SpicedGracken
               end
             rescue => e
               # rescue here so that the server doesn't stop listening
-              SpicedGracken.ui.alert e.message
-              SpicedGracken.ui.fatal e.message
-              SpicedGracken.ui.fatal e.backtrace.join("\n")
+              Display.alert e.message
+              Display.fatal e.message
+              Display.fatal e.backtrace.join("\n")
             end
           end
         end
       rescue => e
-        SpicedGracken.ui.alert e.message
-        SpicedGracken.ui.fatal e.message
-        SpicedGracken.ui.fatal e.backtrace.join("\n")
+        Display.alert e.message
+        Display.fatal e.message
+        Display.fatal e.backtrace.join("\n")
       end
 
       def processes_message(data)
@@ -39,12 +39,12 @@ module SpicedGracken
         klass = Message::TYPES[type]
 
         unless klass
-          SpicedGracken.ui.alert 'message recieved and not recognized...'
+          Display.alert 'message recieved and not recognized...'
           return
         end
 
         message = klass.new(payload: data)
-        SpicedGracken.ui.present_message(message)
+        Display.present_message(message)
       end
 
       def update_sender_info(data)

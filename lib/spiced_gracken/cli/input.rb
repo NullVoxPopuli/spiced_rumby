@@ -45,7 +45,7 @@ module SpicedGracken
             uid: SpicedGracken.settings[:uid]
           )
 
-          SpicedGracken.ui.chat m.display
+          Display.chat m.display
           data = m.render
 
           # if sending to all, iterate thorugh list of
@@ -61,9 +61,7 @@ module SpicedGracken
             end
           end
         else
-          SpicedGracken.ui.warning(
-            'you have no servers'
-          )
+          Display.warning 'you have no servers'
         end
       end
     end

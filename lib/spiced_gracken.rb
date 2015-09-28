@@ -12,6 +12,7 @@ require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/object/try'
 
 require 'spiced_gracken/version'
+require 'spiced_gracken/display'
 require 'spiced_gracken/display/manager'
 require 'spiced_gracken/config/entry'
 require 'spiced_gracken/config/hash_file'

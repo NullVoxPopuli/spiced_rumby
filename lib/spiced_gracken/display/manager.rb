@@ -7,6 +7,7 @@ require 'spiced_gracken/display/bash/ui'
 
 module SpicedGracken
   module Display
+
     class Manager
       attr_accessor :_ui
 
