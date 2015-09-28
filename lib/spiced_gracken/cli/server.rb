@@ -17,7 +17,7 @@ module SpicedGracken
             )
           else
             s = 'add requires alias@ip:port#uid'
-            SpicedGracken.display.alert(s)
+            Display.alert(s)
           end
         when REMOVE, RM
           if is_valid_remove_command?

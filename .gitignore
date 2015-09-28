@@ -3,6 +3,7 @@ settings.json
 serverlist.json
 test-settings
 test-activeserverlist
+test-serverlist
 test-hashfile
 debug.log
 

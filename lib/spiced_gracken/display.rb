@@ -24,9 +24,6 @@ module SpicedGracken
     def debug(*args); current.debug(*args); end
     def error(*args); current.error(*args); end
 
-
-
-
     def current
       SpicedGracken.ui
     end

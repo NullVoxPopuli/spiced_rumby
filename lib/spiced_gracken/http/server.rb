@@ -5,7 +5,7 @@ module SpicedGracken
 
       # instantiate!
       def initialize(port: '')
-        SpicedGracken.display.success "listening on #{port}..."
+        Display.success "listening on #{port}..."
         @server = TCPServer.new(port)
 
         loop do
