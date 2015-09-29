@@ -13,6 +13,19 @@ module SpicedGracken
   class CLI
     attr_accessor :client, :server
 
+    class << self
+
+      delegate :server_address, :listen_for_commands,
+        :shutdown, :start_server, :client, :server,
+        to: :instance
+
+      def instance
+        @instance ||= new
+      end
+
+    end
+
+
     def initialize
       # check_startup_settings
 
@@ -38,7 +51,7 @@ module SpicedGracken
     end
 
     def create_input(msg)
-      handler = Input.create(msg, cli: self)
+      handler = Input.create(msg)
       handler.handle
     rescue => e
       Display.error e.message

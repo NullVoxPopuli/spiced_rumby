@@ -6,7 +6,7 @@ module SpicedGracken
           puts Help.welcome
           puts "\n"
           yield if block_given?
-          SpicedGracken.cli.listen_for_commands
+          CLI.listen_for_commands
         end
 
         # TODO: find a more elegant way to handle color

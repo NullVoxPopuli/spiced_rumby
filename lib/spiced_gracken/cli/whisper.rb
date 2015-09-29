@@ -7,31 +7,28 @@ module SpicedGracken
       end
 
       def message
-        command_args[1..command_args.length].join(' ')
+        command_args[1..command_args.length].try(:join, ' ')
       end
 
       def handle
         server = ActiveServers.find(alias_name: target)
 
         if server
-          # if _cli.client and !_cli.client.socket.closed?
+          # if CLI.client and !CLI.client.socket.closed?
           m = Message::Whisper.new(
             message: message,
             name_of_sender: Settings[:alias],
-            location: _cli.server_address,
+            location: CLI.server_address,
             to: target
           )
 
           Display.whisper m.display
           data = m.render
-          m.display
 
           Http::Client.send_to_and_close(
             address: server.address,
             payload: data
           )
-
-          print "\n"
         else
           Display.alert "server for #{target} not found or is not online"
         end

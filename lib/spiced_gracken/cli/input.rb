@@ -3,10 +3,10 @@ module SpicedGracken
     class Input
       WHISPER = '@'
       COMMAND = '/'
-      attr_accessor :_input, :_cli
+      attr_accessor :_input
 
       class << self
-        def create(input, cli: nil)
+        def create(input)
           klass =
             if is_command(input)
               CLI::Command
@@ -17,7 +17,7 @@ module SpicedGracken
               CLI::Input
             end
 
-          klass.new(input, cli: cli)
+          klass.new(input)
         end
 
         def is_command(input)
@@ -29,19 +29,18 @@ module SpicedGracken
         end
       end
 
-      def initialize(input, cli: nil)
+      def initialize(input)
         self._input = input.chomp
-        self._cli = cli
       end
 
       def handle
         servers = ActiveServers.all
         if !servers.empty?
-          # if _cli.client and !_cli.client.socket.closed?
+          # if CLI.client and !CLI.client.socket.closed?
           m = Message::Chat.new(
             message: _input,
             name_of_sender: Settings[:alias],
-            location: _cli.server_address,
+            location: CLI.server_address,
             uid: Settings[:uid]
           )
 

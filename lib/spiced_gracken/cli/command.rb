@@ -25,21 +25,19 @@ module SpicedGracken
         # these could even be split up in to classes if they needed to be
         case command
         when PING
-          CLI::Ping.new(_input, cli: _cli).handle
+          CLI::Ping.new(_input).handle
         when WHO
           Display.info(ActiveServers.who)
         when STOP_LISTENING
-          _cli.close_server
+          CLI.close_server
         when SERVERS, SERVER
-          CLI::Server.new(_input, cli: _cli).handle
+          CLI::Server.new(_input).handle
         when CONFIG
-          CLI::Config.new(_input, cli: _cli).handle
+          CLI::Config.new(_input).handle
         when EXIT, QUIT
-          _cli.shutdown
+          CLI.shutdown
         when LISTEN
-          _cli.start_server
-        when CONNECT, CHAT
-          Display.alert('not implemented...')
+          CLI.start_server
         else
           Display.alert('not implemented...')
         end

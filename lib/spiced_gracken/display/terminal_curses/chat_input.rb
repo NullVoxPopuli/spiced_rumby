@@ -34,7 +34,7 @@ module SpicedGracken
             case input
             when 10, 13 # Enter
               refresh
-              SpicedGracken.cli.create_input(_current_input)
+              CLI.create_input(_current_input)
               self._current_input = ''
             when 8 # backspace
               curx = _window.curx

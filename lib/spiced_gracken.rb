@@ -33,10 +33,9 @@ module SpicedGracken
   module_function
 
   def start(selected_ui)
-    # start the user interface
-    # interfaces are responsible for creating the client and server
-    @@cli = CLI.new
-
+    # select the specified interface.
+    # default is Display::Bash::UI
+    #
     ui = Display::Bash::UI
     if !selected_ui.blank?
       if selected_ui != 'bash'
@@ -44,20 +43,15 @@ module SpicedGracken
       elsif selected_ui == 'null'
         ui = Display::Null::UI
       end
-
     end
 
     @@display = Display::Manager.new(ui)
     @@display.start do
-      @@cli.check_startup_settings
+      CLI.check_startup_settings
     end
   end
 
   def ui
     @@display
-  end
-
-  def cli
-    @@cli
   end
 end

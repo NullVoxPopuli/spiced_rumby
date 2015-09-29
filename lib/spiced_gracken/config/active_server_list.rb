@@ -11,10 +11,9 @@ module SpicedGracken
       class << self
         # TODO: is there a way to delegate everything?
         delegate :save,
-        :who, :all, :find, :remove_by,
-        :display_addresses, :remove, :update,
-        :add, :clear!, :count,
-          to: :instance
+          :who, :all, :find, :remove_by,
+          :display_addresses, :remove, :update,
+          :add, :clear!, :count, to: :instance
 
         def instance
           @instance ||= new
