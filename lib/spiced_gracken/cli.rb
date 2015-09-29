@@ -14,7 +14,7 @@ module SpicedGracken
     attr_accessor :client, :server
 
     def initialize
-      # che/ck_startup_settings
+      # check_startup_settings
 
       # this will allow our listener / server to print exceptions,
       # rather than  silently fail

@@ -3,16 +3,16 @@ module SpicedGracken
     # for testing!
     module Null
       class UI < Display::Base
-        def start(*); end
-        def add_line(*); end
-        def info(*); end
-        def alert(*); end
-        def success(*); end
-        def chat(*); end
-        def whisper(*); end
-        def warning(*); end
-        def log(*); end
-        def error(*); end
+        def start(*args); args.join; end
+        def add_line(*args); args.join; end
+        def info(*args); args.join; end
+        def alert(*args); args.join; end
+        def success(*args); args.join; end
+        def chat(*args); args.join; end
+        def whisper(*args); args.join; end
+        def warning(*args); args.join; end
+        def log(*args); args.join; end
+        def error(*args); args.join; end
       end
     end
   end

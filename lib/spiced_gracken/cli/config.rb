@@ -15,7 +15,7 @@ module SpicedGracken
           Display.info Settings.display
         else
           Display.alert(
-            'config command not implemented....'
+            'config command not implemented...'
           )
         end
       end
