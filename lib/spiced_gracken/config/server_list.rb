@@ -20,6 +20,7 @@ module SpicedGracken
       end
 
       def clear!
+        @entries = nil
         self._hash ||= {}
         self._hash.clear
         self._hash = { 'servers' => [] }
@@ -34,7 +35,7 @@ module SpicedGracken
       end
 
       def as_entries
-        unless @entries
+        if @entries.nil?
           @entries = []
           servers.each do |s|
             entry = Entry.new(
