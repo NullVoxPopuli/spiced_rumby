@@ -1,10 +1,12 @@
 def mock_settings_objects
-  sl = SpicedGracken::Config::ServerList.new
+  delete_test_files
+
   allow_any_instance_of(SpicedGracken::Config::ServerList).to receive(:filename) { 'test-serverlist' }
+  sl = SpicedGracken::Config::ServerList.new
   allow(SpicedGracken::Config::ServerList).to receive(:instance) { sl }
 
-  s = SpicedGracken::Config::Settings.new
   allow_any_instance_of(SpicedGracken::Config::Settings).to receive(:filename) { 'test-settings' }
+  s = SpicedGracken::Config::Settings.new
   allow(SpicedGracken::Config::Settings).to receive(:instance) { s }
 
   asl = SpicedGracken::Config::ActiveServerList.new
@@ -14,4 +16,11 @@ def mock_settings_objects
     SpicedGracken::Display::Null::UI
   )
   allow(SpicedGracken).to receive(:ui){ display_manager }
+end
+
+def delete_test_files
+  File.delete('test-serverlist') if File.exist?('test-serverlist')
+  File.delete('test-hashfile') if File.exist?('test-hashfile')
+  File.delete('test-settings') if File.exist?('test-settings')
+  File.delete('test-activeserverlist') if File.exist?('test-activeserverlist')
 end

@@ -35,11 +35,4 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
-
-  config.before(:each) do
-    File.delete('test-serverlist') if File.exist?('test-serverlist')
-    File.delete('test-hashfile') if File.exist?('test-hashfile')
-    File.delete('test-settings') if File.exist?('test-settings')
-    File.delete('test-activeserverlist') if File.exist?('test-activeserverlist')
-  end
 end
