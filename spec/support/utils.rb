@@ -10,6 +10,8 @@ def mock_settings_objects
   asl = SpicedGracken::Config::ActiveServerList.new
   allow(SpicedGracken::Config::ActiveServerList).to receive(:instance) { asl }
 
-  null = SpicedGracken::Display::Null::UI.new
-  allow(SpicedGracken).to receive(:ui){ null }
+  display_manager = SpicedGracken::Display::Manager.new(
+    SpicedGracken::Display::Null::UI
+  )
+  allow(SpicedGracken).to receive(:ui){ display_manager }
 end

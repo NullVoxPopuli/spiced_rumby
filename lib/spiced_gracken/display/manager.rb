@@ -36,6 +36,8 @@ module SpicedGracken
           chat message.display
         when Message::Whisper.name
           whisper message.display
+        when Message::PingReply.name
+          info message.display
         else
           add_line message.display
         end

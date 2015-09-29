@@ -19,15 +19,19 @@ module SpicedGracken
       end
 
       def load
-        f = File.read(filename)
+        f = read_file
         begin
           self._hash = JSON.parse(f)
         rescue Exception => e
-          puts e.message.colorize(:red)
+          Display.alert e.message
           self._hash = default_settings
-          puts 'writing defaults...'
+          Display.warning 'writing defaults...'
           save
         end
+      end
+
+      def read_file
+        File.read(filename)
       end
 
       def display

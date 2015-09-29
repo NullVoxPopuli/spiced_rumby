@@ -19,8 +19,23 @@ describe SpicedGracken::Config::Settings do
 
   context 'instance' do
     let(:i){ klass.new }
-    
-    context 'errors' do
+
+    describe '#valid?' do
+      before(:each) do
+        i._hash = {}
+      end
+
+      it 'is valid' do
+        allow(i).to receive(:errors){ [] }
+        expect(i).to be_valid
+      end
+
+      it 'is not valid' do
+        expect(i).to_not be_valid
+      end
+    end
+
+    describe '#errors' do
 
       it 'must have an alias' do
         i['alias'] = nil
@@ -41,7 +56,6 @@ describe SpicedGracken::Config::Settings do
         i['uid'] = nil
         expect(i.errors).to include('must have uid set')
       end
-
     end
   end
 end

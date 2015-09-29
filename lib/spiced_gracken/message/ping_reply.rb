@@ -22,7 +22,7 @@ module SpicedGracken
       end
 
       def display
-        'ping successful'.colorize(:light_black)
+        'ping successful'
       end
     end
   end
