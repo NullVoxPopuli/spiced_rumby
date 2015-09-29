@@ -8,6 +8,10 @@ describe SpicedGracken::CLI::Ping do
   end
 
   describe '#handle' do
+    before(:each) do
+      allow(SpicedGracken::Http::Client).to receive(:send_to_and_close){}
+    end
+
     it 'cannot find the server' do
       c = klass.new('/ping alias noone')
       expect(c.handle).to eq ('noone could not be found')
@@ -16,6 +20,12 @@ describe SpicedGracken::CLI::Ping do
     it 'shows usage' do
       c = klass.new('/ping')
       expect(c.handle).to eq c.usage
+    end
+
+    it 'tries to send' do
+      c = klass.new('/ping address noone')
+      # does not return when sending
+      expect(c.handle).to eq nil
     end
   end
 
