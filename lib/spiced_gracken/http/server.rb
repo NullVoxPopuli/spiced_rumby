@@ -50,7 +50,7 @@ module SpicedGracken
       def update_sender_info(data)
         sender = data['sender']
 
-        SpicedGracken.active_server_list.update(
+        ActiveServers.update(
           sender['uid'],
           address: sender['location'],
           alias_name: sender['name']

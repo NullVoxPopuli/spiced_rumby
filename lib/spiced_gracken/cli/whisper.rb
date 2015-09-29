@@ -1,7 +1,6 @@
 module SpicedGracken
   class CLI
     class Whisper < CLI::Command
-      require 'pry-byebug'
       def target
         # get first arg
         command
@@ -12,13 +11,13 @@ module SpicedGracken
       end
 
       def handle
-        server = SpicedGracken.active_server_list.find(alias_name: target)
+        server = ActiveServers.find(alias_name: target)
 
         if server
           # if _cli.client and !_cli.client.socket.closed?
           m = Message::Whisper.new(
             message: message,
-            name_of_sender: SpicedGracken.settings[:alias],
+            name_of_sender: Settings[:alias],
             location: _cli.server_address,
             to: target
           )

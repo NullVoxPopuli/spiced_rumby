@@ -14,9 +14,9 @@ module SpicedGracken
           'client_version' => SpicedGracken::VERSION,
           'time_sent' => Time.now.to_s, # not yet sent
           'sender' => {
-            'name' => SpicedGracken.settings['alias'],
-            'location' => SpicedGracken.settings['ip'] + ':' + SpicedGracken.settings['port'],
-            'uid' => SpicedGracken.settings['uid']
+            'name' => Settings['alias'],
+            'location' => Settings['ip'] + ':' + Settings['port'],
+            'uid' => Settings['uid']
           }
         }
       end

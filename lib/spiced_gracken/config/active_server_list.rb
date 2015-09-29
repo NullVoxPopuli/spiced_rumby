@@ -8,8 +8,21 @@ module SpicedGracken
       delegate :first, to: :_list
       delegate :last, to: :_list
 
+      class << self
+        # TODO: is there a way to delegate everything?
+        delegate :save,
+        :who, :all, :find, :remove_by,
+        :display_addresses, :remove, :update,
+        :add, :clear!, :count,
+          to: :instance
+
+        def instance
+          @instance ||= new
+        end
+      end
+
       def initialize
-        servers = SpicedGracken.server_list.as_entries
+        servers = ServerList.as_entries
         self._list = servers
       end
 
@@ -67,8 +80,8 @@ module SpicedGracken
 
       def save
         # for now, just output everything to severs list
-        SpicedGracken.server_list.servers = _list.map(&:as_json)
-        SpicedGracken.server_list.save
+        ServerList.servers = _list.map(&:as_json)
+        ServerList.save
       end
 
       def as_array

@@ -6,7 +6,7 @@ module SpicedGracken
         last_alias = @payload['sender']['name']
         uid = @payload['sender']['uid']
 
-        SpicedGracken.active_server_list.add(
+        ActiveServers.add(
           uid: uid,
           address: address,
           alias_name: last_alias)

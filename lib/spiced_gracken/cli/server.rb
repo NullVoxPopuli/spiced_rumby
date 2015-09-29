@@ -10,7 +10,7 @@ module SpicedGracken
             address, uid = info.split('#')
 
 
-            SpicedGracken.active_server_list.add(
+            ActiveServers.add(
               address: address,
               alias_name: alias_name,
               uid: uid
@@ -23,14 +23,14 @@ module SpicedGracken
           if is_valid_remove_command?
             field, value = sub_command_args
 
-            SpicedGracken.active_server_list.remove_by(field, value)
+            ActiveServers.remove_by(field, value)
           else
             s = 'requires address or alias. ex: /server rm alias evan'
             Display.alert(s)
           end
         else
           if command_args.length > 0
-            s = SpicedGracken.active_server_list.display_addresses
+            s = ActiveServers.display_addresses
             Display.info(s)
           else
             s = 'server command not implemented...'

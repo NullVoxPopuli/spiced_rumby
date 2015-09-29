@@ -54,9 +54,9 @@ module SpicedGracken
     end
 
     def start_server
-      unless SpicedGracken.settings.valid?
+      unless Settings.valid?
         Display.alert("settings not fully valid\n")
-        errors = SpicedGracken.settings.errors
+        errors = Settings.errors
         errors.each do |error|
           Display.alert(" - #{error}")
         end
@@ -70,7 +70,7 @@ module SpicedGracken
 
       @server = Queue.new
       # start the server thread
-      Thread.new(SpicedGracken.settings) do |settings|
+      Thread.new(Settings) do |settings|
         @server << Http::Server.new(port: settings['port'])
       end
     end
@@ -83,19 +83,19 @@ module SpicedGracken
     end
 
     def server_address
-      "#{SpicedGracken.settings['ip']}:#{SpicedGracken.settings['port']}"
+      "#{Settings['ip']}:#{Settings['port']}"
     end
 
     def check_startup_settings
-      start_server if SpicedGracken.settings['autolisten']
+      start_server if Settings['autolisten']
     end
 
     # save config and exit
     def shutdown
       # close_server
       puts 'saving config...'
-      SpicedGracken.settings.save
-      SpicedGracken.active_server_list.save
+      Settings.save
+      ActiveServers.save
       abort "\n\nGoodbye.  "
     end
   end

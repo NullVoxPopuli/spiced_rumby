@@ -27,7 +27,7 @@ module SpicedGracken
         when PING
           CLI::Ping.new(_input, cli: _cli).handle
         when WHO
-          Display.info(SpicedGracken.active_server_list.who)
+          Display.info(ActiveServers.who)
         when STOP_LISTENING
           _cli.close_server
         when SERVERS, SERVER

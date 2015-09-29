@@ -10,13 +10,38 @@ describe SpicedGracken::Config::Settings do
   it 'sets the default if there is no settings file' do
     allow_any_instance_of(klass).to receive(:exists?) { false }
 
-    s = klass.new
-    expect(s.as_hash).to eq klass::DEFAULT_SETTINGS
+    expect(klass.new.as_hash).to eq klass::DEFAULT_SETTINGS
   end
 
   it 'sets the default if there is a settings file' do
-    s = klass.new
+    expect(klass.new.as_hash).to eq klass::DEFAULT_SETTINGS
+  end
 
-    expect(s.as_hash).to eq klass::DEFAULT_SETTINGS
+  context 'instance' do
+    let(:i){ klass.new }
+    
+    context 'errors' do
+
+      it 'must have an alias' do
+        i['alias'] = nil
+        expect(i.errors).to include('must have an alias')
+      end
+
+      it 'must have ip set' do
+        i['ip'] = nil
+        expect(i.errors).to include('must have ip set')
+      end
+
+      it error = 'must have port set' do
+        i['port'] = nil
+        expect(i.errors).to include('must have port set')
+      end
+
+      it error = 'must have uid set' do
+        i['uid'] = nil
+        expect(i.errors).to include('must have uid set')
+      end
+
+    end
   end
 end

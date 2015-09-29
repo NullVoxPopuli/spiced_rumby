@@ -9,7 +9,7 @@ module SpicedGracken
             if lookup_field == 'address'
               lookup_value
             else
-              SpicedGracken.active_server_list.find(alias_name: lookup_value).try(:address)
+              ActiveServers.find(alias_name: lookup_value).try(:address)
             end
 
           unless address

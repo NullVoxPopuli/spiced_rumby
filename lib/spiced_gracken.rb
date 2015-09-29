@@ -26,13 +26,13 @@ require 'spiced_gracken/message'
 module SpicedGracken
   NAME = 'Spiced Gracken'
 
+  Settings = Config::Settings
+  ServerList = Config::ServerList
+  ActiveServers = Config::ActiveServerList
+
   module_function
 
   def start(selected_ui)
-    @@settings = Config::Settings.new
-    @@server_list = Config::ServerList.new
-    @@active_servers = Config::ActiveServerList.new
-
     # start the user interface
     # interfaces are responsible for creating the client and server
     @@cli = CLI.new
@@ -51,22 +51,6 @@ module SpicedGracken
     @@display.start do
       @@cli.check_startup_settings
     end
-  end
-
-  def self.settings
-    @@settings
-  end
-
-  def self.server_list
-    @@server_list
-  end
-
-  def active_server_list
-    @@active_servers
-  end
-
-  def display
-    @@display
   end
 
   def ui

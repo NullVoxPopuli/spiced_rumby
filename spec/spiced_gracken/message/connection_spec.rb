@@ -16,7 +16,7 @@ describe SpicedGracken::Message::Connection do
 
   context 'display' do
     it 'displays who pinged' do
-      SpicedGracken.active_server_list.clear!
+      SpicedGracken::ActiveServers.clear!
       msg = klass.new
       msg.payload = {
         'sender' => {
@@ -27,7 +27,7 @@ describe SpicedGracken::Message::Connection do
       }
       msg.display
 
-      expect(SpicedGracken.active_server_list.count).to eq 1
+      expect(SpicedGracken::ActiveServers.count).to eq 1
     end
   end
 end

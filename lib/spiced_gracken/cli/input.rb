@@ -35,14 +35,14 @@ module SpicedGracken
       end
 
       def handle
-        servers = SpicedGracken.active_server_list.all
+        servers = ActiveServers.all
         if !servers.empty?
           # if _cli.client and !_cli.client.socket.closed?
           m = Message::Chat.new(
             message: _input,
-            name_of_sender: SpicedGracken.settings[:alias],
+            name_of_sender: Settings[:alias],
             location: _cli.server_address,
-            uid: SpicedGracken.settings[:uid]
+            uid: Settings[:uid]
           )
 
           Display.chat m.display

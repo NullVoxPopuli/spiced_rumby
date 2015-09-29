@@ -4,6 +4,15 @@ module SpicedGracken
       FILENAME = 'serverlist.json'
       DEFAULT_SETTINGS = { 'servers' => [] }
 
+      class << self
+        delegate :as_entries, :servers, :save,
+          to: :instance
+
+        def instance
+          @instance ||= new
+        end
+      end
+
       def initialize
         @default_settings = DEFAULT_SETTINGS
         @filename = FILENAME

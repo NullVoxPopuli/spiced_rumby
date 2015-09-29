@@ -11,6 +11,16 @@ module SpicedGracken
         'publicKey' => 'replace this'
       }
 
+      class << self
+        delegate :valid?, :errors,
+          :[], :[]=, :display, :as_hash, :save, :set,
+          to: :instance
+
+        def instance
+          @instance ||= new
+        end
+      end
+
       def initialize
         @default_settings = DEFAULT_SETTINGS
         @filename = FILENAME
