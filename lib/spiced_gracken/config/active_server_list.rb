@@ -40,7 +40,7 @@ module SpicedGracken
         when 'address'
           remove(address: value)
         when 'alias'
-          remove(alias: value)
+          remove(alias_name: value)
         when 'uid'
           remove(uid: value)
         end

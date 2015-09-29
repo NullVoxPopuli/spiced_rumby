@@ -155,4 +155,101 @@ describe SpicedGracken::Config::ActiveServerList do
       expect(result).to eq nil
     end
   end
+
+  describe '#find_all' do
+    it 'finds no one' do
+      expect(list.find_all).to be_empty
+    end
+
+    context 'servers exist' do
+      let(:entry) do
+        SpicedGracken::Config::Entry.new(
+          address: '10.10.10.10:1010',
+          alias_name: 'test',
+          uid: '1234',
+          public_key: 'abcde')
+      end
+
+      before(:each) do
+        list._list = [entry, entry]
+      end
+
+      it 'finds multiple' do
+        result = list.find_all(alias_name: 'test').count
+        expect(result).to eq 2
+      end
+    end
+  end
+
+  describe '#display_addresses' do
+
+    it 'shows no one is online' do
+      expect(list.display_addresses).to eq 'no active nodes'
+    end
+
+    it 'shows who is online' do
+      entry = SpicedGracken::Config::Entry.new(
+        address: '10.10.10.10:1010',
+        alias_name: 'test',
+        uid: '1234',
+        public_key: 'abcde')
+
+      list._list = [entry]
+
+      expect(list.display_addresses).to eq 'test@10.10.10.10:1010'
+    end
+  end
+
+  describe '#who' do
+
+    it 'shows no one is online' do
+      expect(list.who).to eq 'no one is online'
+    end
+
+    it 'shows who is online' do
+      entry = SpicedGracken::Config::Entry.new(
+        address: '10.10.10.10:1010',
+        alias_name: 'test',
+        uid: '1234',
+        public_key: 'abcde')
+
+      list._list = [entry]
+
+      expect(list.who).to eq 'test'
+    end
+  end
+
+  describe '#remove_by' do
+    let(:entry) do
+      SpicedGracken::Config::Entry.new(
+        address: '10.10.10.10:1010',
+        alias_name: 'test',
+        uid: '1234',
+        public_key: 'abcde')
+    end
+
+    before(:each) do
+      list._list = [entry]
+    end
+
+    it 'removes an entry by address' do
+      list.remove_by('address', entry.address)
+      expect(list.count).to eq 0
+    end
+
+    it 'removes an entry by alias' do
+      list.remove_by('alias', entry.alias_name)
+      expect(list.count).to eq 0
+    end
+
+    it 'removes an entry by uid' do
+      list.remove_by('uid', entry.uid)
+      expect(list.count).to eq 0
+    end
+
+    it 'does not remove non existant' do
+      list.remove_by('address', 'wut')
+      expect(list.count).to eq 1
+    end
+  end
 end
