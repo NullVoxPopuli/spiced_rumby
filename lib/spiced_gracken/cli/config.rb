@@ -9,14 +9,12 @@ module SpicedGracken
 
             Display.info Settings.set(key, with: value)
           else
-            Display.alert('set requires a key and a value')
+            Display.alert 'set requires a key and a value'
           end
         when DISPLAY
           Display.info Settings.display
         else
-          Display.alert(
-            'config command not implemented...'
-          )
+          Display.alert 'config command not implemented...'
         end
       end
 

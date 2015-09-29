@@ -22,22 +22,9 @@ module SpicedGracken
       PING = 'ping'
 
       def handle
-        # these could even be split up in to classes if they needed to be
-        case command
-        when PING
-          CLI::Ping.new(_input).handle
-        when WHO
-          Display.info(ActiveServers.who)
-        when STOP_LISTENING
-          CLI.close_server
-        when SERVERS, SERVER
-          CLI::Server.new(_input).handle
-        when CONFIG
-          CLI::Config.new(_input).handle
-        when EXIT, QUIT
-          CLI.shutdown
-        when LISTEN
-          CLI.start_server
+        klass = CLI::COMMAND_MAP[command]
+        if klass
+          klass.new(_input).handle
         else
           Display.alert('not implemented...')
         end

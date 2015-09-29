@@ -6,12 +6,27 @@ require 'spiced_gracken/cli/config'
 require 'spiced_gracken/cli/ping'
 require 'spiced_gracken/cli/server'
 require 'spiced_gracken/cli/whisper'
+require 'spiced_gracken/cli/exit'
+require 'spiced_gracken/cli/listen'
+require 'spiced_gracken/cli/stop_listening'
+require 'spiced_gracken/cli/who'
 
 module SpicedGracken
   # A user interface is responsible for for creating a client
   # and sending messages to that client
   class CLI
     attr_accessor :client, :server
+
+    COMMAND_MAP = {
+      Command::CONFIG => CLI::Config,
+      Command::PING => CLI::Ping,
+      Command::STOP_LISTENING => CLI::StopListening,
+      Command::SERVERS => CLI::Server,
+      Command::SERVER => CLI::Server,
+      Command::EXIT => CLI::Exit,
+      Command::QUIT => CLI::Exit,
+      Command::LISTEN => CLI::Listen
+    }
 
     class << self
 
