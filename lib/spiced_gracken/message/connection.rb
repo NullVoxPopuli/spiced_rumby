@@ -2,9 +2,9 @@ module SpicedGracken
   module Message
     class Connection < Base
       def display
-        address = @payload['sender']['location']
-        last_alias = @payload['sender']['name']
-        uid = @payload['sender']['uid']
+        address = payload['sender']['location']
+        last_alias = payload['sender']['name']
+        uid = payload['sender']['uid']
 
         ActiveServers.add(
           uid: uid,

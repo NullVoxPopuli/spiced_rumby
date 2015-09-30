@@ -8,9 +8,9 @@ describe SpicedGracken::Message::Base do
   end
 
   describe '#display' do
-    it 'alerts the need to implement' do
+    it 'shows the message' do
       m = klass.new
-      expect(m.display).to eq 'not implemented... you must implement display'
+      expect(m.display).to eq nil # no message
     end
   end
 

@@ -38,10 +38,7 @@ module SpicedGracken
         if !servers.empty?
           # if CLI.client and !CLI.client.socket.closed?
           m = Message::Chat.new(
-            message: _input,
-            name_of_sender: Settings[:alias],
-            location: CLI.server_address,
-            uid: Settings[:uid]
+            message: _input
           )
 
           Display.chat m.display

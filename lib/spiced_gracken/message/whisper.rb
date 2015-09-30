@@ -5,25 +5,31 @@ module SpicedGracken
 
       def initialize(
         message: '',
-        name_of_sender: '',
-        location: 'localhost',
-        to: '',
-        payload: nil)
-        super(message: message, name_of_sender: name_of_sender, location: location)
+        sender_name: '',
+        sender_location: '',
+        sender_uid: '',
+        time_recieved: nil,
+        payload: nil,
+        to: '')
+
+        super(
+          message: message,
+          sender_name: sender_name,
+          sender_location: sender_location,
+          sender_uid: sender_uid,
+          time_recieved: time_recieved,
+          payload: payload)
 
         self._to = to
-        self.payload = payload if payload
       end
 
       def display
-        time_sent = payload['time_sent']
+        time_sent = payload['time_sent'].to_s
         time = Date.parse(time_sent)
         time_recieved = time.strftime('%e/%m/%y %H:%I:%M')
-        sender = payload['sender']['name']
-        message = payload['message']
 
         to = _to.present? ? "->#{_to}" : ''
-        "#{time_recieved} #{sender}#{to} > #{message}"
+        "#{time_recieved} #{sender_name}#{to} > #{message}"
       end
     end
   end

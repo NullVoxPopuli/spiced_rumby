@@ -3,30 +3,8 @@ module SpicedGracken
     class Chat < Base
       include Encryptor
 
-      def initialize(
-        message: '',
-        name_of_sender: '',
-        location: 'localhost',
-        uid: '',
-        payload: nil)
-
-        @payload = payload || {
-          'type' => CHAT,
-          'message' => message,
-          'client' => SpicedGracken::NAME,
-          'client_version' => SpicedGracken::VERSION,
-          'time_sent' => nil, # not yet sent
-          'sender' => {
-            'name' => name_of_sender,
-            'location' => location,
-            'uid' => uid
-          }
-        }
-        @time_recieved = Time.now
-      end
-
       def display
-        time_recieved = @time_recieved.strftime('%e/%m/%y %H:%I:%M')
+        time_recieved = self.time_recieved.strftime('%e/%m/%y %H:%I:%M')
         name = payload['sender']['name']
         message = payload['message']
 

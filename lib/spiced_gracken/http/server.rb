@@ -7,7 +7,14 @@ module SpicedGracken
       def initialize(port: '')
         Display.success "listening on #{port}..."
         @server = TCPServer.new(port)
+        listen
+      rescue => e
+        Display.alert e.message
+        Display.fatal e.message
+        Display.fatal e.backtrace.join("\n")
+      end
 
+      def listen
         loop do
           # use a seprate thread, acception multiple incoming connections
           Thread.start(@server.accept) do |connection|
@@ -18,7 +25,8 @@ module SpicedGracken
 
                 data = JSON.parse(input)
                 update_sender_info(data)
-                processes_message(data)
+                message = processes_message(data)
+                Display.present_message message
               end
             rescue => e
               # rescue here so that the server doesn't stop listening
@@ -28,10 +36,6 @@ module SpicedGracken
             end
           end
         end
-      rescue => e
-        Display.alert e.message
-        Display.fatal e.message
-        Display.fatal e.backtrace.join("\n")
       end
 
       def processes_message(data)
@@ -43,8 +47,7 @@ module SpicedGracken
           return
         end
 
-        message = klass.new(payload: data)
-        Display.present_message(message)
+        klass.new(payload: data)
       end
 
       def update_sender_info(data)

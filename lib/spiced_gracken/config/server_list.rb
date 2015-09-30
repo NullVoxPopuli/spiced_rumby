@@ -5,7 +5,8 @@ module SpicedGracken
       DEFAULT_SETTINGS = { 'servers' => [] }
 
       class << self
-        delegate :as_entries, :servers, :save,
+        delegate :as_entries, :servers, :servers=, :save,
+          :as_sha512,
           to: :instance
 
         def instance
@@ -17,6 +18,15 @@ module SpicedGracken
         @default_settings = DEFAULT_SETTINGS
         @filename = FILENAME
         super
+      end
+
+      def sha_preimage
+        servers.map{ |s| s['publicKey']}.join(',')
+      end
+
+      def as_sha512
+        digest = Digest::SHA512.new
+        digest.hexdigest sha_preimage
       end
 
       def clear!

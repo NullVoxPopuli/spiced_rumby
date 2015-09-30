@@ -14,11 +14,16 @@ module SpicedGracken
       class << self
         delegate :valid?, :errors,
           :[], :[]=, :display, :as_hash, :save, :set,
+          :location,
           to: :instance
 
         def instance
           @instance ||= new
         end
+      end
+
+      def location
+        "#{self['id']}:#{self['port']}"
       end
 
       def initialize

@@ -32,6 +32,7 @@ module SpicedGracken
 
       delegate :server_address, :listen_for_commands,
         :shutdown, :start_server, :client, :server,
+        :check_startup_settings,
         to: :instance
 
       def instance
@@ -58,7 +59,7 @@ module SpicedGracken
       msg = get_input
       create_input(msg)
     rescue SystemExit, Interrupt
-      shutdown
+      close_program
     rescue Exception => e
       Display.error e.class.name
       Display.error e.message.colorize(:red)
@@ -71,6 +72,7 @@ module SpicedGracken
     rescue => e
       Display.error e.message
       Display.error e.class.name
+      Display.error e.backtrace.join("\n").colorize(:red)
     end
 
     def get_input
@@ -118,13 +120,19 @@ module SpicedGracken
       start_server if Settings['autolisten']
     end
 
+    def close_program
+      exit
+    end
+
     # save config and exit
     def shutdown
       # close_server
-      puts 'saving config...'
+      Display.info 'saving config...'
       Settings.save
+      Display.info 'saving servers...'
       ActiveServers.save
-      abort "\n\nGoodbye.  "
+      Display.alert "\n\nGoodbye.  "
+      exit
     end
   end
 end

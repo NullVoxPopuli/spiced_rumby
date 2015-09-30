@@ -1,27 +1,11 @@
 module SpicedGracken
   module Message
     class Ping < Base
-      def initialize(
-        message: '',
-        name_of_sender: '',
-        location: 'localhost',
-        payload: nil)
-
-        self.payload = payload || {
-          'type' => PING,
-          'message' => '',
-          'client' => SpicedGracken::NAME,
-          'client_version' => SpicedGracken::VERSION,
-          'time_sent' => Time.now.to_s, # not yet sent
-          'sender' => {
-            'name' => Settings['alias'],
-            'location' => Settings['ip'] + ':' + Settings['port'],
-            'uid' => Settings['uid']
-          }
-        }
-      end
 
       def display
+        # we'll never display our own ping to someone else...
+        # or shouldn't.... or there should be different output
+        # TODO: display is a bad method name
         name = payload['sender']['name']
         location = payload['sender']['location']
 

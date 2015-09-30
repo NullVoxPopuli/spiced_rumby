@@ -17,8 +17,6 @@ module SpicedGracken
           # if CLI.client and !CLI.client.socket.closed?
           m = Message::Whisper.new(
             message: message,
-            name_of_sender: Settings[:alias],
-            location: CLI.server_address,
             to: target
           )
 

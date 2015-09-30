@@ -1,7 +1,8 @@
 module SpicedGracken
   module Message
     class Base
-      attr_accessor :payload, :time_recieved
+      attr_accessor :payload, :time_recieved,
+        :message, :sender_name, :sender_location, :sender_uid
 
       # @param [String] message
       # @param [String] name_of_sender
@@ -9,25 +10,51 @@ module SpicedGracken
       # @param [Hash] payload optionally overrides the default payload
       def initialize(
         message: '',
-        name_of_sender: '',
-        location: 'localhost',
+        sender_name: Settings['alias'],
+        sender_location: Settings.location,
+        sender_uid: Settings['uid'],
+        time_recieved: nil,
         payload: nil)
 
-        self.payload = payload || {
-          'type' => WHISPER,
+        @payload = payload.presence
+
+        self.message = message.presence || @payload.try(:[], 'message')
+        self.sender_name = sender_name.presence || @payload.try(:[], 'sender').try(:[], 'name')
+        self.sender_location = sender_name.presence || @payload.try(:[], 'sender').try(:[], 'location')
+        self.sender_uid = sender_uid.presence || @payload.try(:[], 'sender').try(:[], 'uid')
+        self.time_recieved = time_recieved.presence || Time.now
+
+      end
+
+      def payload
+        @payload ||= {
+          'type' => type,
           'message' => message,
-          'client' => SpicedGracken::NAME,
-          'client_version' => SpicedGracken::VERSION,
-          'time_sent' => Time.now.to_s, # not yet sent
+          'client' => client,
+          'client_version' => client_version,
+          'time_sent' => time_recieved || Time.now.to_s,
           'sender' => {
-            'name' => name_of_sender,
-            'location' => location
+            'name' => sender_name,
+            'location' => sender_location,
+            'uid' => sender_uid
           }
         }
       end
 
+      def type
+        @type ||= TYPES.invert[self.class]
+      end
+
+      def client
+        SpicedGracken::NAME
+      end
+
+      def client_version
+        SpicedGracken::VERSION
+      end
+
       def display
-        Display.alert 'not implemented... you must implement display'
+        message
       end
 
       # this message should be called immediately
