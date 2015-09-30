@@ -7,9 +7,13 @@ module SpicedGracken
       # they should be able to talk to eachother, assuming the do the
       # proper port  forwarding so that data on this port goes to that computer
       def initialize(address: '', port: '', silent: false)
-        puts "connecting to #{address} on #{port}...".colorize(:yellow) unless silent
+        Display.info "connecting to #{address} on #{port}..." unless silent
+        create_socket(address, port)
+        Display.success 'connected!' unless silent
+      end
+
+      def create_socket(address, port)
         @socket = TCPSocket.new(address, port)
-        puts 'connected!'.colorize(:green) unless silent
       end
 
       def send(message: '')

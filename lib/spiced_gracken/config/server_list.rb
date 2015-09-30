@@ -21,7 +21,7 @@ module SpicedGracken
       end
 
       def sha_preimage
-        servers.map{ |s| s['publicKey']}.join(',')
+        servers.map{ |s| s['publicKey']}.sort.join(',')
       end
 
       def as_sha512

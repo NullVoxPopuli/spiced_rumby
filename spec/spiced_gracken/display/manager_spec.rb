@@ -4,6 +4,8 @@ describe SpicedGracken::Display::Manager do
   let (:klass){ SpicedGracken::Display::Manager }
 
   before(:each) do
+    allow(SpicedGracken::Http::Client).to receive(:send_to_and_close){}
+
     mock_settings_objects
   end
 
@@ -29,7 +31,7 @@ describe SpicedGracken::Display::Manager do
 
     it 'invokes add_line for other menssages' do
       expect(SpicedGracken.ui).to receive(:add_line)
-      m = SpicedGracken::Message::Ping.new
+      m = SpicedGracken::Message::Connection.new
       SpicedGracken::Display.present_message(m)
     end
   end

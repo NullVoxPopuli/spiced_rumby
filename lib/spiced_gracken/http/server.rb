@@ -53,6 +53,15 @@ module SpicedGracken
       def update_sender_info(data)
         sender = data['sender']
 
+        unless ActiveServers.exists?(sender['uid'])
+          # user has not yet been logged as being active,
+          # perform the server list exchange
+          payload = Message::ServerListHash.new.render
+          Client.send_to_and_close(
+            address: sender['location'],
+            payload: payload)
+        end
+
         ActiveServers.update(
           sender['uid'],
           address: sender['location'],

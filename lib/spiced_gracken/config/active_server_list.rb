@@ -13,7 +13,7 @@ module SpicedGracken
         delegate :save,
           :who, :all, :find, :remove_by,
           :display_addresses, :remove, :update,
-          :add, :clear!, :count, to: :instance
+          :add, :clear!, :exists?, :count, to: :instance
 
         def instance
           @instance ||= new
@@ -71,6 +71,10 @@ module SpicedGracken
 
       def find_by_uid(uid)
         contains?(uid: uid)
+      end
+
+      def exists?(uid)
+        !!find_by_uid(uid)
       end
 
       def all

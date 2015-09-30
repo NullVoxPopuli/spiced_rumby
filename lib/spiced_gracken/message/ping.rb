@@ -9,7 +9,8 @@ module SpicedGracken
         name = payload['sender']['name']
         location = payload['sender']['location']
 
-        "#{name}@#{location} pinged you.".colorize(:light_black)
+        respond
+        "#{name}@#{location} pinged you."
       end
 
       def respond

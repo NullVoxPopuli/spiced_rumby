@@ -25,7 +25,8 @@ module SpicedGracken
       Command::SERVER => CLI::Server,
       Command::EXIT => CLI::Exit,
       Command::QUIT => CLI::Exit,
-      Command::LISTEN => CLI::Listen
+      Command::LISTEN => CLI::Listen,
+      Command::WHO => CLI::Who
     }
 
     class << self
