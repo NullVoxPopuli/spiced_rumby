@@ -3,7 +3,6 @@ def mock_settings_objects
 
   setup_database
 
-  SpicedGracken::Models::Entry.destroy_all
 
   allow_any_instance_of(SpicedGracken::Config::Settings).to receive(:filename) { 'test-settings' }
   s = SpicedGracken::Config::Settings.new
@@ -26,18 +25,21 @@ def delete_test_files
 end
 
 def setup_database
+  SpicedGracken::Models::Entry.destroy_all
+
   ActiveRecord::Base.establish_connection(
       :adapter => "sqlite3",
       :database  => ':memory:'
   )
-
-  ActiveRecord::Schema.define do
-    unless table_exists? :entries
-      create_table :entries do |table|
-        table.column :alias_name, :string
-        table.column :address, :string
-        table.column :uid, :string
-        table.column :public_key, :string
+  ActiveRecord::Migration.suppress_messages do
+    ActiveRecord::Schema.define do
+      unless table_exists? :entries
+        create_table :entries do |table|
+          table.column :alias_name, :string
+          table.column :address, :string
+          table.column :uid, :string
+          table.column :public_key, :string
+        end
       end
     end
   end

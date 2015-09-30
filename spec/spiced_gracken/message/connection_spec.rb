@@ -21,7 +21,7 @@ describe SpicedGracken::Message::Connection do
       msg.payload = {
         'sender' => {
           'name' => 'me',
-          'location' => 'here',
+          'location' => '10.10.10.10:1010',
           'uid' => '1234'
         }
       }
