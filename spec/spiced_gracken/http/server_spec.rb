@@ -29,7 +29,7 @@ describe SpicedGracken::Http::Server do
 
       s = klass.new
 
-      expect_any_instance_of(SpicedGracken::Message::ServerListHash).to receive(:render)
+      expect_any_instance_of(SpicedGracken::Message::NodeListHash).to receive(:render)
       expect(SpicedGracken::Http::Client).to receive(:send_to_and_close)
       s.update_sender_info(data)
     end
@@ -60,7 +60,7 @@ describe SpicedGracken::Http::Server do
 
       s = klass.new
 
-      expect_any_instance_of(SpicedGracken::Message::ServerListHash).to_not receive(:render)
+      expect_any_instance_of(SpicedGracken::Message::NodeListHash).to_not receive(:render)
       expect(SpicedGracken::Http::Client).to_not receive(:send_to_and_close)
       s.update_sender_info(data)
     end

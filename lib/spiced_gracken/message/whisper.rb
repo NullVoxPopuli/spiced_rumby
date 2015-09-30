@@ -4,10 +4,10 @@ module SpicedGracken
       attr_accessor :_to
 
       def initialize(
-        message: '',
-        sender_name: '',
-        sender_location: '',
-        sender_uid: '',
+        message: nil,
+        sender_name: nil,
+        sender_location: nil,
+        sender_uid: nil,
         time_recieved: nil,
         payload: nil,
         to: '')

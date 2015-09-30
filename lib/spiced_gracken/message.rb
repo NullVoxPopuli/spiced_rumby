@@ -6,9 +6,9 @@ require 'spiced_gracken/message/ping_reply'
 require 'spiced_gracken/message/connection'
 require 'spiced_gracken/message/disconnection'
 require 'spiced_gracken/message/whisper'
-require 'spiced_gracken/message/server_list'
-require 'spiced_gracken/message/server_list_diff'
-require 'spiced_gracken/message/server_list_hash'
+require 'spiced_gracken/message/node_list'
+require 'spiced_gracken/message/node_list_diff'
+require 'spiced_gracken/message/node_list_hash'
 
 module SpicedGracken
   module Message
@@ -20,9 +20,9 @@ module SpicedGracken
     DISCONNECTION = 'disconnection'
     AUTHORIZATION = 'authorization'
 
-    SERVER_LIST = 'serverlist'
-    SERVER_LIST_HASH = 'serverlisthash'
-    SERVER_LIST_DIFF = 'serverlistdiff'
+    NODE_LIST = 'nodelist'
+    NODE_LIST_HASH = 'nodelisthash'
+    NODE_LIST_DIFF = 'nodelistdiff'
 
     TYPES = {
       CHAT => Chat,
@@ -32,9 +32,9 @@ module SpicedGracken
       AUTHORIZATION => Authorization,
       PING => Ping,
       PING_REPLY => PingReply,
-      SERVER_LIST => ServerList,
-      SERVER_LIST_DIFF => ServerListDiff,
-      SERVER_LIST_HASH => ServerListHash
+      NODE_LIST => NodeList,
+      NODE_LIST_DIFF => NodeListDiff,
+      NODE_LIST_HASH => NodeListHash
     }
 
 

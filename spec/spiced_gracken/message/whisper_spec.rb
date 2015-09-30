@@ -8,6 +8,13 @@ describe SpicedGracken::Message::Whisper do
       msg = klass.new
       expect(msg.payload).to_not be_nil
     end
+
+    it 'sets the default sender' do
+      m = klass.new
+      expect(m.sender_name).to eq SpicedGracken::Settings['alias']
+      expect(m.sender_location).to eq SpicedGracken::Settings.location
+      expect(m.sender_uid).to eq SpicedGracken::Settings['uid']
+    end
   end
 
   context 'display' do

@@ -25,21 +25,6 @@ require 'spiced_gracken/cli'
 require 'spiced_gracken/encryptor'
 require 'spiced_gracken/message'
 
-ActiveRecord::Base.establish_connection(
-    :adapter => "sqlite3",
-    :database  => "dev.sqlite3"
-)
-
-ActiveRecord::Schema.define do
-  unless table_exists? :entries
-    create_table :entries do |table|
-      table.column :alias_name, :string
-      table.column :address, :string
-      table.column :uid, :string
-      table.column :public_key, :string
-    end
-  end
-end
 
 module SpicedGracken
   NAME = 'Spiced Gracken'
@@ -72,4 +57,26 @@ module SpicedGracken
   def ui
     @@display
   end
+
+  def self.setup_storage
+    ActiveRecord::Base.establish_connection(
+        :adapter => "sqlite3",
+        :database  => "dev.sqlite3"
+    )
+
+    ActiveRecord::Migration.suppress_messages do
+      ActiveRecord::Schema.define do
+        unless table_exists? :entries
+          create_table :entries do |table|
+            table.column :alias_name, :string
+            table.column :address, :string
+            table.column :uid, :string
+            table.column :public_key, :string
+          end
+        end
+      end
+    end
+  end
 end
+
+SpicedGracken.setup_storage

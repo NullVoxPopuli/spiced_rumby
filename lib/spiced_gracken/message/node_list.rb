@@ -1,8 +1,8 @@
 module SpicedGracken
   module Message
-    class ServerListHash < Base
+    class NodeList < Base
       def message
-        @message ||= Models::Entry.as_sha512
+        Node.all.map(&:as_json)
       end
     end
   end

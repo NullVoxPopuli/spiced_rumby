@@ -37,7 +37,7 @@ module SpicedGracken
 
       delegate :server_address, :listen_for_commands,
         :shutdown, :start_server, :client, :server,
-        :check_startup_settings,
+        :check_startup_settings, :create_input,
         to: :instance
 
       def instance

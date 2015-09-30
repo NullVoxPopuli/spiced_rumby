@@ -56,7 +56,7 @@ module SpicedGracken
         # if the sender isn't currently marked as active,
         # perform the server list exchange
         unless ActiveServers.exists?(sender['uid'])
-          payload = Message::ServerListHash.new.render
+          payload = Message::NodeListHash.new.render
           Client.send_to_and_close(
             address: sender['location'],
             payload: payload)

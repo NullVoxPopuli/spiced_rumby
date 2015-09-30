@@ -8,8 +8,7 @@ describe 'Message Coloring' do
   end
 
   describe 'chats' do
-
-    context 'is received' do
+    context 'are received' do
       before(:each) do
         allow_any_instance_of(SpicedGracken::Http::Server).to receive(:listen){}
 
@@ -27,9 +26,6 @@ describe 'Message Coloring' do
         expect(SpicedGracken.ui).to receive(:chat)
         SpicedGracken::Display.present_message @msg
       end
-
     end
-
   end
-
 end

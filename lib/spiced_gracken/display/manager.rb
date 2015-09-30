@@ -31,15 +31,18 @@ module SpicedGracken
       end
 
       def present_message(message)
+        result = message.handle
+        return unless result
+
         case message.class.name
         when Message::Chat.name
-          chat message.display
+          chat result
         when Message::Whisper.name
-          whisper message.display
+          whisper result
         when Message::PingReply.name, Message::Ping.name
-          info message.display
+          info result
         else
-          add_line message.display
+          add_line result
         end
       end
     end

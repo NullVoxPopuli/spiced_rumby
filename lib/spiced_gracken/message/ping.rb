@@ -9,8 +9,12 @@ module SpicedGracken
         name = payload['sender']['name']
         location = payload['sender']['location']
 
-        respond
         "#{name}@#{location} pinged you."
+      end
+
+      def handle
+        respond
+        display
       end
 
       def respond

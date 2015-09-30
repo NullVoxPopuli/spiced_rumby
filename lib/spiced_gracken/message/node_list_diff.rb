@@ -1,6 +1,6 @@
 module SpicedGracken
   module Message
-    class ServerListDiff < Base
+    class NodeListDiff < Base
     end
   end
 end
