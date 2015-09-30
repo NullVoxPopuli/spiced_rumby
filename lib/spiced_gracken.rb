@@ -46,6 +46,7 @@ module SpicedGracken
 
   Settings = Config::Settings
   ActiveServers = Config::ActiveServerList
+  Node = Models::Entry
 
   module_function
 

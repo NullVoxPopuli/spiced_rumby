@@ -53,9 +53,9 @@ module SpicedGracken
       def update_sender_info(data)
         sender = data['sender']
 
+        # if the sender isn't currently marked as active,
+        # perform the server list exchange
         unless ActiveServers.exists?(sender['uid'])
-          # user has not yet been logged as being active,
-          # perform the server list exchange
           payload = Message::ServerListHash.new.render
           Client.send_to_and_close(
             address: sender['location'],

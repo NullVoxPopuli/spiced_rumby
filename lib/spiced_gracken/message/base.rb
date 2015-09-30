@@ -20,7 +20,7 @@ module SpicedGracken
 
         self.message = message.presence || @payload.try(:[], 'message')
         self.sender_name = sender_name.presence || @payload.try(:[], 'sender').try(:[], 'name')
-        self.sender_location = sender_name.presence || @payload.try(:[], 'sender').try(:[], 'location')
+        self.sender_location = sender_location.presence || @payload.try(:[], 'sender').try(:[], 'location')
         self.sender_uid = sender_uid.presence || @payload.try(:[], 'sender').try(:[], 'uid')
         self.time_recieved = time_recieved.presence || Time.now
 
