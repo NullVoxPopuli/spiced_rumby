@@ -5,11 +5,6 @@ describe SpicedGracken::Config::ActiveServerList do
   let(:list) { klass.new }
 
   before(:each) do
-    allow_any_instance_of(SpicedGracken::Config::ServerList).to receive(:filename) { 'test-serverlist' }
-    allow(SpicedGracken).to receive(:server_list) do
-      SpicedGracken::Config::ServerList.new
-    end
-
     list.clear!
   end
 
@@ -34,7 +29,7 @@ describe SpicedGracken::Config::ActiveServerList do
 
   context 'remove' do
     let(:entry) do
-      SpicedGracken::Config::Entry.new(
+      SpicedGracken::Models::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
@@ -68,20 +63,25 @@ describe SpicedGracken::Config::ActiveServerList do
 
   context 'add' do
     it 'adds an entry' do
+      SpicedGracken::Models::Entry.destroy_all
+
       entry = {
-        address: '10.10.10.10:1010',
-        alias_name: 'test',
-        uid: '1234',
-        public_key: 'abcde'
+        'address' => '10.10.10.10:1010',
+        'alias' => 'test',
+        'uid' => '1234',
+        'publicKey' => 'abcde'
       }
-      list.add(entry)
+      e = SpicedGracken::Models::Entry.from_json(entry)
+      list.add(entry: e)
 
       expect(list.count).to eq 1
-      expect(list.first.attributes).to eq entry
+      expect(list.first.as_json).to eq entry
     end
 
     it 'updates an existing entry' do
-      entry = SpicedGracken::Config::Entry.new(
+      SpicedGracken::Models::Entry.destroy_all
+
+      entry = SpicedGracken::Models::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
@@ -100,7 +100,7 @@ describe SpicedGracken::Config::ActiveServerList do
 
   context 'update' do
     let(:entry) do
-      SpicedGracken::Config::Entry.new(
+      SpicedGracken::Models::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
@@ -124,7 +124,7 @@ describe SpicedGracken::Config::ActiveServerList do
 
   context 'contains?' do
     let(:entry) do
-      SpicedGracken::Config::Entry.new(
+      SpicedGracken::Models::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
@@ -163,7 +163,7 @@ describe SpicedGracken::Config::ActiveServerList do
 
     context 'servers exist' do
       let(:entry) do
-        SpicedGracken::Config::Entry.new(
+        SpicedGracken::Models::Entry.new(
           address: '10.10.10.10:1010',
           alias_name: 'test',
           uid: '1234',
@@ -188,7 +188,7 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     it 'shows who is online' do
-      entry = SpicedGracken::Config::Entry.new(
+      entry = SpicedGracken::Models::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
@@ -207,7 +207,7 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     it 'shows who is online' do
-      entry = SpicedGracken::Config::Entry.new(
+      entry = SpicedGracken::Models::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
@@ -221,7 +221,7 @@ describe SpicedGracken::Config::ActiveServerList do
 
   describe '#remove_by' do
     let(:entry) do
-      SpicedGracken::Config::Entry.new(
+      SpicedGracken::Models::Entry.new(
         address: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',

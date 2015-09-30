@@ -2,6 +2,8 @@ require 'spiced_gracken/http/client'
 require 'spiced_gracken/http/server'
 require 'spiced_gracken/cli/input'
 require 'spiced_gracken/cli/command'
+require 'spiced_gracken/cli/identity'
+require 'spiced_gracken/cli/node'
 require 'spiced_gracken/cli/config'
 require 'spiced_gracken/cli/ping'
 require 'spiced_gracken/cli/server'
@@ -26,7 +28,9 @@ module SpicedGracken
       Command::EXIT => CLI::Exit,
       Command::QUIT => CLI::Exit,
       Command::LISTEN => CLI::Listen,
-      Command::WHO => CLI::Who
+      Command::WHO => CLI::Who,
+      Command::IDENTITY => CLI::Identity,
+      Command::NODE => CLI::Node
     }
 
     class << self
@@ -81,7 +85,7 @@ module SpicedGracken
     end
 
     def client_active?
-      @client.nil? || !@client.socket.closed?
+      @client.nil? || !@client._socket.closed?
     end
 
     def start_server

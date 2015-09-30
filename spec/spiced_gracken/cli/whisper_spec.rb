@@ -48,7 +48,7 @@ describe SpicedGracken::CLI::Whisper do
     context 'target found' do
       before(:each) do
         allow(SpicedGracken::ActiveServers).to receive(:find){
-          SpicedGracken::Config::Entry.new(
+          SpicedGracken::Models::Entry.new(
             alias_name: 'alias',
             address: '1.1.1.1:1111',
             uid: '1',

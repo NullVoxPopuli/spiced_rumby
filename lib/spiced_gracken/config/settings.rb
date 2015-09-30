@@ -14,7 +14,7 @@ module SpicedGracken
       class << self
         delegate :valid?, :errors,
           :[], :[]=, :display, :as_hash, :save, :set,
-          :location,
+          :location, :identity,
           to: :instance
 
         def instance
@@ -22,8 +22,12 @@ module SpicedGracken
         end
       end
 
+      def identity
+        "#{self['alias']}@#{location}##{self['uid']}"
+      end
+
       def location
-        "#{self['id']}:#{self['port']}"
+        "#{self['ip']}:#{self['port']}"
       end
 
       def initialize

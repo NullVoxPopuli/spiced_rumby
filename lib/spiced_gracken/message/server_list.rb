@@ -2,7 +2,7 @@ module SpicedGracken
   module Message
     class ServerList < Base
       def message
-        ::ServerList._hash
+        SpicedGracken::Models::Entry.all.map(&:as_json)
       end
     end
   end

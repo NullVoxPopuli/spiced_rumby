@@ -1,9 +1,9 @@
 def mock_settings_objects
   delete_test_files
 
-  allow_any_instance_of(SpicedGracken::Config::ServerList).to receive(:filename) { 'test-serverlist' }
-  sl = SpicedGracken::Config::ServerList.new
-  allow(SpicedGracken::Config::ServerList).to receive(:instance) { sl }
+  setup_database
+
+  SpicedGracken::Models::Entry.destroy_all
 
   allow_any_instance_of(SpicedGracken::Config::Settings).to receive(:filename) { 'test-settings' }
   s = SpicedGracken::Config::Settings.new
@@ -19,8 +19,26 @@ def mock_settings_objects
 end
 
 def delete_test_files
-  File.delete('test-serverlist') if File.exist?('test-serverlist')
+  File.delete('test.sqlite3') if File.exist?('test.sqlite3')
   File.delete('test-hashfile') if File.exist?('test-hashfile')
   File.delete('test-settings') if File.exist?('test-settings')
   File.delete('test-activeserverlist') if File.exist?('test-activeserverlist')
+end
+
+def setup_database
+  ActiveRecord::Base.establish_connection(
+      :adapter => "sqlite3",
+      :database  => ':memory:'
+  )
+
+  ActiveRecord::Schema.define do
+    unless table_exists? :entries
+      create_table :entries do |table|
+        table.column :alias_name, :string
+        table.column :address, :string
+        table.column :uid, :string
+        table.column :public_key, :string
+      end
+    end
+  end
 end

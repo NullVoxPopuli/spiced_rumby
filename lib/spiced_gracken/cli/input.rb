@@ -36,7 +36,6 @@ module SpicedGracken
       def handle
         servers = ActiveServers.all
         if !servers.empty?
-          # if CLI.client and !CLI.client.socket.closed?
           m = Message::Chat.new(
             message: _input
           )

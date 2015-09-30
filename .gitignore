@@ -6,6 +6,7 @@ test-activeserverlist
 test-serverlist
 test-hashfile
 debug.log
+*.sqlite3
 
 ## default ruby git ignore
 *.gem

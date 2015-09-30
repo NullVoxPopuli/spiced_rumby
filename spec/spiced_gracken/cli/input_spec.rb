@@ -34,7 +34,7 @@ describe SpicedGracken::CLI::Input do
       before(:each) do
         allow(SpicedGracken::ActiveServers).to receive(:all){
           [
-            SpicedGracken::Config::Entry.new(
+            SpicedGracken::Models::Entry.new(
               alias_name: 'test',
               address: '1.1.1.1:1111',
               uid: '1',

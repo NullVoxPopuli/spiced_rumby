@@ -21,8 +21,7 @@ module SpicedGracken
       end
 
       def initialize
-        servers = ServerList.as_entries
-        self._list = servers
+        self._list = Models::Entry.all
       end
 
       def clear!
@@ -50,13 +49,14 @@ module SpicedGracken
         if e = contains?(uid: uid, address: address)
           update(e.uid, address: address, alias_name: alias_name, entry: e)
         else
-          entry = Entry.new(
+          entry = Models::Entry.new(
             alias_name: alias_name,
             address: address,
             uid: uid,
             public_key: public_key
           ) unless entry
 
+          entry.save
           _list << entry
         end
       end
@@ -82,9 +82,9 @@ module SpicedGracken
       end
 
       def save
-        # for now, just output everything to severs list
-        ServerList.servers = _list.map(&:as_json)
-        ServerList.save
+        _list.each do |entry|
+          entry.save
+        end
       end
 
       def as_array

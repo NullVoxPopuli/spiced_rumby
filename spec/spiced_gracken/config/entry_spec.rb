@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SpicedGracken::Config::Entry do
-  let(:klass) { SpicedGracken::Config::Entry }
+describe SpicedGracken::Models::Entry do
+  let(:klass) { SpicedGracken::Models::Entry }
 
   before(:each) do
     mock_settings_objects

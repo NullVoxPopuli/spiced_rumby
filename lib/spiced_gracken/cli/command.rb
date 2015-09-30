@@ -20,6 +20,8 @@ module SpicedGracken
       SERVER = 'server'
       WHO = 'who'
       PING = 'ping'
+      IDENTITY = 'identity'
+      NODE = 'node'
 
       def handle
         klass = CLI::COMMAND_MAP[command]

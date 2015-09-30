@@ -22,9 +22,12 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0'
 
+  s.add_runtime_dependency 'sqlite3'
+  s.add_runtime_dependency 'activerecord'
   s.add_runtime_dependency 'activesupport'
   s.add_runtime_dependency 'colorize'
   s.add_runtime_dependency 'curses'
+  s.add_runtime_dependency 'awesome_print'
   # sudo apt-get install libncursesw5-dev
   # may be needed ^ :-(
   # s.add_runtime_dependency 'ncursesw' # in gemfile

@@ -14,7 +14,6 @@ module SpicedGracken
         server = ActiveServers.find(alias_name: target)
 
         if server
-          # if CLI.client and !CLI.client.socket.closed?
           m = Message::Whisper.new(
             message: message,
             to: target
