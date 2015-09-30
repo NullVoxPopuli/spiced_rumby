@@ -78,7 +78,7 @@ module SpicedGracken
 
       # Most message types aren't going to need to have an
       # immediate response.
-      # 
+      #
       def respond
         return
       end

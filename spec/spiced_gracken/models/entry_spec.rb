@@ -7,6 +7,48 @@ describe SpicedGracken::Models::Entry do
     mock_settings_objects
   end
 
+  describe 'diff' do
+    let(:shared){
+      {
+        'alias' => 'shared',
+        'address' => '1.1.1.1:8000',
+        'uid' => '1',
+        'publicKey' => 'a'
+      }
+    }
+
+    let(:ours){
+      {
+        'alias' => 'ours',
+        'address' => '1.1.1.1:8001',
+        'uid' => '2',
+        'publicKey' => 'b'
+      }
+    }
+
+    let(:theirs){
+      {
+        'alias' => 'theirs',
+        'address' => '1.1.1.1:8002',
+        'uid' => '3',
+        'publicKey' => 'c'
+      }
+    }
+
+    it 'seperates ours from theirs' do
+      us = [shared, ours]
+      them = [shared, theirs]
+
+      us.each{|e| klass.from_json(e).save }
+
+      we_only_have, they_only_have = klass.diff(them)
+
+      expect(we_only_have).to eq [ours]
+      expect(they_only_have).to eq [theirs]
+    end
+
+  end
+
   describe '#as_json' do
     it 'converts to a hash / json' do
       m = klass.new(
