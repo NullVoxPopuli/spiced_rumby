@@ -15,7 +15,7 @@ describe SpicedGracken::CLI do
     end
   end
 
-  context 'listen_for_commands' do
+  describe '#listen_for_commands' do
     it 'creates an input' do
       cli = klass.new
       allow(cli).to receive(:get_input) { 'chat message' }

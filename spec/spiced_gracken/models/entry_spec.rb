@@ -7,6 +7,7 @@ describe SpicedGracken::Models::Entry do
     mock_settings_objects
   end
 
+
   describe 'diff' do
     let(:shared){
       {
@@ -47,6 +48,24 @@ describe SpicedGracken::Models::Entry do
       expect(they_only_have).to eq [theirs]
     end
 
+  end
+
+  describe '#==' do
+    it 'is equal to a hash of same values' do
+      hasherized_json = {
+        'alias' => 'alias',
+        'address' => '1.1.1.1:8080',
+        'uid' => '1',
+        'publicKey' => '123'
+      }
+      m = klass.new(
+        alias_name: 'alias',
+        address: '1.1.1.1:8080',
+        uid: '1',
+        public_key: '123')
+
+      expect(m == hasherized_json).to be_truthy
+    end
   end
 
   describe '#as_json' do

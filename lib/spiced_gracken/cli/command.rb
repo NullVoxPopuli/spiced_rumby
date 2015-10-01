@@ -28,7 +28,7 @@ module SpicedGracken
         if klass
           klass.new(_input).handle
         else
-          Display.alert('not implemented...')
+          Display.alert 'not implemented...'
         end
       end
 

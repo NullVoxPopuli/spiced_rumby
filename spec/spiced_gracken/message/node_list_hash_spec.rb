@@ -14,7 +14,7 @@ describe SpicedGracken::Message::NodeListHash do
     end
   end
 
-  context 'display' do
+  context '#display' do
     it 'displays hash' do
       msg = klass.new(message: 'hash')
 
@@ -22,7 +22,15 @@ describe SpicedGracken::Message::NodeListHash do
     end
   end
 
-  context 'respond' do
+  context '#handle' do
+    it 'calls respond' do
+      msg = klass.new(message: 'hash')
+      expect(msg).to receive(:respond)
+      expect(msg.handle).to be_nil
+    end
+  end
+
+  context '#respond' do
     it 'shoots off a ping reply to the sender of the ping' do
       expect(SpicedGracken::Http::Client).to receive(:send_to_and_close)
 

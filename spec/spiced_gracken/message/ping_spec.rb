@@ -28,6 +28,20 @@ describe SpicedGracken::Message::Ping do
     end
   end
 
+  context '#handle' do
+    it 'calls respond' do
+      msg = klass.new
+      msg.payload = {
+        'sender' => {
+          'name' => 'me',
+          'location' => 'here'
+        }
+      }
+      expect(msg).to receive(:respond)
+      expect(msg.handle).to include('me@here pinged you.')
+    end
+  end
+
   context 'respond' do
     it 'shoots off a ping reply to the sender of the ping' do
       expect(SpicedGracken::Http::Client).to receive(:send_to_and_close)

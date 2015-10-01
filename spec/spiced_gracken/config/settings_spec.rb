@@ -20,6 +20,12 @@ describe SpicedGracken::Config::Settings do
   context 'instance' do
     let(:i){ klass.new }
 
+    describe '#identity' do
+      it 'returns a string' do
+        expect(i.identity).to eq "#{i['alias']}@#{i.location}##{i['uid']}"
+      end
+    end
+
     describe '#valid?' do
       before(:each) do
         i._hash = {}

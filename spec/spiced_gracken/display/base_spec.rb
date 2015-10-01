@@ -9,15 +9,15 @@ describe SpicedGracken::Display::Base do
     end
 
     it 'must implement add_line' do
-      expect{ klass.new.add_line }.to raise_error
+      expect{ klass.new.add_line('text') }.to raise_error
     end
 
     it 'must implement whisper' do
-      expect{ klass.new.whisper }.to raise_error
+      expect{ klass.new.whisper('text') }.to raise_error
     end
 
     it 'must implement log' do
-      expect{ klass.new.log }.to raise_error
+      expect{ klass.new.log('text') }.to raise_error
     end
   end
 

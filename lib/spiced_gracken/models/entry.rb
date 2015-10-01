@@ -47,7 +47,7 @@ module SpicedGracken
         result = false
 
         if other.is_a?(Hash)
-          result = attributes.values_at(*other.keys) == other.values
+          result = as_json.values_at(*other.keys) == other.values
         end
 
         result || super

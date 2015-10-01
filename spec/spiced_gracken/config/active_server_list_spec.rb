@@ -2,28 +2,27 @@ require 'spec_helper'
 
 describe SpicedGracken::Config::ActiveServerList do
   let(:klass) { SpicedGracken::Config::ActiveServerList }
-  let(:list) { klass.new }
 
   before(:each) do
-    list.clear!
+    klass.clear!
   end
 
   context 'as_array' do
     it 'gets the active servers' do
-      list._list = expected = [
+      klass.instance._list = expected = [
         {}, {}, {}
       ]
-      result = list.as_array
+      result = klass.instance.as_array
       expect(result).to eq expected
     end
   end
 
   context 'clear' do
     it 'clears the list' do
-      list._list = [12]
-      list.clear!
+      klass.instance._list = [12]
+      klass.clear!
 
-      expect(list._list).to eq []
+      expect(klass.instance._list).to eq []
     end
   end
 
@@ -37,27 +36,27 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     before(:each) do
-      list._list = [entry]
+      klass.instance._list = [entry]
     end
 
     it 'removes an entry by address' do
-      list.remove(address: entry.address)
-      expect(list.count).to eq 0
+      klass.remove(address: entry.address)
+      expect(klass.count).to eq 0
     end
 
     it 'removes an entry by alias' do
-      list.remove(alias_name: entry.alias_name)
-      expect(list.count).to eq 0
+      klass.remove(alias_name: entry.alias_name)
+      expect(klass.count).to eq 0
     end
 
     it 'removes an entry by uid' do
-      list.remove(uid: entry.uid)
-      expect(list.count).to eq 0
+      klass.remove(uid: entry.uid)
+      expect(klass.count).to eq 0
     end
 
     it 'does not remove non existant' do
-      list.remove(address: 'wut')
-      expect(list.count).to eq 1
+      klass.remove(address: 'wut')
+      expect(klass.count).to eq 1
     end
   end
 
@@ -72,10 +71,10 @@ describe SpicedGracken::Config::ActiveServerList do
         'publicKey' => 'abcde'
       }
       e = SpicedGracken::Models::Entry.from_json(entry)
-      list.add(entry: e)
+      klass.add(entry: e)
 
-      expect(list.count).to eq 1
-      expect(list.first.as_json).to eq entry
+      expect(klass.count).to eq 1
+      expect(klass.first.as_json).to eq entry
     end
 
     it 'updates an existing entry' do
@@ -88,13 +87,13 @@ describe SpicedGracken::Config::ActiveServerList do
         public_key: 'abcde'
       )
 
-      list.add(uid: entry.uid, entry: entry)
+      klass.add(uid: entry.uid, entry: entry)
 
       entry.alias_name = 'test2'
-      list.add(uid: entry.uid, entry: entry)
+      klass.add(uid: entry.uid, entry: entry)
 
-      expect(list.count).to eq 1
-      expect(list.first.alias_name).to eq 'test2'
+      expect(klass.count).to eq 1
+      expect(klass.first.alias_name).to eq 'test2'
     end
   end
 
@@ -108,17 +107,17 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     before(:each) do
-      list.add(entry: entry)
+      klass.add(entry: entry)
     end
 
     it 'updates the address' do
-      list.update('1234', address: '1.1.1.1:11')
-      expect(list.first.address).to eq '1.1.1.1:11'
+      klass.update('1234', address: '1.1.1.1:11')
+      expect(klass.first.address).to eq '1.1.1.1:11'
     end
 
     it 'updates the alias' do
-      list.update('1234', alias_name: 'test2')
-      expect(list.first.alias_name).to eq 'test2'
+      klass.update('1234', alias_name: 'test2')
+      expect(klass.first.alias_name).to eq 'test2'
     end
   end
 
@@ -132,33 +131,33 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     before(:each) do
-      list.add(entry: entry)
+      klass.add(entry: entry)
     end
 
     it 'finds by alias' do
-      result = list.find(alias_name: 'test')
+      result = klass.find(alias_name: 'test')
       expect(result).to eq entry
     end
 
     it 'finds by address' do
-      result = list.find(address: '10.10.10.10:1010')
+      result = klass.find(address: '10.10.10.10:1010')
       expect(result).to eq entry
     end
 
     it 'finds by uid' do
-      result = list.find(uid: '1234')
+      result = klass.find(uid: '1234')
       expect(result).to eq entry
     end
 
     it 'does not find' do
-      result = list.find(address: 'fake')
+      result = klass.find(address: 'fake')
       expect(result).to eq nil
     end
   end
 
   describe '#find_all' do
     it 'finds no one' do
-      expect(list.find_all).to be_empty
+      expect(klass.find_all).to be_empty
     end
 
     context 'servers exist' do
@@ -171,20 +170,36 @@ describe SpicedGracken::Config::ActiveServerList do
       end
 
       before(:each) do
-        list._list = [entry, entry]
+        klass.instance._list = [entry, entry]
       end
 
       it 'finds multiple' do
-        result = list.find_all(alias_name: 'test').count
+        result = klass.find_all(alias_name: 'test').count
         expect(result).to eq 2
       end
+    end
+  end
+
+  describe '#save' do
+    it 'saves' do
+      entry =   SpicedGracken::Models::Entry.new(
+          address: '10.10.10.10:1010',
+          alias_name: 'test',
+          uid: '1234',
+          public_key: 'abcde')
+
+      klass.instance._list = [entry]
+
+      expect{
+        klass.save
+      }.to change(SpicedGracken::Models::Entry, :count).by 1
     end
   end
 
   describe '#display_addresses' do
 
     it 'shows no one is online' do
-      expect(list.display_addresses).to eq 'no active nodes'
+      expect(klass.display_addresses).to eq 'no active nodes'
     end
 
     it 'shows who is online' do
@@ -194,16 +209,16 @@ describe SpicedGracken::Config::ActiveServerList do
         uid: '1234',
         public_key: 'abcde')
 
-      list._list = [entry]
+      klass.instance._list = [entry]
 
-      expect(list.display_addresses).to eq 'test@10.10.10.10:1010'
+      expect(klass.display_addresses).to eq 'test@10.10.10.10:1010'
     end
   end
 
   describe '#who' do
 
     it 'shows no one is online' do
-      expect(list.who).to eq 'no one is online'
+      expect(klass.who).to eq 'no one is online'
     end
 
     it 'shows who is online' do
@@ -213,9 +228,9 @@ describe SpicedGracken::Config::ActiveServerList do
         uid: '1234',
         public_key: 'abcde')
 
-      list._list = [entry]
+      klass.instance._list = [entry]
 
-      expect(list.who).to eq 'test'
+      expect(klass.who).to eq 'test'
     end
   end
 
@@ -229,27 +244,27 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     before(:each) do
-      list._list = [entry]
+      klass.instance._list = [entry]
     end
 
     it 'removes an entry by address' do
-      list.remove_by('address', entry.address)
-      expect(list.count).to eq 0
+      klass.remove_by('address', entry.address)
+      expect(klass.count).to eq 0
     end
 
     it 'removes an entry by alias' do
-      list.remove_by('alias', entry.alias_name)
-      expect(list.count).to eq 0
+      klass.remove_by('alias', entry.alias_name)
+      expect(klass.count).to eq 0
     end
 
     it 'removes an entry by uid' do
-      list.remove_by('uid', entry.uid)
-      expect(list.count).to eq 0
+      klass.remove_by('uid', entry.uid)
+      expect(klass.count).to eq 0
     end
 
     it 'does not remove non existant' do
-      list.remove_by('address', 'wut')
-      expect(list.count).to eq 1
+      klass.remove_by('address', 'wut')
+      expect(klass.count).to eq 1
     end
   end
 end

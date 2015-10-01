@@ -37,7 +37,7 @@ module SpicedGracken
 
       delegate :server_address, :listen_for_commands,
         :shutdown, :start_server, :client, :server,
-        :check_startup_settings, :create_input,
+        :check_startup_settings, :create_input, :close_server,
         to: :instance
 
       def instance
@@ -56,8 +56,7 @@ module SpicedGracken
     end
 
     def listen_for_commands
-      process_input while client_active?
-      Display.alert 'client not running'
+      process_input
     end
 
     def process_input
@@ -84,10 +83,6 @@ module SpicedGracken
       gets
     end
 
-    def client_active?
-      @client.nil? || !@client._socket.closed?
-    end
-
     def start_server
       unless Settings.valid?
         Display.alert("settings not fully valid\n")
@@ -112,8 +107,10 @@ module SpicedGracken
 
     def close_server
       puts 'shutting down server'
-      server = @server.pop
-      server.try(:server).try(:close)
+      if @server.present?
+        server = @server.pop
+        server.try(:server).try(:close)
+      end
       puts 'no longer listening...'
     end
 
