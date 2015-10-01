@@ -15,5 +15,6 @@ notifications:
   email: false
 
 matrix:
-  allowed_failures:
+  fast_finish: true
+  allow_failures:
     - rvm: ruby-head
