@@ -7,9 +7,13 @@ rvm:
   - ruby-head
 script: "bundle exec rspec"
 addons:
-  codeCLImate:
+  code_climate:
     repo_token: 18ddab0ec2f7be2430569f2ffc7dee169da139b792172d3992a6aacba1f50877
 branches:
   only: master
 notifications:
   email: false
+
+matrix:
+  allowed_failures:
+    - rvm: ruby-head

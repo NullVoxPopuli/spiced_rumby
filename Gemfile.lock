@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spiced_gracken (0.1.2)
+    spiced_gracken (0.2.0)
       activerecord
       activesupport
       awesome_print
