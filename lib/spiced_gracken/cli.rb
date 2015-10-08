@@ -56,7 +56,7 @@ module SpicedGracken
     end
 
     def listen_for_commands
-      process_input
+      process_input while true
     end
 
     def process_input

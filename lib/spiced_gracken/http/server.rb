@@ -65,7 +65,7 @@ module SpicedGracken
         ActiveServers.update(
           sender['uid'],
           address: sender['location'],
-          alias_name: sender['name']
+          alias_name: sender['alias']
         )
       end
 

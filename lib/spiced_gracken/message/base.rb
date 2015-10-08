@@ -43,7 +43,7 @@ module SpicedGracken
           'client_version' => client_version,
           'time_sent' => time_recieved || Time.now.to_s,
           'sender' => {
-            'name' => sender_name,
+            'alias' => sender_name,
             'location' => sender_location,
             'uid' => sender_uid
           }

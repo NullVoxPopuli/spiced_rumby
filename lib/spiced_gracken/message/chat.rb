@@ -5,7 +5,7 @@ module SpicedGracken
 
       def display
         time_recieved = self.time_recieved.strftime('%e/%m/%y %H:%I:%M')
-        name = payload['sender']['name']
+        name = payload['sender']['alias']
         message = payload['message']
 
         "#{time_recieved} #{name} > #{message}"

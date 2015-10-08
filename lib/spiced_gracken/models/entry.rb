@@ -56,7 +56,7 @@ module SpicedGracken
       def as_json
         {
           'alias' => alias_name,
-          'address' => address,
+          'location' => address,
           'uid' => uid,
           'publicKey' => public_key
         }

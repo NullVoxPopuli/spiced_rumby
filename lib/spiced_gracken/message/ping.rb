@@ -6,7 +6,7 @@ module SpicedGracken
         # we'll never display our own ping to someone else...
         # or shouldn't.... or there should be different output
         # TODO: display is a bad method name
-        name = payload['sender']['name']
+        name = payload['sender']['alias']
         location = payload['sender']['location']
 
         "#{name}@#{location} pinged you."

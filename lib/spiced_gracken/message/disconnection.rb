@@ -3,7 +3,7 @@ module SpicedGracken
     class Disconnection < Base
       def display
         address = payload['sender']['location']
-        name = payload['sender']['name']
+        name = payload['sender']['alias']
         ActiveServers.remove(address: address)
         "#{name}@#{address} has disconnected"
       end

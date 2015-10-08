@@ -3,7 +3,7 @@ module SpicedGracken
     class Connection < Base
       def display
         address = payload['sender']['location']
-        last_alias = payload['sender']['name']
+        last_alias = payload['sender']['alias']
         uid = payload['sender']['uid']
 
         ActiveServers.add(
