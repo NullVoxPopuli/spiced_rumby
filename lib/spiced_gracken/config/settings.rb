@@ -28,8 +28,7 @@ module SpicedGracken
           'alias' => me = self['alias'],
           'location' => location,
           'uid' => self['uid'],
-          'publicKey' => public_key,
-          'privateKey' => private_key
+          'publicKey' => public_key
         }.to_json
 
         filename = "#{me}.json"
