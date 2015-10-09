@@ -14,12 +14,46 @@ module SpicedGracken
       class << self
         delegate :valid?, :errors,
           :[], :[]=, :display, :as_hash, :save, :set,
-          :location, :identity,
+          :location, :identity, :keys_exist?, :public_key,
+          :private_key, :generate_keys, :share,
           to: :instance
 
         def instance
           @instance ||= new
         end
+      end
+
+      def share
+        data = {
+          'alias' => me = self['alias'],
+          'location' => location,
+          'uid' => self['uid'],
+          'publicKey' => public_key,
+          'privateKey' => private_key
+        }.to_json
+
+        filename = "#{me}.json"
+        File.open(filename, 'w'){ |f| f.syswrite(data) }
+        Display.info "#{filename} written..."
+      end
+
+      def keys_exist?
+        public_key.present? && private_key.present?
+      end
+
+      def public_key
+        self['publicKey']
+      end
+
+      def private_key
+        self['privatKey']
+      end
+
+      def generate_keys
+        public_key, private_key = Encryption::Keypair.generate(2048)
+        self['publicKey'] = public_key.to_s
+        self['privateKey'] = private_key.to_s
+        Display.success 'new keys generated'
       end
 
       def identity

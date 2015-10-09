@@ -86,7 +86,13 @@ module SpicedGracken
       # this message should be called immediately
       # before sending to the whomever
       def render
-        payload.to_json
+        payload.to_json.encrypt(key: senders_public_key)
+      end
+
+      private
+
+      def senders_public_key
+        Node.find_by_uid(sender_uid).public_key
       end
     end
   end

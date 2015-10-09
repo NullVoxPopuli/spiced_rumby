@@ -12,6 +12,9 @@ require 'spiced_gracken/cli/exit'
 require 'spiced_gracken/cli/listen'
 require 'spiced_gracken/cli/stop_listening'
 require 'spiced_gracken/cli/who'
+require 'spiced_gracken/cli/init'
+require 'spiced_gracken/cli/share'
+require 'spiced_gracken/cli/import'
 
 module SpicedGracken
   # A user interface is responsible for for creating a client
@@ -30,7 +33,10 @@ module SpicedGracken
       Command::LISTEN => CLI::Listen,
       Command::WHO => CLI::Who,
       Command::IDENTITY => CLI::Identity,
-      Command::NODE => CLI::Node
+      Command::NODE => CLI::Node,
+      Command::INIT => CLI::Init,
+      Command::SHARE => CLI::Share,
+      Command::IMPORT => CLI::Import
     }
 
     class << self

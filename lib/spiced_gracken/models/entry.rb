@@ -41,6 +41,19 @@ module SpicedGracken
 
           [we_only_have, they_only_have]
         end
+
+        def import_from_file(filename)
+          begin
+            f = File.read(filename)
+            hash = JSON.parse(f)
+            hash['address'] = hash['location']
+            n = from_json(hash)
+            n.save
+            n
+          rescue => e
+            Display.alert e.message
+          end
+        end
       end
 
       def ==(other)

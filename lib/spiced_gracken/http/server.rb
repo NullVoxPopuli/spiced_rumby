@@ -20,12 +20,14 @@ module SpicedGracken
           Thread.start(@server.accept) do |connection|
             begin
               while (input = connection.gets)
+                input = input.decrypt(key: Settings[:privateKey])
                 Display.debug 'server received message:'
                 Display.debug input
 
                 data = JSON.parse(input)
                 update_sender_info(data)
                 message = processes_message(data)
+                next unless message
                 Display.present_message message
               end
             rescue => e

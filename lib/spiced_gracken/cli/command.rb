@@ -22,6 +22,9 @@ module SpicedGracken
       PING = 'ping'
       IDENTITY = 'identity'
       NODE = 'node'
+      INIT = 'init'
+      SHARE = 'share'
+      IMPORT = 'import'
 
       def handle
         klass = CLI::COMMAND_MAP[command]
