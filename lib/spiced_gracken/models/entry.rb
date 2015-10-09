@@ -32,6 +32,10 @@ module SpicedGracken
           )
         end
 
+        def public_key_from_uid(uid)
+          find_by_uid(uid).try(:public_key)
+        end
+
         # @param [Array] theirs array of hashes representing node entries
         # @return [Array<-,+>] nodes only we have, and nodes only they have
         def diff(theirs)

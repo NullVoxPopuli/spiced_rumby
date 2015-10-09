@@ -24,7 +24,8 @@ module SpicedGracken
 
           Http::Client.send_to_and_close(
             address: server.address,
-            payload: data
+            payload: data,
+            encrypt_with: server.public_key
           )
         else
           Display.alert "server for #{target} not found or is not online"

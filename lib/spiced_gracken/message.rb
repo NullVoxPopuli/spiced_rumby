@@ -9,6 +9,7 @@ require 'spiced_gracken/message/whisper'
 require 'spiced_gracken/message/node_list'
 require 'spiced_gracken/message/node_list_diff'
 require 'spiced_gracken/message/node_list_hash'
+require 'spiced_gracken/message/encryptor'
 
 module SpicedGracken
   module Message

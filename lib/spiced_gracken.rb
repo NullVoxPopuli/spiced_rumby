@@ -7,7 +7,6 @@ require 'curses'
 require 'io/console'
 require 'logger'
 
-require 'encryption'
 require 'awesome_print'
 require 'sqlite3'
 require 'active_record'

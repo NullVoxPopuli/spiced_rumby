@@ -15,7 +15,7 @@ module SpicedGracken
         delegate :valid?, :errors,
           :[], :[]=, :display, :as_hash, :save, :set,
           :location, :identity, :keys_exist?, :public_key,
-          :private_key, :generate_keys, :share,
+          :private_key, :generate_keys, :share, :key_pair,
           to: :instance
 
         def instance
@@ -49,10 +49,17 @@ module SpicedGracken
       end
 
       def generate_keys
-        public_key, private_key = Encryption::Keypair.generate(2048)
-        self['publicKey'] = public_key.to_s
-        self['privateKey'] = private_key.to_s
+        @key_pair = OpenSSL::PKey::RSA.new(2048)
+        self['publicKey'] = @key_pair.public_key.export
+        self['privateKey'] = @key_pair.export
         Display.success 'new keys generated'
+      end
+
+      def key_pair
+        if !@key_pair && keys_exist?
+          @key_pair = OpenSSL::PKey::RSA.new(self['privateKey'] + self['publicKey'])
+        end
+        @key_pair
       end
 
       def identity

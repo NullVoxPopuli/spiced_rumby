@@ -20,7 +20,9 @@ module SpicedGracken
           Thread.start(@server.accept) do |connection|
             begin
               while (input = connection.gets)
-                input = input.decrypt(key: Settings[:privateKey])
+                # TODO: what about for the optionally cleartext messages?
+                # TODO: do we want cleartext messages?
+                input = Message::Encryptor.decrypt(input, Settings[:privateKey])
                 Display.debug 'server received message:'
                 Display.debug input
 

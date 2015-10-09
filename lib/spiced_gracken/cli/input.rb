@@ -51,7 +51,8 @@ module SpicedGracken
             Thread.new(entry, data) do |entry, data|
               Http::Client.send_to_and_close(
                 address: entry.address,
-                payload: data
+                payload: data,
+                encrypt_with: entry.public_key
               )
             end
           end

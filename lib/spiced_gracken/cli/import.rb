@@ -8,6 +8,7 @@ module SpicedGracken
             Display.success "#{node.alias_name} successfully imported"
           else
             Display.alert "#{node.alias_name} is invalid"
+            Display.alert node.errors.full_messages.join("\n")
           end
         else
           Display.alert usage

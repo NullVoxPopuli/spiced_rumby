@@ -34,8 +34,13 @@ module SpicedGracken
         _socket.try(:close)
       end
 
-      def self.send_to_and_close(address: '', payload: nil)
+      # @param [String] encrypt_with the uid of who to use for encryption
+      def self.send_to_and_close(address: '', payload: nil, encrypt_with: nil)
         ip, port = address.split(':')
+
+        if encrypt_with
+          payload = Message::Encryptor.encrypt(payload, encrypt_with)
+        end
 
         begin
           client = new(address: ip, port: port, silent: true)
@@ -48,6 +53,7 @@ module SpicedGracken
           )
         end
       end
+
     end
   end
 end
