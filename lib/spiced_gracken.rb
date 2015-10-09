@@ -23,7 +23,6 @@ require 'spiced_gracken/config/hash_file'
 require 'spiced_gracken/config/settings'
 require 'spiced_gracken/config/active_server_list'
 require 'spiced_gracken/cli'
-require 'spiced_gracken/encryptor'
 require 'spiced_gracken/message'
 
 
