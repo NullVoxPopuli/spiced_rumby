@@ -16,8 +16,10 @@ module SpicedGracken
         if message != Node.as_sha512
           location = payload['sender']['location']
 
-          SpicedGracken::Http::Client.send_to_and_close(
-            location: location,
+          node = Node.find_by_location(location)
+
+          SpicedGracken::Http::Client.dispatch(
+            node: node,
             payload: NodeList.new(message: Node.as_json).render
           )
         end

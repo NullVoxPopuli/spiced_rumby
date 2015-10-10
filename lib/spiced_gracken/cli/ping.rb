@@ -7,19 +7,21 @@ module SpicedGracken
 
           field, value = parse_ping_command
 
-          location =
+          node =
             if field == 'location'
-              lookup_value
+              ActiveServers.find(location: lookup_value)
             else
-              ActiveServers.find(alias_name: lookup_value).try(:location)
+              ActiveServers.find(alias_name: lookup_value)
             end
+
+          location = node.try(:location)
 
           unless location
             return Display.alert "#{lookup_value} could not be found"
           end
 
-          Http::Client.send_to_and_close(
-            location: location,
+          Http::Client.dispatch(
+            node: node,
             payload: msg.render
           )
         else

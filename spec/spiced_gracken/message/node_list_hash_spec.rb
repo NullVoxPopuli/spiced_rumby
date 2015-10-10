@@ -32,7 +32,7 @@ describe SpicedGracken::Message::NodeListHash do
 
   context '#respond' do
     it 'shoots off a ping reply to the sender of the ping' do
-      expect(SpicedGracken::Http::Client).to receive(:send_to_and_close)
+      expect(SpicedGracken::Http::Client).to receive(:dispatch)
 
       msg = klass.new(message: 'hash')
       msg.respond

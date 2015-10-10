@@ -20,12 +20,10 @@ module SpicedGracken
           )
 
           Display.whisper m.display
-          data = m.render
 
-          Http::Client.send_to_and_close(
-            location: server.location,
-            payload: data,
-            encrypt_with: server.public_key
+          Http::Client.dispatch(
+            node: server,
+            payload: m.render
           )
         else
           Display.alert "server for #{target} not found or is not online"

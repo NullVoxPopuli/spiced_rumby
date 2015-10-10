@@ -54,6 +54,21 @@ module SpicedGracken
         end
       end
 
+      # wrapper for adding encryption to a message
+      def self.dispatch(node: nil, payload: '')
+
+        if !(node && node.location)
+          Display.alert "Node not found, or does not have a location"
+          return
+        end
+
+        send_to_and_close(
+          location: node.location,
+          payload: payload,
+          encrypt_with: node.public_key
+        )
+      end
+
     end
   end
 end

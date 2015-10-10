@@ -19,8 +19,10 @@ module SpicedGracken
         if we_only_have.present?
           location = payload['sender']['location']
 
-          SpicedGracken::Http::Client.send_to_and_close(
-            location: location,
+          node = Node.find_by_location(location)
+
+          SpicedGracken::Http::Client.dispatch(
+            node: node,
             payload: NodeListDiff.new(message: we_only_have).render
           )
         end

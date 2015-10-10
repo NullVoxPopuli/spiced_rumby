@@ -49,10 +49,9 @@ module SpicedGracken
           # the rest of the servers from receiving the messages
           servers.each do |entry|
             Thread.new(entry, data) do |entry, data|
-              Http::Client.send_to_and_close(
-                location: entry.location,
-                payload: data,
-                encrypt_with: entry.public_key
+              Http::Client.dispatch(
+                node: entry,
+                payload: data
               )
             end
           end
