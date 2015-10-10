@@ -21,7 +21,7 @@ describe SpicedGracken::Http::Server do
         "client_version":"0.1.2",
         "time_sent":"2015-09-30T13:04:39.019-04:00",
         "sender":{
-          "name":"nvp",
+          "alias":"nvp",
           "location":"10.10.10.10:1010",
           "uid":"100"
         }}'
@@ -52,7 +52,7 @@ describe SpicedGracken::Http::Server do
         "client_version":"0.1.2",
         "time_sent":"2015-09-30T13:04:39.019-04:00",
         "sender":{
-          "name":"nvp",
+          "alias":"nvp",
           "location":"10.10.10.10:1010",
           "uid":"100"
         }}'
@@ -79,7 +79,7 @@ describe SpicedGracken::Http::Server do
         "client_version":"0.1.2",
         "time_sent":"2015-09-30 09:04:59 -0400",
         "sender":{
-          "name":"nvp",
+          "alias":"nvp",
           "location":"localhost:8081",
           "uid":"1"
         }

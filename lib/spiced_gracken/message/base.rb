@@ -28,7 +28,7 @@ module SpicedGracken
 
         # TODO: find a more elegant way to represent this
         self.message = message.presence || @payload.try(:[], 'message')
-        self.sender_name = sender_name.presence || @payload.try(:[], 'sender').try(:[], 'name') || Settings['alias']
+        self.sender_name = sender_name.presence || @payload.try(:[], 'sender').try(:[], 'alias') || Settings['alias']
         self.sender_location = sender_location.presence || @payload.try(:[], 'sender').try(:[], 'location') || Settings.location
         self.sender_uid = sender_uid.presence || @payload.try(:[], 'sender').try(:[], 'uid') || Settings['uid']
         self.time_recieved = time_recieved.presence || Time.now

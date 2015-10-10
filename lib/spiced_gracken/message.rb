@@ -3,7 +3,6 @@ require 'spiced_gracken/message/authorization'
 require 'spiced_gracken/message/chat'
 require 'spiced_gracken/message/ping'
 require 'spiced_gracken/message/ping_reply'
-require 'spiced_gracken/message/connection'
 require 'spiced_gracken/message/disconnection'
 require 'spiced_gracken/message/whisper'
 require 'spiced_gracken/message/node_list'
@@ -16,7 +15,6 @@ module SpicedGracken
     PING = 'ping'
     PING_REPLY = 'pingreply'
     WHISPER = 'whisper'
-    CONNECTION = 'connection'
     DISCONNECTION = 'disconnection'
     AUTHORIZATION = 'authorization'
 
@@ -27,7 +25,6 @@ module SpicedGracken
     TYPES = {
       CHAT => Chat,
       WHISPER => Whisper,
-      CONNECTION => Connection,
       DISCONNECTION => Disconnection,
       AUTHORIZATION => Authorization,
       PING => Ping,

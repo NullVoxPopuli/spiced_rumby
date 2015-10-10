@@ -31,7 +31,7 @@ describe SpicedGracken::Display::Manager do
 
     it 'invokes add_line for other menssages' do
       expect(SpicedGracken.ui).to receive(:add_line)
-      m = SpicedGracken::Message::Connection.new
+      m = SpicedGracken::Message::Disconnection.new
       SpicedGracken::Display.present_message(m)
     end
   end

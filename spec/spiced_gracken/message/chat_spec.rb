@@ -19,7 +19,7 @@ describe SpicedGracken::Message::Chat do
          'client_version' => SpicedGracken::VERSION,
          'time_sent' => @time = Time.now, # not yet sent
          'sender' => {
-           'name' => @sender = 'name_of_sender',
+           'alias' => @sender = 'name_of_sender',
            'location' => 'location',
            'uid' => 'uid'
          }

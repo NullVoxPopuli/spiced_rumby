@@ -32,6 +32,7 @@ module SpicedGracken
   Settings = Config::Settings
   ActiveServers = Config::ActiveServerList
   Node = Models::Entry
+  Cipher = Encryption
 
   module_function
 

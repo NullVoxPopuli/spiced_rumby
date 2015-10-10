@@ -39,7 +39,7 @@ module SpicedGracken
         ip, port = location.split(':')
 
         if encrypt_with
-          payload = SpicedGracken::Encryptor.encrypt(payload, encrypt_with)
+          payload = Cipher.encrypt(payload, encrypt_with)
         end
 
         begin

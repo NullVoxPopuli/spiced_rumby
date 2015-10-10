@@ -22,7 +22,7 @@ module SpicedGracken
               while (input = connection.gets)
                 # TODO: what about for the optionally cleartext messages?
                 # TODO: do we want cleartext messages?
-                input = Encryptor.decrypt(input, Settings[:privateKey])
+                input = Cipher.decrypt(input, Settings[:privateKey])
                 Display.debug 'server received message:'
                 Display.debug input
 

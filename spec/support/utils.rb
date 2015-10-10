@@ -3,7 +3,7 @@ def mock_settings_objects
 
   setup_database
 
-  allow(SpicedGracken::Encryption).to receive(:current_encryptor){
+  allow(SpicedGracken::Cipher).to receive(:current_encryptor){
       SpicedGracken::Encryption::Passthrough
   }
 

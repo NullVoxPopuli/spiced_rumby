@@ -19,7 +19,7 @@ describe SpicedGracken::Message::Disconnection do
       msg = klass.new
       msg.payload = {
         'sender' => {
-          'name' => 'me',
+          'alias' => 'me',
           'location' => 'here'
         }
       }
