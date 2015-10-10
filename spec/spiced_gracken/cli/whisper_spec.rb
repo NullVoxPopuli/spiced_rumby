@@ -50,7 +50,7 @@ describe SpicedGracken::CLI::Whisper do
         allow(SpicedGracken::ActiveServers).to receive(:find){
           SpicedGracken::Models::Entry.new(
             alias_name: 'alias',
-            address: '1.1.1.1:1111',
+            location: '1.1.1.1:1111',
             uid: '1',
             public_key: '123'
           )

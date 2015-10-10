@@ -3,11 +3,11 @@ module SpicedGracken
     class Entry < ActiveRecord::Base
       IPV4_WITH_PORT = /((?:(?:^|\.)(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])){4})(:\d*)?/
 
-      validates :alias_name, :address, presence: true
+      validates :alias_name, :location, presence: true
       validates :uid, presence: true, uniqueness: true
 
       # ipv4 with port
-      validates_format_of :address, with: IPV4_WITH_PORT
+      validates_format_of :location, with: IPV4_WITH_PORT
 
       class << self
         def sha_preimage
@@ -26,7 +26,7 @@ module SpicedGracken
         def from_json(json)
           new(
             alias_name: json['alias'],
-            address: json['address'],
+            location: json['location'],
             uid: json['uid'],
             public_key: json['publicKey']
           )
@@ -50,7 +50,6 @@ module SpicedGracken
           begin
             f = File.read(filename)
             hash = JSON.parse(f)
-            hash['address'] = hash['location']
             n = from_json(hash)
             n.save
             n
@@ -73,7 +72,7 @@ module SpicedGracken
       def as_json
         {
           'alias' => alias_name,
-          'location' => address,
+          'location' => location,
           'uid' => uid,
           'publicKey' => public_key
         }

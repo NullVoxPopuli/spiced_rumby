@@ -29,7 +29,7 @@ describe SpicedGracken::Config::ActiveServerList do
   context 'remove' do
     let(:entry) do
       SpicedGracken::Models::Entry.new(
-        address: '10.10.10.10:1010',
+        location: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
@@ -39,8 +39,8 @@ describe SpicedGracken::Config::ActiveServerList do
       klass.instance._list = [entry]
     end
 
-    it 'removes an entry by address' do
-      klass.remove(address: entry.address)
+    it 'removes an entry by location' do
+      klass.remove(location: entry.location)
       expect(klass.count).to eq 0
     end
 
@@ -55,7 +55,7 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     it 'does not remove non existant' do
-      klass.remove(address: 'wut')
+      klass.remove(location: 'wut')
       expect(klass.count).to eq 1
     end
   end
@@ -65,7 +65,7 @@ describe SpicedGracken::Config::ActiveServerList do
       SpicedGracken::Models::Entry.destroy_all
 
       entry = {
-        'address' => '10.10.10.10:1010',
+        'location' => '10.10.10.10:1010',
         'alias' => 'test',
         'uid' => '1234',
         'publicKey' => 'abcde'
@@ -81,7 +81,7 @@ describe SpicedGracken::Config::ActiveServerList do
       SpicedGracken::Models::Entry.destroy_all
 
       entry = SpicedGracken::Models::Entry.new(
-        address: '10.10.10.10:1010',
+        location: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde'
@@ -100,7 +100,7 @@ describe SpicedGracken::Config::ActiveServerList do
   context 'update' do
     let(:entry) do
       SpicedGracken::Models::Entry.new(
-        address: '10.10.10.10:1010',
+        location: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
@@ -110,9 +110,9 @@ describe SpicedGracken::Config::ActiveServerList do
       klass.add(entry: entry)
     end
 
-    it 'updates the address' do
-      klass.update('1234', address: '1.1.1.1:11')
-      expect(klass.first.address).to eq '1.1.1.1:11'
+    it 'updates the location' do
+      klass.update('1234', location: '1.1.1.1:11')
+      expect(klass.first.location).to eq '1.1.1.1:11'
     end
 
     it 'updates the alias' do
@@ -124,7 +124,7 @@ describe SpicedGracken::Config::ActiveServerList do
   context 'contains?' do
     let(:entry) do
       SpicedGracken::Models::Entry.new(
-        address: '10.10.10.10:1010',
+        location: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
@@ -139,8 +139,8 @@ describe SpicedGracken::Config::ActiveServerList do
       expect(result).to eq entry
     end
 
-    it 'finds by address' do
-      result = klass.find(address: '10.10.10.10:1010')
+    it 'finds by location' do
+      result = klass.find(location: '10.10.10.10:1010')
       expect(result).to eq entry
     end
 
@@ -150,7 +150,7 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     it 'does not find' do
-      result = klass.find(address: 'fake')
+      result = klass.find(location: 'fake')
       expect(result).to eq nil
     end
   end
@@ -163,7 +163,7 @@ describe SpicedGracken::Config::ActiveServerList do
     context 'servers exist' do
       let(:entry) do
         SpicedGracken::Models::Entry.new(
-          address: '10.10.10.10:1010',
+          location: '10.10.10.10:1010',
           alias_name: 'test',
           uid: '1234',
           public_key: 'abcde')
@@ -183,7 +183,7 @@ describe SpicedGracken::Config::ActiveServerList do
   describe '#save' do
     it 'saves' do
       entry =   SpicedGracken::Models::Entry.new(
-          address: '10.10.10.10:1010',
+          location: '10.10.10.10:1010',
           alias_name: 'test',
           uid: '1234',
           public_key: 'abcde')
@@ -196,22 +196,22 @@ describe SpicedGracken::Config::ActiveServerList do
     end
   end
 
-  describe '#display_addresses' do
+  describe '#display_locations' do
 
     it 'shows no one is online' do
-      expect(klass.display_addresses).to eq 'no active nodes'
+      expect(klass.display_locations).to eq 'no active nodes'
     end
 
     it 'shows who is online' do
       entry = SpicedGracken::Models::Entry.new(
-        address: '10.10.10.10:1010',
+        location: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
 
       klass.instance._list = [entry]
 
-      expect(klass.display_addresses).to eq 'test@10.10.10.10:1010'
+      expect(klass.display_locations).to eq 'test@10.10.10.10:1010'
     end
   end
 
@@ -223,7 +223,7 @@ describe SpicedGracken::Config::ActiveServerList do
 
     it 'shows who is online' do
       entry = SpicedGracken::Models::Entry.new(
-        address: '10.10.10.10:1010',
+        location: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
@@ -237,7 +237,7 @@ describe SpicedGracken::Config::ActiveServerList do
   describe '#remove_by' do
     let(:entry) do
       SpicedGracken::Models::Entry.new(
-        address: '10.10.10.10:1010',
+        location: '10.10.10.10:1010',
         alias_name: 'test',
         uid: '1234',
         public_key: 'abcde')
@@ -247,8 +247,8 @@ describe SpicedGracken::Config::ActiveServerList do
       klass.instance._list = [entry]
     end
 
-    it 'removes an entry by address' do
-      klass.remove_by('address', entry.address)
+    it 'removes an entry by location' do
+      klass.remove_by('location', entry.location)
       expect(klass.count).to eq 0
     end
 
@@ -263,7 +263,7 @@ describe SpicedGracken::Config::ActiveServerList do
     end
 
     it 'does not remove non existant' do
-      klass.remove_by('address', 'wut')
+      klass.remove_by('location', 'wut')
       expect(klass.count).to eq 1
     end
   end

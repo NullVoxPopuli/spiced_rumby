@@ -22,7 +22,7 @@ module SpicedGracken
               while (input = connection.gets)
                 # TODO: what about for the optionally cleartext messages?
                 # TODO: do we want cleartext messages?
-                input = Message::Encryptor.decrypt(input, Settings[:privateKey])
+                input = Encryptor.decrypt(input, Settings[:privateKey])
                 Display.debug 'server received message:'
                 Display.debug input
 
@@ -62,19 +62,19 @@ module SpicedGracken
         unless ActiveServers.exists?(sender['uid'])
           payload = Message::NodeListHash.new.render
           Client.send_to_and_close(
-            address: sender['location'],
+            location: sender['location'],
             payload: payload)
         end
 
         ActiveServers.update(
           sender['uid'],
-          address: sender['location'],
+          location: sender['location'],
           alias_name: sender['alias']
         )
       end
 
-      def address
-        "#{server.address}:#{server.port}"
+      def location
+        "#{server.location}:#{server.port}"
       end
     end
   end

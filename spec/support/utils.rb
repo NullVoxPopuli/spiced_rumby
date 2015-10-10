@@ -3,6 +3,10 @@ def mock_settings_objects
 
   setup_database
 
+  allow(SpicedGracken::Encryption).to receive(:current_encryptor){
+      SpicedGracken::Encryption::Passthrough
+  }
+
 
   allow_any_instance_of(SpicedGracken::Config::Settings).to receive(:filename) { 'test-settings' }
   s = SpicedGracken::Config::Settings.new
@@ -36,7 +40,7 @@ def setup_database
       unless table_exists? :entries
         create_table :entries do |table|
           table.column :alias_name, :string
-          table.column :address, :string
+          table.column :location, :string
           table.column :uid, :string
           table.column :public_key, :string
         end

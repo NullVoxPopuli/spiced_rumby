@@ -41,7 +41,7 @@ module SpicedGracken
 
     class << self
 
-      delegate :server_address, :listen_for_commands,
+      delegate :server_location, :listen_for_commands,
         :shutdown, :start_server, :client, :server,
         :check_startup_settings, :create_input, :close_server,
         to: :instance
@@ -120,8 +120,8 @@ module SpicedGracken
       puts 'no longer listening...'
     end
 
-    def server_address
-      "#{Settings['ip']}:#{Settings['port']}"
+    def server_location
+      Settings.location
     end
 
     def check_startup_settings

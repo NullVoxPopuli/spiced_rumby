@@ -19,7 +19,7 @@ describe SpicedGracken::Message::NodeListDiff do
       msg = klass.new(message: [
           {
             'alias' => 'hi',
-            'address' => '2.2.2.2:222',
+            'location' => '2.2.2.2:222',
             'uid' => '222',
             'publicKey' => '1233333'
           }

@@ -12,7 +12,7 @@ module SpicedGracken
         # TODO: is there a way to delegate everything?
         delegate :save,
           :who, :all, :find, :find_all, :remove_by,
-          :display_addresses, :remove, :update,
+          :display_locations, :remove, :update,
           :first, :last,
           :add, :clear!, :exists?, :count, to: :instance
 
@@ -30,15 +30,15 @@ module SpicedGracken
         self._list.clear
       end
 
-      def remove(address: nil, alias_name: nil, uid: nil)
-        entry = find(address: address, alias_name: alias_name, uid: uid)
+      def remove(location: nil, alias_name: nil, uid: nil)
+        entry = find(location: location, alias_name: alias_name, uid: uid)
         _list.delete(entry) if entry
       end
 
       def remove_by(field, value)
         case field
-        when 'address'
-          remove(address: value)
+        when 'location'
+          remove(location: value)
         when 'alias'
           remove(alias_name: value)
         when 'uid'
@@ -46,13 +46,13 @@ module SpicedGracken
         end
       end
 
-      def add(address: nil, alias_name: nil, uid: nil, public_key: nil, entry: nil)
-        if e = contains?(uid: uid, address: address)
-          update(e.uid, address: address, alias_name: alias_name, entry: e)
+      def add(location: nil, alias_name: nil, uid: nil, public_key: nil, entry: nil)
+        if e = contains?(uid: uid, location: location)
+          update(e.uid, location: location, alias_name: alias_name, entry: e)
         else
           entry = Models::Entry.new(
             alias_name: alias_name,
-            address: address,
+            location: location,
             uid: uid,
             public_key: public_key
           ) unless entry
@@ -62,11 +62,11 @@ module SpicedGracken
         end
       end
 
-      def update(uid, address: nil, alias_name: nil, entry: nil)
+      def update(uid, location: nil, alias_name: nil, entry: nil)
         entry = entry || find_by_uid(uid)
-        return add(uid: uid, address: address, alias_name: alias_name) unless entry
+        return add(uid: uid, location: location, alias_name: alias_name) unless entry
 
-        entry.address = address if address
+        entry.location = location if location
         entry.alias_name = alias_name if alias_name
       end
 
@@ -92,11 +92,11 @@ module SpicedGracken
         _list
       end
 
-      def contains?(alias_name: nil, address: nil, uid: nil)
+      def contains?(alias_name: nil, location: nil, uid: nil)
         _list.each do |entry|
           found = (
             (alias_name && entry.alias_name == alias_name) ||
-            (address && entry.address == address) ||
+            (location && entry.location == location) ||
             (uid && entry.uid == uid)
           )
 
@@ -108,20 +108,20 @@ module SpicedGracken
 
       alias_method :find, :contains?
 
-      def find_all(alias_name: nil, address: nil)
+      def find_all(alias_name: nil, location: nil)
         _list.each_with_object([]) do |entry, entries|
           found = (
             (alias_name && entry.alias_name == alias_name) ||
-            (address && entry.address == address)
+            (location && entry.location == location)
           )
 
           entries << entry if found
         end
       end
 
-      def display_addresses
+      def display_locations
         list = _list.map do |entry|
-          "#{entry.alias_name}@#{entry.address}"
+          "#{entry.alias_name}@#{entry.location}"
         end
         list.join("\n").presence || 'no active nodes'
       end

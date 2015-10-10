@@ -2,13 +2,13 @@ module SpicedGracken
   module Message
     class Connection < Base
       def display
-        address = payload['sender']['location']
+        location = payload['sender']['location']
         last_alias = payload['sender']['alias']
         uid = payload['sender']['uid']
 
         ActiveServers.add(
           uid: uid,
-          address: address,
+          location: location,
           alias_name: last_alias)
       end
     end

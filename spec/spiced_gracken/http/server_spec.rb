@@ -39,7 +39,7 @@ describe SpicedGracken::Http::Server do
         [
           SpicedGracken::Node.new(
             uid: '100',
-            address: '1.1.1.1:11',
+            location: '1.1.1.1:11',
             alias_name: 'hi'
           )
         ]

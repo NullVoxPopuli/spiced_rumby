@@ -7,19 +7,19 @@ module SpicedGracken
 
           field, value = parse_ping_command
 
-          address =
-            if field == 'address'
+          location =
+            if field == 'location'
               lookup_value
             else
-              ActiveServers.find(alias_name: lookup_value).try(:address)
+              ActiveServers.find(alias_name: lookup_value).try(:location)
             end
 
-          unless address
+          unless location
             return Display.alert "#{lookup_value} could not be found"
           end
 
           Http::Client.send_to_and_close(
-            address: address,
+            location: location,
             payload: msg.render
           )
         else
@@ -28,7 +28,7 @@ module SpicedGracken
       end
 
       def usage
-        'Usage: /ping {field} {value}  e.g.: /ping alias neurotek or /ping address 10.10.10.10:8080'
+        'Usage: /ping {field} {value}  e.g.: /ping alias neurotek or /ping location 10.10.10.10:8080'
       end
 
       def lookup_field
@@ -46,10 +46,10 @@ module SpicedGracken
 
       def parse_ping_command
         @parsed_args ||=
-          if lookup_field == 'address' || lookup_field == 'alias'
+          if lookup_field == 'location' || lookup_field == 'alias'
             [lookup_field, lookup_value]
           elsif lookup_field =~ /(?:[0-9]{1,3}\.){3}[0-9]{1,3}/
-            ['address', lookup_field]
+            ['location', lookup_field]
           else
             ['alias', lookup_field]
           end

@@ -17,7 +17,7 @@ module SpicedGracken
           location = payload['sender']['location']
 
           SpicedGracken::Http::Client.send_to_and_close(
-            address: location,
+            location: location,
             payload: NodeList.new(message: Node.as_json).render
           )
         end

@@ -7,11 +7,11 @@ module SpicedGracken
           if is_valid_add_command?
             info = command_args[2]
             alias_name, info = info.split('@')
-            address, uid = info.split('#')
+            location, uid = info.split('#')
 
 
             ActiveServers.add(
-              address: address,
+              location: location,
               alias_name: alias_name,
               uid: uid
             )
@@ -25,12 +25,12 @@ module SpicedGracken
 
             ActiveServers.remove_by(field, value)
           else
-            s = 'requires address or alias. ex: /server rm alias evan'
+            s = 'requires location or alias. ex: /server rm alias evan'
             Display.alert(s)
           end
         else
           if command_args.length > 0
-            s = ActiveServers.display_addresses
+            s = ActiveServers.display_locations
             Display.info(s)
           else
             s = 'server command not implemented...'

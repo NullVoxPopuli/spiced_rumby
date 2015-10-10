@@ -23,7 +23,7 @@ describe SpicedGracken::CLI::Ping do
     end
 
     it 'tries to send' do
-      c = klass.new('/ping address noone')
+      c = klass.new('/ping location noone')
       # does not return when sending
       expect(c.handle).to eq nil
     end
@@ -48,20 +48,20 @@ describe SpicedGracken::CLI::Ping do
     end
 
     it 'retuns nil if there is no value' do
-      c = klass.new('/ping address')
+      c = klass.new('/ping location')
       expect(c.lookup_value).to be_nil
     end
   end
 
   describe '#parse_ping_command' do
     it 'when lookup field is specified' do
-      c = klass.new('/ping address 1.1.1.1')
-      expect(c.parse_ping_command).to eq ['address', '1.1.1.1']
+      c = klass.new('/ping location 1.1.1.1')
+      expect(c.parse_ping_command).to eq ['location', '1.1.1.1']
     end
 
-    it 'when only an address is specified' do
+    it 'when only an location is specified' do
       c = klass.new('/ping 1.1.1.1')
-      expect(c.parse_ping_command).to eq ['address', '1.1.1.1']
+      expect(c.parse_ping_command).to eq ['location', '1.1.1.1']
     end
 
     it 'is an alias' do

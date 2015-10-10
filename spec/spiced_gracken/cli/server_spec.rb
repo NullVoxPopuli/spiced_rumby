@@ -46,14 +46,14 @@ describe SpicedGracken::CLI::Server do
     context 'remove' do
       it 'is not valid' do
         c = klass.new('/server remove me')
-        expect(c.handle).to eq 'requires address or alias. ex: /server rm alias evan'
+        expect(c.handle).to eq 'requires location or alias. ex: /server rm alias evan'
       end
       context 'is valid' do
         it 'removes from active servers' do
           SpicedGracken::ActiveServers.instance._list = [
             SpicedGracken::Models::Entry.new(
               alias_name: 'me',
-              address: '1.1.1.1:11',
+              location: '1.1.1.1:11',
               uid: '125',
               public_key: '00'
             )
@@ -69,12 +69,12 @@ describe SpicedGracken::CLI::Server do
     context 'neither' do
       it 'is not recognized' do
         c = klass.new('/server wut')
-        expect(c.handle).to eq SpicedGracken::ActiveServers.display_addresses
+        expect(c.handle).to eq SpicedGracken::ActiveServers.display_locations
       end
 
-      it 'lists the addresses' do
+      it 'lists the locations' do
         c = klass.new('/servers')
-        expect(c.handle).to eq SpicedGracken::ActiveServers.display_addresses
+        expect(c.handle).to eq SpicedGracken::ActiveServers.display_locations
       end
 
 

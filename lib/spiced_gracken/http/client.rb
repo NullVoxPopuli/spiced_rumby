@@ -6,18 +6,18 @@ module SpicedGracken
       # if two people change 'localhost' to be eachother's machine,
       # they should be able to talk to eachother, assuming the do the
       # proper port  forwarding so that data on this port goes to that computer
-      def initialize(address: '', port: '', silent: false)
-        if address.blank? || port.blank?
-          Display.alert "address and port must be specified"
+      def initialize(location: '', port: '', silent: false)
+        if location.blank? || port.blank?
+          Display.alert "location and port must be specified"
           return
         end
-        Display.info "connecting to #{address} on #{port}..." unless silent
-        create_socket(address, port)
+        Display.info "connecting to #{location} on #{port}..." unless silent
+        create_socket(location, port)
         Display.success 'connected!' unless silent
       end
 
-      def create_socket(address, port)
-        self._socket = TCPSocket.new(address, port)
+      def create_socket(location, port)
+        self._socket = TCPSocket.new(location, port)
       end
 
       def send(message: '')
@@ -35,21 +35,21 @@ module SpicedGracken
       end
 
       # @param [String] encrypt_with the uid of who to use for encryption
-      def self.send_to_and_close(address: '', payload: nil, encrypt_with: nil)
-        ip, port = address.split(':')
+      def self.send_to_and_close(location: '', payload: nil, encrypt_with: nil)
+        ip, port = location.split(':')
 
         if encrypt_with
-          payload = Message::Encryptor.encrypt(payload, encrypt_with)
+          payload = SpicedGracken::Encryptor.encrypt(payload, encrypt_with)
         end
 
         begin
-          client = new(address: ip, port: port, silent: true)
+          client = new(location: ip, port: port, silent: true)
           client.send(message: payload)
           client.close
         rescue Errno::ECONNREFUSED, Errno::ETIMEDOUT
-          Display.info "#{address} is not available"
+          Display.info "#{location} is not available"
           ActiveServers.remove(
-            address: address
+            location: location
           )
         end
       end

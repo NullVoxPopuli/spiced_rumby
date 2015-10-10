@@ -7,7 +7,6 @@ PATH
       awesome_print
       colorize
       curses
-      rsa
       sqlite3
 
 GEM
@@ -57,7 +56,6 @@ GEM
       byebug (~> 5.0)
       pry (~> 0.10)
     rainbow (2.0.0)
-    rsa (0.1.4)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -98,6 +96,3 @@ DEPENDENCIES
   rspec
   rubocop
   spiced_gracken!
-
-BUNDLED WITH
-   1.10.6

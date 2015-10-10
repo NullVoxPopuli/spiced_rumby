@@ -36,7 +36,7 @@ describe SpicedGracken::CLI::Input do
           [
             SpicedGracken::Models::Entry.new(
               alias_name: 'test',
-              address: '1.1.1.1:1111',
+              location: '1.1.1.1:1111',
               uid: '1',
               public_key: '10'
             )

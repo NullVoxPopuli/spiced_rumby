@@ -23,7 +23,7 @@ module SpicedGracken
           data = m.render
 
           Http::Client.send_to_and_close(
-            address: server.address,
+            location: server.location,
             payload: data,
             encrypt_with: server.public_key
           )

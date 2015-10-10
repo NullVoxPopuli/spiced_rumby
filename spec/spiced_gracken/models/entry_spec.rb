@@ -12,7 +12,7 @@ describe SpicedGracken::Models::Entry do
     let(:shared){
       {
         'alias' => 'shared',
-        'address' => '1.1.1.1:8000',
+        'location' => '1.1.1.1:8000',
         'uid' => '1',
         'publicKey' => 'a'
       }
@@ -21,7 +21,7 @@ describe SpicedGracken::Models::Entry do
     let(:ours){
       {
         'alias' => 'ours',
-        'address' => '1.1.1.1:8001',
+        'location' => '1.1.1.1:8001',
         'uid' => '2',
         'publicKey' => 'b'
       }
@@ -30,7 +30,7 @@ describe SpicedGracken::Models::Entry do
     let(:theirs){
       {
         'alias' => 'theirs',
-        'address' => '1.1.1.1:8002',
+        'location' => '1.1.1.1:8002',
         'uid' => '3',
         'publicKey' => 'c'
       }
@@ -54,13 +54,13 @@ describe SpicedGracken::Models::Entry do
     it 'is equal to a hash of same values' do
       hasherized_json = {
         'alias' => 'alias',
-        'address' => '1.1.1.1:8080',
+        'location' => '1.1.1.1:8080',
         'uid' => '1',
         'publicKey' => '123'
       }
       m = klass.new(
         alias_name: 'alias',
-        address: '1.1.1.1:8080',
+        location: '1.1.1.1:8080',
         uid: '1',
         public_key: '123')
 
@@ -72,14 +72,14 @@ describe SpicedGracken::Models::Entry do
     it 'converts to a hash / json' do
       m = klass.new(
         alias_name: 'alias',
-        address: '1.1.1.1:8080',
+        location: '1.1.1.1:8080',
         uid: '1',
         public_key: '123')
 
 
       expected = {
         'alias' => 'alias',
-        'address' => '1.1.1.1:8080',
+        'location' => '1.1.1.1:8080',
         'uid' => '1',
         'publicKey' => '123'
       }
@@ -95,8 +95,8 @@ describe SpicedGracken::Models::Entry do
       expect(m).to_not be_valid
     end
 
-    it 'is false without an address' do
-      m = klass.new(address: '')
+    it 'is false without an location' do
+      m = klass.new(location: '')
       expect(m).to_not be_valid
     end
 

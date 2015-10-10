@@ -1,10 +1,10 @@
 module SpicedGracken
-  module Message
+  module Encryption
     # Using AES266-CBC with RSA
     #
     # Docs on AES
     # http://ruby-doc.org/stdlib-2.0.0/libdoc/openssl/rdoc/OpenSSL/Cipher.html
-    module Encryptor
+    module AES_RSA
       module_function
 
       # Use Cipher Block Chaining
@@ -57,7 +57,6 @@ module SpicedGracken
 
         decipher.update(aes_encrypted_message) + decipher.final
       end
-
     end
   end
 end

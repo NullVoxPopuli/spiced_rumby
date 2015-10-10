@@ -15,6 +15,7 @@ require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/object/try'
 
 require 'spiced_gracken/version'
+require 'spiced_gracken/encryption'
 require 'spiced_gracken/display'
 require 'spiced_gracken/display/manager'
 require 'spiced_gracken/models/entry'
@@ -68,7 +69,7 @@ module SpicedGracken
         unless table_exists? :entries
           create_table :entries do |table|
             table.column :alias_name, :string
-            table.column :address, :string
+            table.column :location, :string
             table.column :uid, :string
             table.column :public_key, :string
           end
