@@ -25,7 +25,7 @@ describe SpicedGracken::CLI::Ping do
     it 'tries to send' do
       c = klass.new('/ping location noone')
       # does not return when sending
-      expect(c.handle).to eq nil
+      expect(c.handle).to eq 'noone could not be found'
     end
   end
 

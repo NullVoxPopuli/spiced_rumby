@@ -18,4 +18,13 @@ describe SpicedGracken::Encryption::AES_RSA do
     expect(message).to eq decrypted
   end
 
+  it 'encrypts a really long message' do
+    message = 'message' * 100
+    encrypted = klass.encrypt(message, @public_key)
+    decrypted = klass.decrypt(encrypted, @private_key)
+
+    expect(message).to eq decrypted
+  end
+  
+
 end

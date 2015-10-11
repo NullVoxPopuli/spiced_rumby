@@ -6,6 +6,7 @@ def mock_settings_objects
   allow(SpicedGracken::Cipher).to receive(:current_encryptor){
       SpicedGracken::Encryption::Passthrough
   }
+  SpicedGracken::Cipher.instance_variable_set('@current_encryptor', SpicedGracken::Encryption::Passthrough)
 
 
   allow_any_instance_of(SpicedGracken::Config::Settings).to receive(:filename) { 'test-settings' }
