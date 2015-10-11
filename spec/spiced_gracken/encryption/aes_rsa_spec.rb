@@ -10,7 +10,7 @@ describe SpicedGracken::Encryption::AES_RSA do
   end
 
 
-  it 'has a message can be decrypted' do
+  it 'has a message that can be decrypted' do
     message = 'message'
     encrypted = klass.encrypt(message, @public_key)
     decrypted = klass.decrypt(encrypted, @private_key)
@@ -25,6 +25,6 @@ describe SpicedGracken::Encryption::AES_RSA do
 
     expect(message).to eq decrypted
   end
-  
+
 
 end
