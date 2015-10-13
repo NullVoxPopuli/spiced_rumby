@@ -20,6 +20,8 @@ module SpicedGracken
           Display.debug Settings[:privateKey]
           input = Cipher.decrypt(input, Settings[:privateKey])
         rescue => e
+          Display.debug e.message
+          Display.debug e.backtrace
           Display.warning e.message
           Display.info 'It\'s possible that this message was sent in cleartext, or was encrypted with the wrong public key'
         end
