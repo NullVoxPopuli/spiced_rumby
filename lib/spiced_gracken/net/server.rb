@@ -23,7 +23,7 @@ module SpicedGracken
           # use a seprate thread, acception multiple incoming connections
           Thread.start(@server.accept) do |connection|
             begin
-              while (input = connection.gets)
+              while (server.flush; input = connection.gets)
                 response = Response.new(input)
                 message = response.message
                 next unless message
