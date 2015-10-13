@@ -25,6 +25,7 @@ module SpicedGracken
         Display.debug message
         if _socket
           _socket.puts message
+          _socket.flush
         else
           Display.alert 'transmitter not running'
         end
