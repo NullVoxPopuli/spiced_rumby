@@ -43,6 +43,8 @@ module SpicedGracken
           payload = Cipher.encrypt(payload, encrypt_with)
         end
 
+        puts payload.length
+
         begin
           client = new(location: ip, port: port, silent: true)
           client.send(message: payload)
