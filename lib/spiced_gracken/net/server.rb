@@ -21,17 +21,22 @@ module SpicedGracken
         #process_responses while true
         loop do
           # use a seprate thread, acception multiple incoming connections
-          Thread.start(@server.accept) do |connection|
+          Thread.start(@server.accept) do |request|
             begin
-              while (server.flush; input = connection.gets)
-                response = Response.new(input)
-                message = response.message
-                next unless message
-
-                update_sender_info(response.json)
-
-                Display.present_message message
+              chunks = []
+              while (chunk = request.gets)
+                chunks << chunk
               end
+
+              input = chunks.join
+              response = Response.new(input)
+              message = response.message
+              next unless message
+
+              update_sender_info(response.json)
+
+              Display.present_message message
+              request.close
             rescue => e
               # rescue here so that the server doesn't stop listening
               Display.alert e.message
