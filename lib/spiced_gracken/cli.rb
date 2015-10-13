@@ -38,7 +38,8 @@ module SpicedGracken
       Command::NODE => CLI::Node,
       Command::INIT => CLI::Init,
       Command::SHARE => CLI::Share,
-      Command::IMPORT => CLI::Import
+      Command::IMPORT => CLI::Import,
+      Command::EXPORT => CLI::Share
     }
 
     class << self

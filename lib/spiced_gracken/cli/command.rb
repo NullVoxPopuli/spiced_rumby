@@ -25,6 +25,7 @@ module SpicedGracken
       INIT = 'init'
       SHARE = 'share'
       IMPORT = 'import'
+      EXPORT = 'export'
 
       def handle
         klass = CLI::COMMAND_MAP[command]

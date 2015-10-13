@@ -16,6 +16,7 @@ module SpicedGracken
           :[], :[]=, :display, :as_hash, :save, :set,
           :location, :identity, :keys_exist?, :public_key,
           :private_key, :generate_keys, :share, :key_pair,
+          :uid_exists?, :generate_uid,
           to: :instance
 
         def instance
@@ -40,12 +41,22 @@ module SpicedGracken
         public_key.present? && private_key.present?
       end
 
+      def uid_exists?
+        self['uid'].present?
+      end
+
       def public_key
         self['publicKey']
       end
 
       def private_key
         self['privatKey']
+      end
+
+      # generates 128 bytes
+      def generate_uid
+        self['uid'] = SecureRandom.hex(128)
+        Display.success 'new uid set'
       end
 
       def generate_keys
