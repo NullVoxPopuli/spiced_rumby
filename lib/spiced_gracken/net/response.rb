@@ -15,7 +15,7 @@ module SpicedGracken
       def try_decrypt(input)
         begin
           Display.debug input.encoding
-          input = input.encode!(Encoding::UTF_8)
+          input = input.force_encoding('ASCII-8BIT').force_encoding('UTF-8')
           Display.debug input.encoding
           Display.debug Settings[:privateKey]
           input = Cipher.decrypt(input, Settings[:privateKey])
