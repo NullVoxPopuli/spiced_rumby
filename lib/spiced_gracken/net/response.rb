@@ -5,6 +5,7 @@ module SpicedGracken
       attr_accessor :_input
 
       def initialize(input)
+        Display.debug input.encoding
         self._input = try_decrypt(input)
         self.json = JSON.parse(_input)
         self.message = process_json
@@ -14,10 +15,13 @@ module SpicedGracken
 
       def try_decrypt(input)
         begin
+          input = input.encode(Encoding::UTF_8)
+          Display.debug input.encoding
+          ap Settings[:privateKey]
           input = Cipher.decrypt(input, Settings[:privateKey])
         rescue => e
           Display.warning e.message
-          Display.info 'It\'s possible that this message was sent in cleartext'
+          Display.info 'It\'s possible that this message was sent in cleartext, or was encrypted with the wrong public key'
         end
 
         Display.debug 'server received message:'
