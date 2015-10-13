@@ -4,7 +4,7 @@ describe SpicedGracken::Display::Manager do
   let (:klass){ SpicedGracken::Display::Manager }
 
   before(:each) do
-    allow(SpicedGracken::Http::Client).to receive(:send_to_and_close){}
+    allow(SpicedGracken::Net::Client).to receive(:send_to_and_close){}
 
     mock_settings_objects
   end

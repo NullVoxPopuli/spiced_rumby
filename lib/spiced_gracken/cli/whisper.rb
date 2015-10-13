@@ -21,7 +21,7 @@ module SpicedGracken
 
           Display.whisper m.display
 
-          Http::Client.dispatch(
+          Net::Client.dispatch(
             node: server,
             payload: m.render
           )

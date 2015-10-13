@@ -58,7 +58,7 @@ describe SpicedGracken::CLI::Whisper do
       end
 
       it 'sends the message' do
-        expect(SpicedGracken::Http::Client).to receive(:send_to_and_close)
+        expect(SpicedGracken::Net::Client).to receive(:send_to_and_close)
 
         c = klass.new('@alias hi, how are ya?')
         c.handle

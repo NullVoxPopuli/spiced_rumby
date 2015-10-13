@@ -21,7 +21,7 @@ module SpicedGracken
 
           node = Node.find_by_location(location)
 
-          SpicedGracken::Http::Client.dispatch(
+          SpicedGracken::Net::Client.dispatch(
             node: node,
             payload: NodeListDiff.new(message: we_only_have).render
           )

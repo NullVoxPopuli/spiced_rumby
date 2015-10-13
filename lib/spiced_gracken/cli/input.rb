@@ -49,7 +49,7 @@ module SpicedGracken
           # the rest of the servers from receiving the messages
           servers.each do |entry|
             Thread.new(entry, data) do |entry, data|
-              Http::Client.dispatch(
+              Net::Client.dispatch(
                 node: entry,
                 payload: data
               )

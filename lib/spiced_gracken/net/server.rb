@@ -1,5 +1,5 @@
 module SpicedGracken
-  module Http
+  module Net
     class Server
       attr_accessor :server
 
@@ -15,21 +15,21 @@ module SpicedGracken
       end
 
       def listen
+        # TODO: extract the body of the loop to a method
+        # TODO: extract the body of the Thread to a method
+        # TODO: why do I have a thread here?
+        #process_responses while true
         loop do
           # use a seprate thread, acception multiple incoming connections
           Thread.start(@server.accept) do |connection|
             begin
               while (input = connection.gets)
-                # TODO: what about for the optionally cleartext messages?
-                # TODO: do we want cleartext messages?
-                input = Cipher.decrypt(input, Settings[:privateKey])
-                Display.debug 'server received message:'
-                Display.debug input
-
-                data = JSON.parse(input)
-                update_sender_info(data)
-                message = processes_message(data)
+                response = Response.new(input)
+                message = response.message
                 next unless message
+
+                update_sender_info(response.json)
+
                 Display.present_message message
               end
             rescue => e
@@ -42,26 +42,14 @@ module SpicedGracken
         end
       end
 
-      def processes_message(data)
-        type = data['type']
-        klass = Message::TYPES[type]
-
-        unless klass
-          Display.alert 'message recieved and not recognized...'
-          return
-        end
-
-        klass.new(payload: data)
-      end
-
-      def update_sender_info(data)
-        sender = data['sender']
+      def update_sender_info(json)
+        sender = json['sender']
 
         # if the sender isn't currently marked as active,
         # perform the server list exchange
         unless ActiveServers.exists?(sender['uid'])
           payload = Message::NodeListHash.new.render
-          Client.send_to_and_close(
+          Client.send_to(
             location: sender['location'],
             payload: payload)
         end

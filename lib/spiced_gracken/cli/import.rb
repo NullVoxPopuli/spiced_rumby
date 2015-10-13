@@ -6,6 +6,12 @@ module SpicedGracken
           node = Models::Entry.import_from_file(filename)
           if node.valid? && node.persisted?
             Display.success "#{node.alias_name} successfully imported"
+
+            # send the server list to this new node
+            Net::Client.dispatch(
+              node: node,
+              payload: Message::NodeList.new.render
+            )
           else
             Display.alert "#{node.alias_name} is invalid"
             Display.alert node.errors.full_messages.join("\n")

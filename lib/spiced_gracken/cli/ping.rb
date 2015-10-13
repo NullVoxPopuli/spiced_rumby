@@ -20,7 +20,7 @@ module SpicedGracken
             return Display.alert "#{lookup_value} could not be found"
           end
 
-          Http::Client.dispatch(
+          Net::Client.dispatch(
             node: node,
             payload: msg.render
           )

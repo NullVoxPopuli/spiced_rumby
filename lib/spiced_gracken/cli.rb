@@ -1,5 +1,6 @@
-require 'spiced_gracken/http/client'
-require 'spiced_gracken/http/server'
+require 'spiced_gracken/net/client'
+require 'spiced_gracken/net/response'
+require 'spiced_gracken/net/server'
 require 'spiced_gracken/cli/input'
 require 'spiced_gracken/cli/command'
 require 'spiced_gracken/cli/identity'
@@ -107,7 +108,7 @@ module SpicedGracken
       @server = Queue.new
       # start the server thread
       Thread.new(Settings) do |settings|
-        @server << Http::Server.new(port: settings['port'])
+        @server << Net::Server.new(port: settings['port'])
       end
     end
 

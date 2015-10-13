@@ -1,5 +1,5 @@
 module SpicedGracken
-  module Http
+  module Net
     class Client
       attr_accessor :_socket
 
@@ -56,7 +56,6 @@ module SpicedGracken
 
       # wrapper for adding encryption to a message
       def self.dispatch(node: nil, payload: '')
-
         if !(node && node.location)
           Display.alert "Node not found, or does not have a location"
           return
@@ -67,6 +66,12 @@ module SpicedGracken
           payload: payload,
           encrypt_with: node.public_key
         )
+      end
+
+      def self.send_to(location: nil, payload: '')
+        node = Models::Entry.find_by_location(location)
+
+        dispatch(node: node, payload: payload)
       end
 
     end
