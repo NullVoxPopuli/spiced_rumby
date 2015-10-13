@@ -1,3 +1,4 @@
+require 'spiced_gracken/net/request'
 require 'spiced_gracken/net/client'
 require 'spiced_gracken/net/response'
 require 'spiced_gracken/net/server'

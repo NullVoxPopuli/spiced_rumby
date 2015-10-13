@@ -61,6 +61,8 @@ module SpicedGracken
           return
         end
 
+        Display.debug "encrypting with #{node.alias_name}'s public key"
+
         send_to_and_close(
           location: node.location,
           payload: payload,
