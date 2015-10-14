@@ -41,17 +41,16 @@ module SpicedGracken
           )
 
           Display.chat m.display
-          data = m.render
 
           # if sending to all, iterate thorugh list of
           # servers, and send to each one
           # TODO: do this async so that one server doesn't block
           # the rest of the servers from receiving the messages
           servers.each do |entry|
-            Thread.new(entry, data) do |entry, data|
-              Net::Client.dispatch(
+            Thread.new(entry, m) do |entry, m|
+              Net::Client.send(
                 node: entry,
-                payload: data
+                message: m
               )
             end
           end

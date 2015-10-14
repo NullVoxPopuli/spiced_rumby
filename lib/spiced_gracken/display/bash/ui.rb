@@ -3,7 +3,9 @@ module SpicedGracken
     module Bash
       class UI < Display::Base
         def start
-          puts Help.welcome
+          puts "\n"
+          alert Help.welcome
+          puts "\n"
           puts "\n"
           yield if block_given?
           CLI.listen_for_commands

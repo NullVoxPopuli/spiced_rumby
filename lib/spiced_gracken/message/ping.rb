@@ -22,9 +22,9 @@ module SpicedGracken
 
         node = Node.find_by_location(location)
 
-        SpicedGracken::Net::Client.dispatch(
+        SpicedGracken::Net::Client.send(
           node: node,
-          payload: PingReply.new.render
+          message: PingReply.new
         )
       end
     end

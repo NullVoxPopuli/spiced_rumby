@@ -1,7 +1,3 @@
-require 'spiced_gracken/net/request'
-require 'spiced_gracken/net/client'
-require 'spiced_gracken/net/response'
-require 'spiced_gracken/net/server'
 require 'spiced_gracken/cli/input'
 require 'spiced_gracken/cli/command'
 require 'spiced_gracken/cli/identity'
@@ -93,6 +89,7 @@ module SpicedGracken
     end
 
     def start_server
+
       unless Settings.valid?
         Display.alert("settings not fully valid\n")
         errors = Settings.errors
@@ -107,10 +104,16 @@ module SpicedGracken
         return
       end
 
-      @server = Queue.new
-      # start the server thread
-      Thread.new(Settings) do |settings|
-        @server << Net::Server.new(port: settings['port'])
+      Thread.new do
+        Thin::Logging.silent = true
+        SpicedGracken::Net::Listener::Server.run!(
+          port: SpicedGracken::Settings['port'],
+          # logger: SpicedGracken::Display,
+          # show_exceptions: false,
+          server: :thin,
+          dump_errors: true,
+          threaded: true
+        )
       end
     end
 

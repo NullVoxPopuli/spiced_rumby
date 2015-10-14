@@ -21,9 +21,9 @@ module SpicedGracken
 
           Display.whisper m.display
 
-          Net::Client.dispatch(
+          Net::Client.send(
             node: server,
-            payload: m.render
+            message: m
           )
         else
           Display.alert "server for #{target} not found or is not online"

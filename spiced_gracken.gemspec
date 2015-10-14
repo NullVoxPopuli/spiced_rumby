@@ -23,6 +23,9 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.0'
 
   s.add_runtime_dependency 'sqlite3'
+  s.add_runtime_dependency 'thin'
+  s.add_runtime_dependency 'sinatra'
+  s.add_runtime_dependency 'curb'
   s.add_runtime_dependency 'activerecord'
   s.add_runtime_dependency 'activesupport'
   s.add_runtime_dependency 'colorize'

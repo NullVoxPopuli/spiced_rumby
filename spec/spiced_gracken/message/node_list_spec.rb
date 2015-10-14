@@ -24,7 +24,7 @@ describe SpicedGracken::Message::NodeList do
 
   describe '#respond' do
     it 'sends a message' do
-      expect(SpicedGracken::Net::Client).to receive(:dispatch)
+      expect(SpicedGracken::Net::Client).to receive(:send)
 
       expect(SpicedGracken::Models::Entry).to receive(:diff) {
         [[  {
@@ -40,7 +40,7 @@ describe SpicedGracken::Message::NodeList do
     end
 
     it 'does not send a message' do
-      expect(SpicedGracken::Net::Client).to_not receive(:dispatch)
+      expect(SpicedGracken::Net::Client).to_not receive(:send)
       msg = klass.new
       msg.respond
     end

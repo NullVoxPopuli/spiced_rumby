@@ -44,7 +44,7 @@ describe SpicedGracken::Message::Ping do
 
   context 'respond' do
     it 'shoots off a ping reply to the sender of the ping' do
-      expect(SpicedGracken::Net::Client).to receive(:dispatch)
+      expect(SpicedGracken::Net::Client).to receive(:send)
 
       msg = klass.new
       msg.respond

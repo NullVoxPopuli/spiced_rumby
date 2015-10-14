@@ -18,9 +18,9 @@ module SpicedGracken
 
           node = Node.find_by_location(location)
 
-          SpicedGracken::Net::Client.dispatch(
+          SpicedGracken::Net::Client.send(
             node: node,
-            payload: NodeList.new(message: Node.as_json).render
+            message: NodeList.new(message: Node.as_json)
           )
         end
       end

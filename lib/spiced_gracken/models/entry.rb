@@ -2,12 +2,18 @@ module SpicedGracken
   module Models
     class Entry < ActiveRecord::Base
       IPV4_WITH_PORT = /((?:(?:^|\.)(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])){4})(:\d*)?/
+      # http://rubular.com/r/WYT09ptct3
+      DOMAIN_WITH_PORT = /(https?:\/\/)?([\da-z\.-]+)\.?([a-z\.]{2,6})([\/\w \.-]*)*[^\/](:\d*)?/
 
       validates :alias_name, :location, presence: true
       validates :uid, presence: true, uniqueness: true
 
       # ipv4 with port
-      validates_format_of :location, with: IPV4_WITH_PORT
+      validates_format_of :location, with: ->(e){
+        e.location.include?('.') || e.location.include?('localhost') ?
+          DOMAIN_WITH_PORT :
+          IPV4_WITH_PORT
+      }
 
       class << self
         def sha_preimage

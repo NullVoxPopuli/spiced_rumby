@@ -9,7 +9,7 @@ describe SpicedGracken::CLI::Ping do
 
   describe '#handle' do
     before(:each) do
-      allow(SpicedGracken::Net::Client).to receive(:dispatch){}
+      allow(SpicedGracken::Net::Client).to receive(:send){}
     end
 
     it 'cannot find the server' do
