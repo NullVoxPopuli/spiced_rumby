@@ -10,7 +10,8 @@ module SpicedGracken
 
       # ipv4 with port
       validates_format_of :location, with: ->(e){
-        e.location.include?('.') || e.location.include?('localhost') ?
+        location = e.location || ''
+        location.include?('//') || location.include?('localhost') ?
           DOMAIN_WITH_PORT :
           IPV4_WITH_PORT
       }

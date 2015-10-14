@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SpicedGracken::Net::Response do
-  let(:klass) { SpicedGracken::Net::Response }
+describe SpicedGracken::Net::Listener::Request do
+  let(:klass) { SpicedGracken::Net::Listener::Request }
 
   before(:each) do
     mock_settings_objects
@@ -25,7 +25,7 @@ describe SpicedGracken::Net::Response do
           "uid":"1"
         }
       }'
-
+      json = Base64.encode64(json)
       s = klass.new(json)
       s.send(:process_json)
       expect(s.message.display).to include("nvp")

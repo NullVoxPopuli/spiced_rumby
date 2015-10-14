@@ -36,6 +36,7 @@ describe SpicedGracken::CLI::Server do
       context 'is valid' do
         it 'adds to active servers' do
           c = klass.new('/server add me@1.2.3.4:1234#4321')
+
           expect{
             c.handle
           }.to change(SpicedGracken::ActiveServers, :count).by 1
