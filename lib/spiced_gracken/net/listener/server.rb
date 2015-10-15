@@ -5,7 +5,7 @@ module SpicedGracken
     module Listener
       class Server < Sinatra::Base
         configure :development do
-          enable :logging
+          # enable :logging
           set :show_exceptions, :after_handler
           set :threaded, true
         end
