@@ -104,17 +104,28 @@ module SpicedGracken
         return
       end
 
+      Thread.abort_on_exception = true
+      Thin::Logging.silent = false
+
       Thread.new do
-        Thin::Logging.silent = true
-        SpicedGracken::Net::Listener::Server.run!(
-          port: SpicedGracken::Settings['port'],
-          # logger: SpicedGracken::Display,
-          # show_exceptions: false,
-          server: :thin,
-          dump_errors: true,
-          threaded: true
-        )
+        begin
+          SpicedGracken::Net::Listener::Server.run!(
+            port: SpicedGracken::Settings['port'],
+            # logger: SpicedGracken::Display,
+            show_exceptions: true,
+            server: :thin,
+            dump_errors: true,
+            threaded: true
+          )
+          loop while Thread.current.alive?
+        rescue Exception => e
+          ap e.message
+          ap e.backtrace
+        ensure
+          ap 'Server Stopped'
+        end
       end
+
     end
 
     def close_server

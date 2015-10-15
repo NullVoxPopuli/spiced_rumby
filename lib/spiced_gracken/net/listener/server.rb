@@ -6,25 +6,30 @@ module SpicedGracken
       class Server < Sinatra::Base
         configure :development do
           enable :logging
-          enable :lock
           set :show_exceptions, :after_handler
+          set :threaded, true
         end
         # TODO: do we want to return an error if
         # we can't decrypt?
 
         get '/' do
           process_request
-          # status 200 # server accepts all messages
+          ok
         end
 
         post '/' do
           process_request
-          # status 200 # server accepts all messages
+          ok
         end
 
         def process_request
           raw = params[:message]
           RequestProcessor.process(raw)
+        end
+
+        def ok
+          status 200
+          body 'OK'
         end
       end
     end
