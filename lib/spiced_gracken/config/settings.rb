@@ -53,16 +53,16 @@ module SpicedGracken
         self['privatKey']
       end
 
-      # generates 128 bytes
+      # generates 32 bytes
       def generate_uid
-        self['uid'] = SecureRandom.hex(128)
+        self['uid'] = SecureRandom.hex(32)
         Display.success 'new uid set'
       end
 
       def generate_keys
         @key_pair = OpenSSL::PKey::RSA.new(2048)
-        self['publicKey'] = @key_pair.public_key.export
-        self['privateKey'] = @key_pair.export
+        self['publicKey'] = @key_pair.public_key.to_pem
+        self['privateKey'] = @key_pair.to_pem
         Display.success 'new keys generated'
       end
 

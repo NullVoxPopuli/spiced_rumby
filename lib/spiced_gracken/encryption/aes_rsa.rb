@@ -24,7 +24,16 @@ module SpicedGracken
         cipher.encrypt
         aes_key = cipher.random_key
         aes_iv = cipher.random_iv
-        encrypted = cipher.update(msg) + cipher.final
+        aes_encrypted_message = cipher.update(msg)
+        # pad, because of how CBC works
+        padding = cipher.final
+        # length = 16 - (aes_encrypted_message.length % 16)
+        # length = 0 if length == 16
+        # padding = ' ' * length
+        # ap aes_encrypted_message.length
+        # ap aes_encrypted_message.length % 16
+        # ap length
+        encrypted = aes_encrypted_message + padding
 
         # 2
         rsa_encryptor = OpenSSL::PKey::RSA.new public_key

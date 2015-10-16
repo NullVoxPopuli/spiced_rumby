@@ -13,16 +13,19 @@ module SpicedGracken
         # verify node is valid
         node = self.node_for(location: location, uid: uid, node: node)
 
-        request = SpicedGracken::Net::Request.new(node, message)
-        payload = {
-          message: request.payload
-        }
+        Thread.new(node, message) do |node, message|
+          request = SpicedGracken::Net::Request.new(node, message)
+          payload = { message: request.payload }
 
-        Display.debug 'posting'
-        http = Curl.post(node.location, payload)
-        Display.debug 'posted'
-        # TODO: what do we do with the response
-        #Display.debug http.body_str
+          Curl::Easy.http_post(node.location, payload.to_json) do |c|
+            c.headers['Accept'] = 'application/json'
+            c.headers['Content-Type'] = 'application/json'
+            # c.verbose = true
+            # c.on_debug do |type, data|
+            #   puts type, data
+            # end
+          end
+        end
       end
 
       # private

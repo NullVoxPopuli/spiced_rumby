@@ -47,12 +47,7 @@ module SpicedGracken
           # TODO: do this async so that one server doesn't block
           # the rest of the servers from receiving the messages
           servers.each do |entry|
-            Thread.new(entry, m) do |entry, m|
-              Net::Client.send(
-                node: entry,
-                message: m
-              )
-            end
+            Net::Client.send(node: entry, message: m)
           end
         else
           Display.warning 'you have no servers'

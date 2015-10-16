@@ -1,1 +1,1 @@
-gem build spiced_gracken.gemspec; gem install spiced_gracken-0.2.0.gem; ./run
+gem build spiced_gracken.gemspec; gem install spiced_gracken-0.3.0.gem; ./run

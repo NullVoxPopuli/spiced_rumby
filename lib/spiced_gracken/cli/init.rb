@@ -2,7 +2,6 @@ module SpicedGracken
   class CLI
     class Init < CLI::Command
       def handle
-
         if Settings.uid_exists?
           if confirm? 'uid exists, are you sure you want a new identity?'
             Settings.generate_uid
@@ -25,7 +24,7 @@ module SpicedGracken
       end
 
       def confirm?(msg)
-        Display.warn(msg + ' (Y/N)')
+        Display.warning(msg + ' (Y/N)')
         response = gets
         response = response.chomp
         ['yes', 'y'].include?(response.downcase)

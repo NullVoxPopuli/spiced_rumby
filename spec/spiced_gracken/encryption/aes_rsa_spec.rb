@@ -26,5 +26,18 @@ describe SpicedGracken::Encryption::AES_RSA do
     expect(message).to eq decrypted
   end
 
+  it 'encrypts long json messages' do
+    message = {
+      hash1: SecureRandom.hex(1024),
+      hash2: SecureRandom.hex(1024),
+      hash3: SecureRandom.hex(3200)
+    }.to_json
+
+    encrypted = klass.encrypt(message, @public_key)
+    decrypted = klass.decrypt(encrypted, @private_key)
+
+    expect(message).to eq decrypted
+  end
+
 
 end

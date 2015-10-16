@@ -16,8 +16,8 @@ module SpicedGracken
         def try_decrypt(input)
           begin
             # TODO: do we want to try to decrypting anyway if decoding fails?
-            input = Base64.decode64(input)
-            input = Cipher.decrypt(input, Settings[:privateKey])
+            decoded = Base64.decode64(input)
+            input = Cipher.decrypt(decoded, Settings[:privateKey])
           rescue => e
             Display.debug e.message
             Display.debug e.backtrace
