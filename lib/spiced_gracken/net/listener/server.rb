@@ -5,7 +5,9 @@ module SpicedGracken
     module Listener
       class Server < Sinatra::Base
         configure :development do
-          # enable :logging
+          # only shows resulting status
+          disable :logging
+
           set :show_exceptions, :after_handler
           set :threaded, true
         end
@@ -14,17 +16,38 @@ module SpicedGracken
 
         get '/' do
           process_request
-          ok
         end
 
         post '/' do
           process_request
-          ok
         end
 
         def process_request
-          raw = params[:message]
-          RequestProcessor.process(raw)
+          Display.debug request.env
+
+          begin
+            # form params should override
+            # raw body
+            raw =
+              if msg = params[:message]
+                msg
+              else
+                request_body = request.body.read
+                json_body = JSON.parse(request_body)
+                json_body['message']
+              end
+
+            # decode, etc
+            RequestProcessor.process(raw)
+
+            # hopefully everything went ok
+            ok
+          rescue => e
+            Display.error e.message
+            Display.error e.backtrace.join("\n")
+            body e.message
+            status 500
+          end
         end
 
         def ok

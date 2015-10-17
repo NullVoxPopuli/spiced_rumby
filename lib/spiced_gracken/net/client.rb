@@ -20,10 +20,12 @@ module SpicedGracken
           Curl::Easy.http_post(node.location, payload.to_json) do |c|
             c.headers['Accept'] = 'application/json'
             c.headers['Content-Type'] = 'application/json'
-            # c.verbose = true
-            # c.on_debug do |type, data|
-            #   puts type, data
-            # end
+            if SpicedGracken::Settings['debug']
+              c.verbose = true
+              c.on_debug do |type, data|
+                puts data
+              end
+            end
           end
         end
       end

@@ -26,3 +26,16 @@ gem install spiced_gracken-___.gem
 ./run # for bash interface (the picture on the right, above)
 ./run ui # for curses interface (the picture on the left above)
 ```
+
+# Dependencies
+
+For sending messages
+```bash
+sudo apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev
+```
+See [the ruby curl bindings installation](https://github.com/taf2/curb#installation) for non Ubuntu OSes.
+
+For encryption and RSA key generation
+```bash
+sudo apt-get install openssl
+```
