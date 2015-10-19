@@ -6,9 +6,9 @@ module SpicedGracken
       class Server < Sinatra::Base
         configure :development do
           # only shows resulting status
-          disable :logging
-
-          set :show_exceptions, :after_handler
+          # disable :logging
+          enable :logging
+          # set :show_exceptions, :after_handler
           set :threaded, true
         end
         # TODO: do we want to return an error if

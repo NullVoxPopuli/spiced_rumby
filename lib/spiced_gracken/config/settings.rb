@@ -16,12 +16,16 @@ module SpicedGracken
           :[], :[]=, :display, :as_hash, :save, :set,
           :location, :identity, :keys_exist?, :public_key,
           :private_key, :generate_keys, :share, :key_pair,
-          :uid_exists?, :generate_uid,
+          :uid_exists?, :generate_uid, :debug?,
           to: :instance
 
         def instance
           @instance ||= new
         end
+      end
+
+      def debug?
+        ['true', '1', 'yes', 'y', 't'].include?(self['debug'].try(:downcase))
       end
 
       def share
