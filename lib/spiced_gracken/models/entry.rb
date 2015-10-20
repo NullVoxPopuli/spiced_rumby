@@ -27,7 +27,9 @@ module SpicedGracken
         end
 
         def as_json
-          all.map(&:as_json)
+          others = all.map(&:as_json)
+          me = Settings.identity_as_json
+          others << me
         end
 
         def from_json(json)

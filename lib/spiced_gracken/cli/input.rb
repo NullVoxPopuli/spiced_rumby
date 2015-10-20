@@ -34,6 +34,8 @@ module SpicedGracken
       end
 
       def handle
+        return if _input.empty?
+
         servers = ActiveServers.all
         if !servers.empty?
           m = Message::Chat.new(

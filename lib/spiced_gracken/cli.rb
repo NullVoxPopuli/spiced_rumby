@@ -18,8 +18,6 @@ module SpicedGracken
   # A user interface is responsible for for creating a client
   # and sending messages to that client
   class CLI
-    attr_accessor :client, :server
-
     COMMAND_MAP = {
       Command::CONFIG => CLI::Config,
       Command::PING => CLI::Ping,
@@ -38,6 +36,7 @@ module SpicedGracken
       Command::EXPORT => CLI::Share
     }
 
+
     class << self
 
       delegate :server_location, :listen_for_commands,
@@ -49,11 +48,20 @@ module SpicedGracken
         @instance ||= new
       end
 
+      # TODO: extract this for sub commands
+      def autocompletes
+        commands = COMMAND_MAP.map{ |k, v| "/#{k}" }
+        aliases = SpicedGracken::Node.all.map{ |n| n.alias_name }
+        commands + aliases
+      end
+
     end
 
 
     def initialize
-      # check_startup_settings
+      # Set up auto complete
+      completion = proc{ |s| self.class.autocompletes.grep(/^#{Regexp.escape(s)}/) }
+      Readline.completion_proc = completion
 
       # this will allow our listener / server to print exceptions,
       # rather than  silently fail
@@ -84,8 +92,9 @@ module SpicedGracken
       Display.error e.backtrace.join("\n").colorize(:red)
     end
 
+
     def get_input
-      gets
+      Readline.readline('> ', true)
     end
 
     def start_server

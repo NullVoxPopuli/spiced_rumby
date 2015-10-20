@@ -5,6 +5,8 @@ require 'date'
 require 'colorize'
 require 'curses'
 require 'io/console'
+require "readline"
+
 require 'logger'
 
 require 'awesome_print'

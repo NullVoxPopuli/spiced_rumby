@@ -16,7 +16,7 @@ module SpicedGracken
           :[], :[]=, :display, :as_hash, :save, :set,
           :location, :identity, :keys_exist?, :public_key,
           :private_key, :generate_keys, :share, :key_pair,
-          :uid_exists?, :generate_uid, :debug?,
+          :uid_exists?, :generate_uid, :debug?, :identity_as_json,
           to: :instance
 
         def instance
@@ -28,15 +28,19 @@ module SpicedGracken
         ['true', '1', 'yes', 'y', 't'].include?(self['debug'].try(:downcase))
       end
 
-      def share
-        data = {
-          'alias' => me = self['alias'],
+      def identity_as_json
+        {
+          'alias' => self['alias'],
           'location' => location,
           'uid' => self['uid'],
           'publicKey' => public_key
-        }.to_json
+        }
+      end
 
-        filename = "#{me}.json"
+      def share
+        data = identity_as_json.to_json
+
+        filename = "#{identity_as_json['alias']}.json"
         File.open(filename, 'w'){ |f| f.syswrite(data) }
         Display.info "#{filename} written..."
       end

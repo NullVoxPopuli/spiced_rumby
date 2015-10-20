@@ -16,17 +16,21 @@ module SpicedGracken
         Thread.new(node, message) do |node, message|
           request = SpicedGracken::Net::Request.new(node, message)
           payload = { message: request.payload }
-
-          Curl::Easy.http_post(node.location, payload.to_json) do |c|
-            c.headers['Accept'] = 'application/json'
-            c.headers['Content-Type'] = 'application/json'
-            if SpicedGracken::Settings.debug?
-              puts message.render
-              c.verbose = true
-              c.on_debug do |type, data|
-                puts data
+          begin
+            Curl::Easy.http_post(node.location, payload.to_json) do |c|
+              c.headers['Accept'] = 'application/json'
+              c.headers['Content-Type'] = 'application/json'
+              if SpicedGracken::Settings.debug?
+                puts message.render
+                c.verbose = true
+                c.on_debug do |type, data|
+                  puts data
+                end
               end
             end
+          rescue => e
+            Display.alert("Issue connectiong to #{node.alias_name}@#{node.location}")
+            Display.alert(e.message)
           end
         end
       end
