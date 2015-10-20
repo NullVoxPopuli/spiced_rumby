@@ -28,7 +28,7 @@ module SpicedGracken
           )
 
           # give the network their list
-          ActiveServers.all.each do |entry|
+          Node.online.each do |entry|
             SpicedGracken::Net::Client.send(
               node: entry,
               message: NodeListDiff.new(message: they_only_have)

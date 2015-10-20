@@ -29,7 +29,7 @@ describe SpicedGracken::Net::Listener::RequestProcessor do
     end
 
     it 'does not dispatch the server list hash if the message is from an active node' do
-      allow_any_instance_of(SpicedGracken::ActiveServers).to receive(:_list){
+      allow_any_instance_of(SpicedGracken::Node).to receive(:all){
         [
           SpicedGracken::Node.new(
             uid: '100',

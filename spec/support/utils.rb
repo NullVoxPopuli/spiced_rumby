@@ -13,9 +13,6 @@ def mock_settings_objects
   s = SpicedGracken::Config::Settings.new
   allow(SpicedGracken::Config::Settings).to receive(:instance) { s }
 
-  asl = SpicedGracken::Config::ActiveServerList.new
-  allow(SpicedGracken::Config::ActiveServerList).to receive(:instance) { asl }
-
   display_manager = SpicedGracken::Display::Manager.new(
     SpicedGracken::Display::Null::UI
   )
@@ -44,6 +41,7 @@ def setup_database
           table.column :location, :string
           table.column :uid, :string
           table.column :public_key, :string
+          table.column :online, :boolean
         end
       end
     end

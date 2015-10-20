@@ -11,9 +11,9 @@ module SpicedGracken
       end
 
       def handle
-        server = ActiveServers.find(alias_name: target)
+        node = Node.find(alias_name: target).first
 
-        if server
+        if node
           m = Message::Whisper.new(
             message: message,
             to: target
@@ -22,11 +22,11 @@ module SpicedGracken
           Display.whisper m.display
 
           Net::Client.send(
-            node: server,
+            node: node,
             message: m
           )
         else
-          Display.alert "server for #{target} not found or is not online"
+          Display.alert "node for #{target} not found or is not online"
         end
       end
     end

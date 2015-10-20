@@ -44,8 +44,8 @@ describe SpicedGracken::Models::Entry do
 
       we_only_have, they_only_have = klass.diff(them)
 
-      expect(we_only_have).to eq [ours]
       expect(they_only_have).to eq [theirs]
+      expect(we_only_have).to eq [ours]
     end
 
   end

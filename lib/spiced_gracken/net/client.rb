@@ -29,7 +29,8 @@ module SpicedGracken
               end
             end
           rescue => e
-            Display.alert("#{node.class.name}: Issue connectiong to #{node.alias_name}@#{node.location}")
+            node.update(online: false)
+            Display.alert("#{message.class.name}: Issue connectiong to #{node.alias_name}@#{node.location}")
             Display.alert(e.message)
           end
         end

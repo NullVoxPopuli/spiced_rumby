@@ -27,7 +27,6 @@ require 'spiced_gracken/display/manager'
 require 'spiced_gracken/models/entry'
 require 'spiced_gracken/config/hash_file'
 require 'spiced_gracken/config/settings'
-require 'spiced_gracken/config/active_server_list'
 require 'spiced_gracken/net/request'
 require 'spiced_gracken/net/client'
 require 'spiced_gracken/net/listener/request'
@@ -41,7 +40,6 @@ module SpicedGracken
   NAME = 'Spiced Gracken'
 
   Settings = Config::Settings
-  ActiveServers = Config::ActiveServerList
   Node = Models::Entry
   Cipher = Encryption
 
@@ -84,6 +82,7 @@ module SpicedGracken
             table.column :location, :string
             table.column :uid, :string
             table.column :public_key, :string
+            table.column :online, :boolean
           end
         end
       end

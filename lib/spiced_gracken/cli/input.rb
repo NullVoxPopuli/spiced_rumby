@@ -36,7 +36,7 @@ module SpicedGracken
       def handle
         return if _input.empty?
 
-        servers = ActiveServers.all
+        servers = Node.online
         if !servers.empty?
           m = Message::Chat.new(
             message: _input

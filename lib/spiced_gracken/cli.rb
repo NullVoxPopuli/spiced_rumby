@@ -1,9 +1,10 @@
 require 'spiced_gracken/cli/input'
 require 'spiced_gracken/cli/command'
 require 'spiced_gracken/cli/identity'
-require 'spiced_gracken/cli/node'
+require 'spiced_gracken/cli/irb'
 require 'spiced_gracken/cli/config'
 require 'spiced_gracken/cli/ping'
+require 'spiced_gracken/cli/ping_all'
 require 'spiced_gracken/cli/server'
 require 'spiced_gracken/cli/whisper'
 require 'spiced_gracken/cli/exit'
@@ -21,6 +22,7 @@ module SpicedGracken
     COMMAND_MAP = {
       Command::CONFIG => CLI::Config,
       Command::PING => CLI::Ping,
+      Command::PING_ALL => CLI::PingAll,
       Command::STOP_LISTENING => CLI::StopListening,
       Command::SERVERS => CLI::Server,
       Command::SERVER => CLI::Server,
@@ -29,7 +31,7 @@ module SpicedGracken
       Command::LISTEN => CLI::Listen,
       Command::WHO => CLI::Who,
       Command::IDENTITY => CLI::Identity,
-      Command::NODE => CLI::Node,
+      Command::IRB => CLI::IRB,
       Command::INIT => CLI::Init,
       Command::SHARE => CLI::Share,
       Command::IMPORT => CLI::Import,
@@ -155,9 +157,7 @@ module SpicedGracken
       # close_server
       Display.info 'saving config...'
       Settings.save
-      Display.info 'saving servers...'
-      ActiveServers.save
-      Display.alert "\n\nGoodbye.  "
+      Display.alert "\n\nGoodbye.  \n\nThank you for using #{SpicedGracken::NAME}"
       exit
     end
   end

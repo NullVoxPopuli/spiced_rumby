@@ -19,15 +19,15 @@ module SpicedGracken
 
           # if the sender isn't currently marked as active,
           # perform the server list exchange
-          unless ActiveServers.exists?(sender['uid'])
+          node = Node.find_by_uid(sender['uid'])
+          unless node.online?
             payload = Message::NodeListHash.new.render
             Client.send_to(
               location: sender['location'],
               payload: payload)
           end
 
-          ActiveServers.update(
-            sender['uid'],
+          node.update(
             location: sender['location'],
             alias_name: sender['alias']
           )

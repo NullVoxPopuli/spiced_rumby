@@ -4,7 +4,8 @@ module SpicedGracken
       def display
         location = payload['sender']['location']
         name = payload['sender']['alias']
-        ActiveServers.remove(location: location)
+        node = Node.find(location: location).first
+        node.update(online: false) if node
         "#{name}@#{location} has disconnected"
       end
     end

@@ -16,6 +16,8 @@ module SpicedGracken
           IPV4_WITH_PORT
       }
 
+      scope :online, -> { where(online: true) }
+
       class << self
         def sha_preimage
           all.map(&:public_key).sort.join(',')
@@ -85,6 +87,10 @@ module SpicedGracken
           'uid' => uid,
           'publicKey' => public_key
         }
+      end
+
+      def as_info
+        "#{alias_name}@#{location}"
       end
     end
   end

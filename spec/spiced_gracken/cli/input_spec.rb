@@ -32,7 +32,7 @@ describe SpicedGracken::CLI::Input do
 
     context 'has servers' do
       before(:each) do
-        allow(SpicedGracken::ActiveServers).to receive(:all){
+        allow(SpicedGracken::Node).to receive(:all){
           [
             SpicedGracken::Models::Entry.new(
               alias_name: 'test',
@@ -56,7 +56,7 @@ describe SpicedGracken::CLI::Input do
 
       it 'renders the message to json' do
         msg = 'hi test'
-        expect_any_instance_of(SpicedGracken::Message::Chat).to receive(:render)
+        expect_any_instance_of(SpicedGracken::Message::Chat).to receive(:display)
         i = klass.new(msg)
         i.handle
       end

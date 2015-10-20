@@ -9,9 +9,9 @@ module SpicedGracken
 
           node =
             if field == 'location'
-              ActiveServers.find(location: lookup_value)
+              Node.find(location: lookup_value).first
             else
-              ActiveServers.find(alias_name: lookup_value)
+              Node.find(alias_name: lookup_value).first
             end
 
           location = node.try(:location)

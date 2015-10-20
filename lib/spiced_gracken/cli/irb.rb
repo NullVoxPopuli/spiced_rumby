@@ -1,9 +1,9 @@
 module SpicedGracken
   class CLI
-    class Node < CLI::Command
+    class IRB < CLI::Command
       def handle
         begin
-          code = 'SpicedGracken::Models::Entry.' + command_args[1..command_args.length].join(' ')
+          code = command_args[1..command_args.length].join(' ')
           ap eval(code)
           ''
         rescue => e

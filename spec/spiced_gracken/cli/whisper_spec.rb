@@ -47,7 +47,7 @@ describe SpicedGracken::CLI::Whisper do
 
     context 'target found' do
       before(:each) do
-        allow(SpicedGracken::ActiveServers).to receive(:find){
+        allow(SpicedGracken::Node).to receive(:find){
           SpicedGracken::Models::Entry.new(
             alias_name: 'alias',
             location: '1.1.1.1:1111',
@@ -58,7 +58,7 @@ describe SpicedGracken::CLI::Whisper do
       end
 
       it 'sends the message' do
-        expect(SpicedGracken::Net::Client).to receive(:send_to_and_close)
+        expect(SpicedGracken::Net::Client).to receive(:send)
 
         c = klass.new('@alias hi, how are ya?')
         c.handle
