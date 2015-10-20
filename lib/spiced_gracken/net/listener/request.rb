@@ -6,8 +6,6 @@ module SpicedGracken
         attr_accessor :_input
 
         def initialize(input)
-          puts '"raw" input'
-          ap input
           self._input = try_decrypt(input)
           self.json = JSON.parse(_input)
           self.message = process_json
@@ -19,7 +17,6 @@ module SpicedGracken
           begin
             # TODO: do we want to try to decrypting anyway if decoding fails?
             decoded = Base64.decode64(input)
-            puts 'decoded from base64'
             input = Cipher.decrypt(decoded, Settings[:privateKey])
           rescue => e
             Display.debug e.message

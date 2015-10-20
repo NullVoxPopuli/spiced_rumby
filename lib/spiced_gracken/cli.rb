@@ -114,7 +114,7 @@ module SpicedGracken
       end
 
       Thread.abort_on_exception = false
-      Thin::Logging.silent = false
+      Thin::Logging.silent = true
 
       Thread.new do
         SpicedGracken::Net::Listener::Server.run!(

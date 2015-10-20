@@ -6,9 +6,9 @@ module SpicedGracken
       class Server < Sinatra::Base
         configure :development do
           # only shows resulting status
-          # disable :logging
-          enable :logging
-          set :bind, ['10.10.2.29','127.0.0.1', 'localhost']
+          disable :logging
+          # enable :logging
+          set :bind, '0.0.0.0' #['10.10.2.29','127.0.0.1', 'localhost']
           # set :show_exceptions, :after_handler
           set :threaded, true
         end
