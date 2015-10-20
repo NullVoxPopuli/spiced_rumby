@@ -1,5 +1,4 @@
 require 'spiced_gracken/message/base'
-require 'spiced_gracken/message/authorization'
 require 'spiced_gracken/message/chat'
 require 'spiced_gracken/message/ping'
 require 'spiced_gracken/message/ping_reply'
@@ -18,7 +17,6 @@ module SpicedGracken
     WHISPER = 'whisper'
     RELAY = 'relay'
     DISCONNECTION = 'disconnection'
-    AUTHORIZATION = 'authorization'
 
     NODE_LIST = 'nodelist'
     NODE_LIST_HASH = 'nodelisthash'
@@ -28,7 +26,6 @@ module SpicedGracken
       CHAT => Chat,
       WHISPER => Whisper,
       DISCONNECTION => Disconnection,
-      AUTHORIZATION => Authorization,
       PING => Ping,
       PING_REPLY => PingReply,
       NODE_LIST => NodeList,
