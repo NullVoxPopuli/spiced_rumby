@@ -30,8 +30,9 @@ module SpicedGracken
             end
           rescue => e
             node.update(online: false)
-            Display.alert("#{message.class.name}: Issue connectiong to #{node.alias_name}@#{node.location}")
-            Display.alert(e.message)
+            Display.info "#{node.alias_name} has ventured offline"
+            Display.debug("#{message.class.name}: Issue connectiong to #{node.alias_name}@#{node.location}")
+            Display.debug(e.message)
           end
         end
       end
