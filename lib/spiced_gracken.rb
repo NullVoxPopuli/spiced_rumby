@@ -70,8 +70,9 @@ module SpicedGracken
 
   def self.setup_storage
     ActiveRecord::Base.establish_connection(
-        :adapter => "sqlite3",
-        :database  => "dev.sqlite3"
+        adapter: "sqlite3",
+        database: "dev.sqlite3",
+        pool: 128
     )
 
     ActiveRecord::Migration.suppress_messages do

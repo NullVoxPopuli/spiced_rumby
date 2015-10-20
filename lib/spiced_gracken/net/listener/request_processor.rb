@@ -21,10 +21,11 @@ module SpicedGracken
           # perform the server list exchange
           node = Node.find_by_uid(sender['uid'])
           unless node.online?
-            payload = Message::NodeListHash.new.render
-            Client.send_to(
+            node.update(online: true)
+            payload = Message::NodeListHash.new
+            Client.send(
               location: sender['location'],
-              payload: payload)
+              message: payload)
           end
 
           node.update(

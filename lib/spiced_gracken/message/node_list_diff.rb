@@ -1,6 +1,8 @@
 module SpicedGracken
   module Message
     class NodeListDiff < Base
+      def display; end
+      
       def handle
         entries_we_do_not_have = message
 
