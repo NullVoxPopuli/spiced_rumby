@@ -11,7 +11,7 @@ module SpicedGracken
       end
 
       def handle
-        node = Node.find(alias_name: target).first
+        node = Node.find_by_alias_name(target)
 
         if node
           m = Message::Whisper.new(

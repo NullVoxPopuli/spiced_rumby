@@ -41,6 +41,10 @@ module SpicedGracken
           whisper result
         when Message::PingReply.name, Message::Ping.name
           info result
+        when Message::NodeList.name,
+             Message::NodeListDiff.name,
+             Message::NodeListHash.name
+          # display nothing
         else
           add_line result
         end

@@ -26,6 +26,18 @@ module SpicedGracken
           time_recieved: time_recieved,
           payload: payload)
       end
+
+      def display; end
+
+      def handle
+        respond
+        return
+      end
+
+      def respond
+
+      end
+
     end
   end
 end

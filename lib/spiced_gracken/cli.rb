@@ -53,7 +53,7 @@ module SpicedGracken
       # TODO: extract this for sub commands
       def autocompletes
         commands = COMMAND_MAP.map{ |k, v| "/#{k}" }
-        aliases = SpicedGracken::Node.all.map{ |n| n.alias_name }
+        aliases = SpicedGracken::Node.all.map{ |n| "#{n.alias_name}" }
         commands + aliases
       end
 
