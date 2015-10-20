@@ -21,10 +21,19 @@ module SpicedGracken
 
           node = Node.find_by_location(location)
 
+          # give the sender our list
           SpicedGracken::Net::Client.send(
             node: node,
             message: NodeListDiff.new(message: we_only_have)
           )
+
+          # give the network their list
+          ActiveServers.all.each do |entry|
+            SpicedGracken::Net::Client.send(
+              node: entry,
+              message: NodeListDiff.new(message: they_only_have)
+            )
+          end
         end
       end
     end
