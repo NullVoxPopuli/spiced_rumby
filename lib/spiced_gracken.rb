@@ -14,6 +14,7 @@ require 'sqlite3'
 require 'active_record'
 require 'curb'
 require 'thin'
+require 'libnotify'
 
 
 require 'active_support/core_ext/module/delegation'
@@ -24,6 +25,7 @@ require 'spiced_gracken/version'
 require 'spiced_gracken/encryption'
 require 'spiced_gracken/display'
 require 'spiced_gracken/display/manager'
+require 'spiced_gracken/notifier/base'
 require 'spiced_gracken/models/entry'
 require 'spiced_gracken/config/hash_file'
 require 'spiced_gracken/config/settings'
@@ -42,6 +44,7 @@ module SpicedGracken
   Settings = Config::Settings
   Node = Models::Entry
   Cipher = Encryption
+  Notify = Notifier::Base
 
   module_function
 

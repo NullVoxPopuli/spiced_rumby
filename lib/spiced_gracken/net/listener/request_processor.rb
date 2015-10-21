@@ -20,6 +20,7 @@ module SpicedGracken
           # if the sender isn't currently marked as active,
           # perform the server list exchange
           node = Node.find_by_uid(sender['uid'])
+          #{}`notify-send '#{SpicedGracken::NAME}:' '#{node.alias_name} sent you a message!'`
           unless node.online?
             node.update(online: true)
             payload = Message::NodeListHash.new

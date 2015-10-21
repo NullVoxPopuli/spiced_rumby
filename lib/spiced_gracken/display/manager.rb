@@ -37,8 +37,10 @@ module SpicedGracken
         case message.class.name
         when Message::Chat.name
           chat result
+          Notify.show(summary: message.sender_name, body: result)
         when Message::Whisper.name
           whisper result
+          Notify.show(summary: message.sender_name, body: result)
         when Message::PingReply.name, Message::Ping.name
           info result
         when Message::NodeList.name,
