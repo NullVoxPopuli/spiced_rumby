@@ -3,36 +3,54 @@ def mock_settings_objects
 
   setup_database
 
-  allow(SpicedGracken::Cipher).to receive(:current_encryptor){
-      SpicedGracken::Encryption::Passthrough
+  allow(MeshChat::Cipher).to receive(:current_encryptor){
+      MeshChat::Encryption::Passthrough
   }
-  SpicedGracken::Cipher.instance_variable_set('@current_encryptor', SpicedGracken::Encryption::Passthrough)
+  MeshChat::Cipher.instance_variable_set('@current_encryptor', MeshChat::Encryption::Passthrough)
 
 
-  allow_any_instance_of(SpicedGracken::Config::Settings).to receive(:filename) { 'test-settings' }
-  s = SpicedGracken::Config::Settings.new
-  allow(SpicedGracken::Config::Settings).to receive(:instance) { s }
+  allow_any_instance_of(MeshChat::Config::Settings).to receive(:filename) { 'test-settings' }
+  s = MeshChat::Config::Settings.new
+  allow(MeshChat::Config::Settings).to receive(:instance) { s }
 
-  display_manager = SpicedGracken::Display::Manager.new(
-    SpicedGracken::Display::Null::UI
+
+  display_manager = MeshChat::Display::Manager.new(
+    MeshChatStub::Display::Null::UI
   )
-  allow(SpicedGracken).to receive(:ui){ display_manager }
+
+  instance = MeshChat::Instance.new(
+    client_name: MeshChat::NAME, # name of your client
+    client_version: MeshChat::VERSION, # version of your client
+    #display: MeshChatStub::Display::Null::UI, # your class of your implementation of `Display::Base`
+    #on_display_start: ->{ MeshChat::CLI.check_startup_settings } # optional
+  )
+  MeshChat::Instance.instance_variable_set('@instance', instance)
+
+  allow(instance).to receive(:start_ui){  }
+  allow(instance).to receive(:display){ display_manager }
 end
 
 def delete_test_files
-  File.delete('test.sqlite3') if File.exist?('test.sqlite3')
-  File.delete('test-hashfile') if File.exist?('test-hashfile')
-  File.delete('test-settings') if File.exist?('test-settings')
-  File.delete('test-activeserverlist') if File.exist?('test-activeserverlist')
+  begin
+    File.delete('test.sqlite3') if File.exist?('test.sqlite3')
+    File.delete('test-hashfile') if File.exist?('test-hashfile')
+    File.delete('test-settings') if File.exist?('test-settings')
+    File.delete('test-activeserverlist') if File.exist?('test-activeserverlist')
+  rescue => e
+    # I wonder if this would be a problem?
+    ap e.message
+  end
 end
 
 def setup_database
-  SpicedGracken::Models::Entry.destroy_all
+  # this method differs from the one defined on meshchat, in that
+  # in destroys all nodes and uses an in-memory db
 
   ActiveRecord::Base.establish_connection(
       :adapter => "sqlite3",
       :database  => ':memory:'
   )
+
   ActiveRecord::Migration.suppress_messages do
     ActiveRecord::Schema.define do
       unless table_exists? :entries
@@ -41,9 +59,12 @@ def setup_database
           table.column :location, :string
           table.column :uid, :string
           table.column :public_key, :string
-          table.column :online, :boolean
+          table.column :online, :boolean, default: true, null: false
         end
       end
     end
   end
+
+  # just to be sure
+  MeshChat::Models::Entry.destroy_all
 end
