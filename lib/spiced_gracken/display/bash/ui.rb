@@ -1,14 +1,14 @@
 module SpicedGracken
   module Display
     module Bash
-      class UI < Display::Base
+      class UI < MeshChat::Display::Base
         def start
           puts "\n"
           alert Help.welcome
           puts "\n"
           puts "\n"
           yield if block_given?
-          CLI.listen_for_commands
+          MeshChat::CLI.listen_for_commands
         end
 
         # TODO: find a more elegant way to handle color
