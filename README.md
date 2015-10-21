@@ -18,11 +18,10 @@ require 'spiced_gracken'
 SpicedGracken.start
 ```
 
-Or, if you just download the zip:
+Or, if you just download the zip / clone the repo:
 
 ```bash
-gem build spiced_gracken.gemspec
-gem install spiced_gracken-___.gem
+bundle install # to install ruby dependencies
 ./run # for bash interface (the picture on the right, above)
 ./run ui # for curses interface (the picture on the left above)
 ```

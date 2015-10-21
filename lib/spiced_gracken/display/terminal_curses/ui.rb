@@ -4,7 +4,7 @@ require 'spiced_gracken/display/terminal_curses/output'
 module SpicedGracken
   module Display
     module TerminalCurses
-      class UI < Display::Base
+      class UI < MeshChat::Display::Base
         # http://ruby-doc.org/stdlib-2.0.0/libdoc/curses/rdoc/Curses.html
         include Curses
 

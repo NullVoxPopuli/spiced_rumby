@@ -1,7 +1,15 @@
 #!/usr/bin/env ruby
 
 current_dir = File.dirname(__FILE__)
+# set load path (similar to how gems require files (relative to lib))
+
+lib = current_dir + '/lib/'
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+
 require current_dir + '/lib/spiced_gracken'
+
+
 
 selected_ui = ARGV.first
 SpicedGracken.start(selected_ui)

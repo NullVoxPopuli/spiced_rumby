@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 
+# set load path so we can use gemspec with bundler
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'spiced_gracken/version'
@@ -22,16 +23,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0'
 
-  s.add_runtime_dependency 'sqlite3'
-  s.add_runtime_dependency 'thin'
-  s.add_runtime_dependency 'sinatra'
-  s.add_runtime_dependency 'curb'
-  s.add_runtime_dependency 'activerecord'
-  s.add_runtime_dependency 'activesupport'
-  s.add_runtime_dependency 'colorize'
-  s.add_runtime_dependency 'curses'
-  s.add_runtime_dependency 'libnotify'
-  s.add_runtime_dependency 'awesome_print'
+  s.add_dependency 'meshchat'
 
   # sudo apt-get install libncursesw5-dev
   # may be needed ^ :-(
