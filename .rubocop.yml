@@ -7,8 +7,6 @@ AllCops:
 
 Lint/NestedMethodDefinition:
   Enabled: false
-  Exclude:
-    - test/action_controller/serialization_test.rb
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes

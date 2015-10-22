@@ -2,12 +2,12 @@
 require 'meshchat'
 
 # additional functionality
-require 'spiced_gracken/version'
-require 'spiced_gracken/cli_input'
-require 'spiced_gracken/cli_output'
+require 'spiced_rumby/version'
+require 'spiced_rumby/cli_input'
+require 'spiced_rumby/cli_output'
 
-module SpicedGracken
-  NAME = 'Spiced Gracken'
+module SpicedRumby
+  NAME = 'Spiced Rumby'
 
   module_function
 

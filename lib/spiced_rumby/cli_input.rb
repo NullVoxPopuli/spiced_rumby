@@ -1,8 +1,8 @@
-module SpicedGracken
+module SpicedRumby
   class CLIInput < MeshChat::CLI::Base
     class << self
       def autocompletes
-        commands = COMMAND_MAP.map{ |k, v| "/#{k}" }
+        commands = MeshChat::CLI::COMMAND_MAP.map{ |k, v| "/#{k}" }
         aliases = MeshChat::Node.all.map{ |n| "#{n.alias_name}" }
         commands + aliases
       end

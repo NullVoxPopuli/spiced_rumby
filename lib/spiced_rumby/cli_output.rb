@@ -1,12 +1,12 @@
-module SpicedGracken
+module SpicedRumby
   class CLIOutput < MeshChat::Display::Base
     def start
       puts "\n"
-      alert 'Welcome to Spiced Gracken!'
+      alert 'Welcome to Spiced Rumby!'
       puts "\n"
       puts "\n"
       yield if block_given?
-      
+
       MeshChat::CLI.listen_for_commands
     end
 

@@ -1,11 +1,11 @@
-# Spiced Gracken [![Build Status](https://travis-ci.org/NullVoxPopuli/spiced_gracken.svg)](https://travis-ci.org/NullVoxPopuli/spiced_gracken) [![Code Climate](https://codeclimate.com/github/NullVoxPopuli/spiced_gracken/badges/gpa.svg)](https://codeclimate.com/github/NullVoxPopuli/spiced_gracken) [![Test Coverage](https://codeclimate.com/github/NullVoxPopuli/spiced_gracken/badges/coverage.svg)](https://codeclimate.com/github/NullVoxPopuli/spiced_gracken/coverage)
+# Spiced Rumby [![Build Status](https://travis-ci.org/NullVoxPopuli/spiced_rumby.svg)](https://travis-ci.org/NullVoxPopuli/spiced_rumby) [![Code Climate](https://codeclimate.com/github/NullVoxPopuli/spiced_rumby/badges/gpa.svg)](https://codeclimate.com/github/NullVoxPopuli/spiced_rumby) [![Test Coverage](https://codeclimate.com/github/NullVoxPopuli/spiced_rumby/badges/coverage.svg)](https://codeclimate.com/github/NullVoxPopuli/spiced_rumby/coverage)
 A ruby gem that acts as a [mesh-chat](https://github.com/neuravion/mesh-chat) client.
 
 ![Screenshot](http://i.imgur.com/Y88P4mw.png)
 # Installation
 
 ```bash
-gem install spiced_gracken
+gem install spiced_rumby
 ```
 
 # Usage
@@ -14,16 +14,15 @@ gem install spiced_gracken
 $ irb
 ```
 ```ruby
-require 'spiced_gracken'
-SpicedGracken.start
+require 'spiced_rumby'
+SpicedRumby.start
 ```
 
 Or, if you just download the zip / clone the repo:
 
 ```bash
 bundle install # to install ruby dependencies
-./run # for bash interface (the picture on the right, above)
-./run ui # for curses interface (the picture on the left above)
+./run
 ```
 
 # Dependencies
