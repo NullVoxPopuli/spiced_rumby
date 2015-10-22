@@ -9,7 +9,4 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require current_dir + '/lib/spiced_gracken'
 
-
-
-selected_ui = ARGV.first
-SpicedGracken.start(selected_ui)
+SpicedGracken.start

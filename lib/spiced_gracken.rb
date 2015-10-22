@@ -3,31 +3,20 @@ require 'meshchat'
 
 # additional functionality
 require 'spiced_gracken/version'
-require 'spiced_gracken/display/help'
-require 'spiced_gracken/display/bash/ui'
-require 'spiced_gracken/display/terminal_curses/ui'
-
-
+require 'spiced_gracken/cli_input'
+require 'spiced_gracken/cli_output'
 
 module SpicedGracken
   NAME = 'Spiced Gracken'
 
   module_function
 
-  def start(selected_ui)
-    ui = Display::Bash::UI
-    if !selected_ui.blank?
-      if selected_ui != 'bash'
-        ui = Display::TerminalCurses::UI
-      elsif selected_ui == 'null'
-        ui = Display::Null::UI
-      end
-    end
-
+  def start
     MeshChat.start(
       client_name: NAME,
       client_version: VERSION,
-      display: ui,
+      display: CLIOutput,
+      input: CLIInput,
       on_display_start: ->{ MeshChat::CLI.check_startup_settings }
     )
   end
