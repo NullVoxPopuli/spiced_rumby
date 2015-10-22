@@ -27,6 +27,13 @@ bundle install # to install ruby dependencies
 
 # Dependencies
 
+### Gems
+
+[meshchat](https://github.com/NullVoxPopuli/meshchat) - the core of mesh chat communication / basic functionality
+[libnotify](https://github.com/splattael/libnotify) - for notifications on unix systems.
+
+### System
+
 For sending messages
 ```bash
 sudo apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev
@@ -37,3 +44,7 @@ For encryption and RSA key generation
 ```bash
 sudo apt-get install openssl
 ```
+
+
+# Credits
+[Icon by Google](https://www.google.com/design/icons/)

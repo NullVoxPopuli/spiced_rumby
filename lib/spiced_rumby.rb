@@ -1,3 +1,6 @@
+# helper gems
+require 'libnotify'
+
 # require the core functionality
 require 'meshchat'
 
@@ -5,6 +8,7 @@ require 'meshchat'
 require 'spiced_rumby/version'
 require 'spiced_rumby/cli_input'
 require 'spiced_rumby/cli_output'
+require 'spiced_rumby/notifier'
 
 module SpicedRumby
   NAME = 'Spiced Rumby'
@@ -17,6 +21,7 @@ module SpicedRumby
       client_version: VERSION,
       display: CLIOutput,
       input: CLIInput,
+      notifier: Notifier,
       on_display_start: ->{ MeshChat::CLI.check_startup_settings }
     )
   end

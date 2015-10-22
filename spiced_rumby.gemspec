@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.0'
 
   s.add_dependency 'meshchat'
+  s.add_runtime_dependency 'libnotify'
 
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'pry-byebug'
