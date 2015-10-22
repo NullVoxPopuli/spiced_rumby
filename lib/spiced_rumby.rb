@@ -13,13 +13,15 @@ require 'spiced_rumby/notifier'
 module SpicedRumby
   NAME = 'Spiced Rumby'
 
+  require 'spiced_rumby/vedeu_test'
+
   module_function
 
   def start
     MeshChat.start(
       client_name: NAME,
       client_version: VERSION,
-      display: CLIOutput,
+      display: VedeuTest::Controllers::ChatOutput, #CLIOutput,
       input: CLIInput,
       notifier: Notifier,
       on_display_start: ->{ MeshChat::CLI.check_startup_settings }
