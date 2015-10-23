@@ -3,7 +3,7 @@ Vedeu.interface :contacts do
   visible false
   zindex 1
   background '#222222'
-
+  cursor false
 
   border do
     title 'Contacts'

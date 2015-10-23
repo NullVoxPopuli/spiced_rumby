@@ -20,11 +20,11 @@ module SpicedRumby
                 line { centre " \tA decentralized chat system utilizing mesh networking." }
                 line
                 line {
-                  foreground '#333333'
+                  foreground '#555555'
                   centre "Press 'q' to exit,",     width: 24
                 }
                 line {
-                  foreground '#333333'
+                  foreground '#555555'
                   centre " 's' to begin.", width: 24
                 }
               end
