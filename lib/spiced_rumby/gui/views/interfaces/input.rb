@@ -1,17 +1,13 @@
 Vedeu.interface :input do
   visible false
   zindex 1
+  background '#222222'
+
 
   border do
-    title 'Input'
+    title  "#{SpicedRumby::NAME}: v#{SpicedRumby::VERSION}"
   end
-  geometry do
-    # grid do
-    #   columns 10
-    #   rows 1
-    # end
-    align :bottom, :left, Vedeu.width - 31, 5
-  end
+
   keymap do
     key('q') { Vedeu.exit }
     key('t') { } # to chat

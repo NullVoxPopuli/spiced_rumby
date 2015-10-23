@@ -1,3 +1,4 @@
+require 'spiced_rumby/gui/colorer'
 require 'spiced_rumby/gui/models/keymaps/_global_'
 require 'spiced_rumby/gui/models/keymaps/welcome'
 require 'spiced_rumby/gui/models/keymaps/contacts'
@@ -18,6 +19,34 @@ module SpicedRumby
     class MeshChatHook
       def start
         SpicedRumby::GUI::Application.start(ARGV)
+      end
+
+      def add_line(line)
+        Views::Chat.add_message(:line, line)
+      end
+
+      def info(msg)
+        Views::Chat.add_message(:info, msg)
+      end
+
+      def warning(msg)
+        Views::Chat.add_message(:warning, msg)
+      end
+
+      def alert(msg)
+        Views::Chat.add_message(:alert, msg)
+      end
+
+      def success(msg)
+        Views::Chat.add_message(:success, msg)
+      end
+
+      def chat(msg)
+        Views::Chat.add_message(:chat, msg)
+      end
+
+      def whisper(msg)
+        Views::Chat.add_message(:whisper, msg)
       end
     end
   end

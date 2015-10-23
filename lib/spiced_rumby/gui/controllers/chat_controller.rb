@@ -7,11 +7,13 @@ module SpicedRumby
         action :show
 
         def show
+          Vedeu.trigger(:_hide_interface_, :welcome)
+
           Vedeu.trigger(:_show_group_, :main)
 
-          Views::Chat.new.render
           Views::Contacts.new.render
           Views::Input.new.render
+          Views::Chat.new.render
 
           Vedeu.trigger(:_focus_by_name_, :input)
         end

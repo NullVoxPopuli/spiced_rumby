@@ -7,6 +7,7 @@ module SpicedRumby
         def render
           Vedeu.render do
             view :contacts do
+              background SpicedRumby::GUI::Colorer::BACKGROUND
 
               lines do
                 nodes = MeshChat::Node.order(alias_name: :desc)
