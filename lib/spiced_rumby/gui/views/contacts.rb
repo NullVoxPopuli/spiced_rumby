@@ -1,23 +1,17 @@
 module SpicedRumby
-  module VedeuTest
+  module GUI
     module Views
-      class Contacts
+      class Contacts < Vedeu::ApplicationView
 
 
-        Vedeu.interface :contacts do
-          border do
-            title 'Contacts'
-          end
-          geometry do
-            align :middle, :right, 40, 40
-          end
-        end
-
-        def self.render_views
+        def render
           Vedeu.render do
             view :contacts do
+
               lines do
-                MeshChat::Node.all.each do |node|
+                nodes = MeshChat::Node.order(alias_name: :desc)
+
+                nodes.each do |node|
                   line{
                     foreground '#ffffff' if node.online?
                     foreground '#333333' if !node.online?
@@ -27,9 +21,7 @@ module SpicedRumby
               end
             end
           end
-
         end
-
 
       end
     end
