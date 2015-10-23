@@ -15,7 +15,7 @@ module SpicedRumby
   module_function
 
   def start
-    is_debugging = ['nogui', 'bash', 'd', 'debug'].include?(ARGV.first)
+    is_debugging = ['nogui', 'bash', 'b', 'd', 'debug'].include?(ARGV.first)
     is_debugging ? debug_start : gui_start
   end
 
