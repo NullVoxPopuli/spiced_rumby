@@ -8,7 +8,7 @@ PATH
 PATH
   remote: /media/Ubuntu-Data/OpenSource/vedeu
   specs:
-    vedeu (0.6.37)
+    vedeu (0.6.38)
       bundler (~> 1.10)
       rake (~> 10.4)
       ruby-prof (= 0.15.8)

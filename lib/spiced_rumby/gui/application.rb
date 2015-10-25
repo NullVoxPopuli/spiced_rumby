@@ -12,13 +12,17 @@ module SpicedRumby
       #   Views::Chat.new.render
       # }
 
+
+      Vedeu.bind(:_command_) do |data|
+        MeshChat::CLI.create_input(data)
+      end
+
       Vedeu.configure do
         debug!
         root :welcome, :show
         log './gui.log'
-
         colour_mode 16777216
-        terminal_mode :raw
+        terminal_mode :fake
         # interactive!
       end
 
