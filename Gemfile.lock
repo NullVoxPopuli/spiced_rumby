@@ -1,20 +1,19 @@
-GIT
-  remote: git@github.com:gavinlaking/vedeu.git
-  revision: 51690f84a622bbaf20d60c589438c387dabb9682
-  specs:
-    vedeu (0.6.36)
-      bundler (~> 1.10)
-      rake (~> 10.4)
-      ruby-prof (= 0.15.8)
-      thor (= 0.19.1)
-      vedeu_cli (= 0.0.7)
-
 PATH
   remote: .
   specs:
     spiced_rumby (0.7.0)
       libnotify
       meshchat
+
+PATH
+  remote: /media/Ubuntu-Data/OpenSource/vedeu
+  specs:
+    vedeu (0.6.37)
+      bundler (~> 1.10)
+      rake (~> 10.4)
+      ruby-prof (= 0.15.8)
+      thor (= 0.19.1)
+      vedeu_cli (= 0.0.7)
 
 GEM
   remote: https://rubygems.org/

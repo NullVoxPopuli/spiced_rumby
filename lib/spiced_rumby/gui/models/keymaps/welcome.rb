@@ -1,6 +1,6 @@
 Vedeu.keymap :welcome do
-  key('q') { Vedeu.exit }
-  key('s') {
+  key(:ctrl_c) { Vedeu.exit }
+  key(:enter) {
     # Vedeu.trigger(:_hide_interface_, :welcome)
     Vedeu.trigger(:_hide_group_, :main)
     Vedeu.goto(:chat, :show)

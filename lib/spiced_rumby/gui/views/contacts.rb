@@ -7,12 +7,17 @@ module SpicedRumby
           MeshChat::Node.order(alias_name: :desc)
         end
 
+        def self.contacts
+          ['All Chat'] + nodes
+        end
+
         def render
           Vedeu.render do
             view :contacts do
               background SpicedRumby::GUI::Colorer::BACKGROUND
 
               Vedeu.trigger(:_menu_view_, :contacts).each do |sel, cur, node|
+                is_all_chat = node == 'All Chat'
                 line {
                   if sel && cur
                       stream {
@@ -32,9 +37,14 @@ module SpicedRumby
                   end
 
                   stream{
-                    foreground '#ffffff' if node.online?
-                    foreground '#333333' if !node.online?
-                    left node.alias_name
+                    if is_all_chat
+                      foreground '#ffffff'
+                      left node
+                    else
+                      foreground '#ffffff' if node.online?
+                      foreground '#333333' if !node.online?
+                      left node.alias_name
+                    end
                   }
                 }
 

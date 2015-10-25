@@ -16,7 +16,7 @@ module SpicedRumby
           Vedeu.trigger(:_show_group_, :main)
 
           Vedeu.menu(:contacts) {
-            items(SpicedRumby::GUI::Views::Contacts.nodes)
+            items(SpicedRumby::GUI::Views::Contacts.contacts)
             Vedeu.bind(:_menu_next_, :contacts)
             Vedeu.bind(:_menu_select_, :contacts)
             Vedeu.bind(:_menu_prev_, :contacts)

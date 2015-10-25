@@ -1,7 +1,7 @@
 Vedeu.keymap('_global_') do
   # see http://www.rubydoc.info/gems/vedeu/Vedeu/DSL/Keymap
 
-  key('q')        { Vedeu.trigger(:_exit_) }
+  key(:ctrl_c)        { Vedeu.trigger(:_exit_) }
   key(:esc)       {
     # TODO: show hotkey help interface
     Vedeu.trigger(:_mode_switch_)

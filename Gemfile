@@ -4,4 +4,5 @@ source 'https://rubygems.org'
 # gem 'ncursesw', github: 'sup-heliotrope/ncursesw-ruby'
 gemspec
 
-gem 'vedeu', git: 'git@github.com:gavinlaking/vedeu.git'
+# gem 'vedeu', git: 'git@github.com:gavinlaking/vedeu.git'
+gem 'vedeu', path: '/media/Ubuntu-Data/OpenSource/vedeu'

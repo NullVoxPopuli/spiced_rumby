@@ -16,9 +16,10 @@ module SpicedRumby
         debug!
         root :welcome, :show
         log './gui.log'
+
         colour_mode 16777216
+        terminal_mode :raw
         # interactive!
-        # raw!
       end
 
 
