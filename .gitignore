@@ -8,6 +8,7 @@ test-hashfile
 debug.log
 *.sqlite3
 *.json
+*.log
 
 ## default ruby git ignore
 *.gem
