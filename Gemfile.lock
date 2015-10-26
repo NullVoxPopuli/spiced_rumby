@@ -1,20 +1,10 @@
-GIT
-  remote: git@github.com:gavinlaking/vedeu.git
-  revision: a6813a659acdc345d28bdec853ad06bd6f47303d
-  specs:
-    vedeu (0.6.38)
-      bundler (~> 1.10)
-      rake (~> 10.4)
-      ruby-prof (= 0.15.8)
-      thor (= 0.19.1)
-      vedeu_cli (= 0.0.7)
-
 PATH
   remote: .
   specs:
     spiced_rumby (0.7.0)
       libnotify
       meshchat
+      vedeu
 
 GEM
   remote: https://rubygems.org/
@@ -122,6 +112,12 @@ GEM
     tilt (2.0.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    vedeu (0.6.38)
+      bundler (~> 1.10)
+      rake (~> 10.4)
+      ruby-prof (= 0.15.8)
+      thor (= 0.19.1)
+      vedeu_cli (= 0.0.7)
     vedeu_cli (0.0.7)
       rake (~> 10.4)
       thor (= 0.19.1)
@@ -135,7 +131,6 @@ DEPENDENCIES
   rspec
   rubocop
   spiced_rumby!
-  vedeu!
 
 BUNDLED WITH
    1.10.6
