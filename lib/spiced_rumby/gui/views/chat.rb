@@ -8,10 +8,6 @@ module SpicedRumby
         def initialize(*)
           super
           self.messages = []
-          # self.class.add_message(:warning, "warning")
-          # self.class.add_message(:alert, "alert")
-          self.class.add_message(:whisper, "23/10/15 13:01:36 nvp->etk > hi, this is a whisper")
-          self.class.add_message(:chat, "23/10/15 13:01:36 nvp > hi, how are ya?")
         end
 
         def self.add_message(kind, text)
@@ -19,9 +15,14 @@ module SpicedRumby
             kind: kind,
             message: text
           }
+          Vedeu.log(type: :update, message: kind.to_s + ": " + text)
+          Vedeu.log(type: :update, message: "num: " + messages.count.to_s)
+          Vedeu.trigger(:_refresh_)
+          SpicedRumby::GUI::Controllers::Chat.chats[:all].render(messages)
+          SpicedRumby::GUI::Controllers::Chat.contacts_list.render
         end
 
-        def render
+        def render(messages = nil)
           Vedeu.render do
             view :chat do
               background SpicedRumby::GUI::Colorer::BACKGROUND
@@ -30,8 +31,9 @@ module SpicedRumby
                 align :top, :left, input.width, input.north
               end
 
+              messages ||= SpicedRumby::GUI::Views::Chat.messages
               # lines do
-                SpicedRumby::GUI::Views::Chat.messages.each do |message|
+                messages.each do |message|
                   SpicedRumby::GUI::Colorer.send(message[:kind], self, message[:message])
                 end
               # end

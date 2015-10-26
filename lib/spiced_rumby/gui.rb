@@ -1,6 +1,7 @@
 require 'spiced_rumby/gui/colorer'
 require 'spiced_rumby/gui/models/keymaps/_global_'
 require 'spiced_rumby/gui/models/keymaps/welcome'
+require 'spiced_rumby/gui/models/keymaps/input'
 require 'spiced_rumby/gui/models/keymaps/contacts'
 require 'spiced_rumby/gui/views/interfaces/chat'
 require 'spiced_rumby/gui/views/interfaces/contacts'

@@ -9,15 +9,56 @@ module SpicedRumby
       WHISPER_CHAT = '#777777'
       BACKGROUND = '#222222'
       FOREGROUND = '#ffffff'
+      WARNING = '#ffff00'
+      ALERT = '#ff0000'
+      INFO = '#999999'
+      SUCCESS = '#00ff00'
 
       module_function
 
-      def alert(p, msg)
-        msg
+      def add_line(renderer, msg)
+        renderer.line {
+          stream{
+            foreground CHAT
+            left msg
+          }
+        }
       end
 
-      def warning(p, msg)
-        msg
+      def alert(renderer, msg)
+        renderer.line {
+          stream{
+            foreground ALERT
+            left msg
+          }
+        }
+      end
+
+      def info(renderer, msg)
+        renderer.line {
+          stream{
+            foreground INFO
+            left msg
+          }
+        }
+      end
+
+      def warning(renderer, msg)
+        renderer.line {
+          stream{
+            foreground WARNING
+            left msg
+          }
+        }
+      end
+
+      def success(renderer, msg)
+        renderer.line {
+          stream{
+            foreground SUCCESS
+            left msg
+          }
+        }
       end
 
       def chat(renderer, msg)

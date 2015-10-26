@@ -3,11 +3,14 @@ module SpicedRumby
     module Controllers
       class Chat < Vedeu::ApplicationController
         controller_name :chat
-
         action :show
+
+        cattr_accessor :chats
+        cattr_accessor :contacts_list
 
 
         def show
+          self.class.chats ||= {}
           Vedeu.trigger(:_hide_interface_, :welcome)
 
           Vedeu.trigger(:_show_group_, :main)
@@ -19,9 +22,12 @@ module SpicedRumby
             Vedeu.bind(:_menu_prev_, :contacts)
           }
 
-          Views::Contacts.new.render
+          self.class.contacts_list = Views::Contacts.new
+          contacts_list.render
           Views::Input.new.render
-          Views::Chat.new.render
+          all = Views::Chat.new
+          all.render
+          self.class.chats[:all] = all
 
 
           Vedeu.trigger(:_focus_by_name_, :input)
