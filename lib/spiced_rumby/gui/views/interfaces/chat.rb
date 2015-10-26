@@ -10,8 +10,9 @@ Vedeu.interface :chat do
   # end
 
   keymap do
-    key('q') { Vedeu.exit }
-    key('t') { } # to chat
+    key(:ctrl_c) { Vedeu.exit }
+    key(:tab){ Vedeu.focus_next }
+    key('t') { Vedeu.focus_by_name(:input) } # to chat
     key('b') { } # to block
     key('w') { } # to whisper
   end
