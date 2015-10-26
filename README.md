@@ -22,7 +22,8 @@ Or, if you just download the zip / clone the repo:
 
 ```bash
 bundle install # to install ruby dependencies
-./run
+./run # to run the fancy terminal-ui
+./run bash # to run the debug / cli-native ui
 ```
 
 # Dependencies
