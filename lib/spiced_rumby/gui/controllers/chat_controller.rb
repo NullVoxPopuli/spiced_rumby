@@ -6,10 +6,6 @@ module SpicedRumby
 
         action :show
 
-        Vedeu.bind(:_command_) do |data|
-          log(type: :info, message: data)
-          MeshChat::CLI.create_input(data)
-        end
 
         def show
           Vedeu.trigger(:_hide_interface_, :welcome)
