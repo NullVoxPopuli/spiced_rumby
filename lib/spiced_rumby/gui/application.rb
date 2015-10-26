@@ -13,7 +13,8 @@ module SpicedRumby
       # }
 
 
-      Vedeu.bind(:_command_) do |data|
+      Vedeu.bind(:_editor_execute_) do |data|
+         log(type: :info, message: data)
         MeshChat::CLI.create_input(data)
       end
 
