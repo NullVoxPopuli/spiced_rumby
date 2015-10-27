@@ -12,14 +12,6 @@ module SpicedRumby
               border do
                 title  "#{SpicedRumby::NAME}: v#{SpicedRumby::VERSION} - #{current_chat}"
               end
-
-              geometry do
-                y Vedeu.height - 5
-                x 1
-                xn use(:contacts).west
-                yn Vedeu.height
-                # align :bottom, :left, Vedeu.width - use(:contacts).width, 5
-              end
             end
           end
         end

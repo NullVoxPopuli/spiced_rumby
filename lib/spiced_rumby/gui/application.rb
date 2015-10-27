@@ -19,7 +19,7 @@ module SpicedRumby
       end
 
       Vedeu.configure do
-        # debug!
+        debug!
         root :welcome, :show
         log './gui.log'
         colour_mode 16777216
