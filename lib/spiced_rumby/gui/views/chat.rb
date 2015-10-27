@@ -18,6 +18,7 @@ module SpicedRumby
           Vedeu.log(type: :update, message: kind.to_s + ": " + text.to_s)
           Vedeu.log(type: :update, message: "num: " + messages.count.to_s)
           Vedeu.trigger(:_refresh_)
+          Vedeu.trigger(:_cursor_bottom_, :chat)
           SpicedRumby::GUI::Controllers::Chat.chats[:all].render(messages)
           SpicedRumby::GUI::Controllers::Chat.contacts_list.render
         end
