@@ -46,6 +46,11 @@ For encryption and RSA key generation
 sudo apt-get install openssl
 ```
 
+For the sqlite3 gem
+```bash
+sudo apt-get install libsqlite3-dev
+```
+
 
 # Credits
 [Icon by Google](https://www.google.com/design/icons/)
