@@ -9,11 +9,6 @@ Vedeu.interface :chat do
     title  "#{SpicedRumby::NAME}: v#{SpicedRumby::VERSION}"
   end
 
-  geometry do
-    align :top, :left, use(:input).width, use(:input).north
-  end
-
-
   keymap do
     key(:ctrl_c) { Vedeu.exit }
     key(:tab)    { Vedeu.focus_next }

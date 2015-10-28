@@ -26,8 +26,10 @@ module SpicedRumby
         def render(messages = nil)
           Vedeu.render do
             view :chat do
-              background SpicedRumby::GUI::Colorer::BACKGROUND
-
+              background SpicedRumby::GUI::Colorer::BACKGROUND  
+              geometry do
+                align :top, :left, use(:input).width, use(:input).north
+              end
 
               messages ||= SpicedRumby::GUI::Views::Chat.messages
               # lines do
