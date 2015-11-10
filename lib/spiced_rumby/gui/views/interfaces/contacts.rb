@@ -1,7 +1,7 @@
 Vedeu.interface :contacts do
   delay 0.5
   visible false
-  zindex 1
+  # zindex 1
   background '#222222'
   cursor false
 
