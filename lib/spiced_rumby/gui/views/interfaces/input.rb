@@ -18,6 +18,4 @@ Vedeu.interface :input do
   group :main
 
   editable!
-
-
 end
