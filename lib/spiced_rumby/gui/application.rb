@@ -3,7 +3,7 @@ module SpicedRumby
 
     class Application
       Vedeu.bind(:_initialize_){
-          Vedeu.trigger(:_goto_, :welcome, :show)
+        Vedeu.trigger(:_goto_, :welcome, :show)
       }
 
       Vedeu.bind(:_command_) do |data|

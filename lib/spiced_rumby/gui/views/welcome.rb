@@ -2,8 +2,6 @@ module SpicedRumby
   module GUI
     module Views
       class Welcome < Vedeu::ApplicationView
-
-
         def render
 
           width = Vedeu.width
