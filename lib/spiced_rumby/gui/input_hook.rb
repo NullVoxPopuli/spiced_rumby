@@ -11,7 +11,7 @@ module SpicedRumby
 
       # called every time meshchat wants a line of text from the user
       def get_input
-        Vedeu.read(nil, mode: :cooked)
+        Vedeu.read(nil, mode: :fake)
       end
 
     end
