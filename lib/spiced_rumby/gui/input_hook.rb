@@ -1,6 +1,6 @@
 module SpicedRumby
-  module Debug
-    class CLIInput < MeshChat::CLI::Base
+  module GUI
+    class InputHook < MeshChat::CLI::Base
       class << self
         def autocompletes
           commands = MeshChat::CLI::COMMAND_MAP.map{ |k, v| "/#{k}" }
@@ -11,12 +11,9 @@ module SpicedRumby
 
       # called every time meshchat wants a line of text from the user
       def get_input
-        # update auto completion
-        completion = proc{ |s| self.class.autocompletes.grep(/^#{Regexp.escape(s)}/) }
-        Readline.completion_proc = completion
-
-        Readline.readline('> ', true)
+        Vedeu.read(nil, mode: :cooked)
       end
+
     end
   end
 end

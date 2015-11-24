@@ -42,6 +42,7 @@ module SpicedRumby
       client_name: NAME,
       client_version: VERSION,
       display: GUI::MeshChatHook,
+      input:  GUI::InputHook,
       notifier: Notifier,
       on_display_start: ->{ MeshChat::CLI.check_startup_settings }
     )

@@ -1,4 +1,5 @@
 require 'spiced_rumby/gui/colorer'
+require 'spiced_rumby/gui/input_hook'
 require 'spiced_rumby/gui/models/keymaps/_global_'
 require 'spiced_rumby/gui/models/keymaps/welcome'
 require 'spiced_rumby/gui/models/keymaps/input'
