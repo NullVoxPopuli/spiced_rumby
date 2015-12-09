@@ -14,11 +14,13 @@ module SpicedRumby
             kind: kind,
             message: text
           }
-          Vedeu.log(type: :update, message: kind.to_s + ': ' + text.to_s)
-          Vedeu.log(type: :update, message: 'num: ' + messages.count.to_s)
-          Vedeu.trigger(:_cursor_bottom_, :chat)
+
+          Vedeu.log(type: :info, message: kind.to_s + ': ' + text.to_s)
+          Vedeu.log(type: :info, message: 'num: ' + messages.count.to_s)
+
           SpicedRumby::GUI::Controllers::Chat.chats[:all].render(messages)
           SpicedRumby::GUI::Controllers::Chat.contacts_list.render
+          Vedeu.trigger(:_cursor_bottom_, :chat)
         end
 
         def render(messages = nil)

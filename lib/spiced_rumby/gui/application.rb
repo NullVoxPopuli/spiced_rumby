@@ -9,7 +9,6 @@ module SpicedRumby
         Vedeu.log(type: :info, message: data.inspect.to_s)
         Vedeu.log(type: :info, message: data.class.name)
         MeshChat::CLI.create_input(data)
-        GUI::Controllers::Chat.contacts_list.render
       end
 
       Vedeu.configure do

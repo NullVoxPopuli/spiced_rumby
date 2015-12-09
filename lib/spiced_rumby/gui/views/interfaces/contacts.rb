@@ -1,7 +1,7 @@
 Vedeu.interface :contacts do
   delay 0.5
   visible false
-  cursor false
+  cursor true
   # zindex 1
   background SpicedRumby::GUI::Colorer::BACKGROUND
 
