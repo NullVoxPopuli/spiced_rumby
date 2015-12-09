@@ -1,7 +1,9 @@
 Vedeu.interface :chat do
   # delay 0.5
   visible false
-  cursor false
+  # cursor needs to be enabled to scroll
+  cursor true
+
   border do
     title "#{SpicedRumby::NAME}: v#{SpicedRumby::VERSION}"
     background SpicedRumby::GUI::Colorer::BACKGROUND

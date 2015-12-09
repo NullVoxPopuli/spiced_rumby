@@ -11,7 +11,7 @@ module SpicedRumby
         end
 
         def self.names
-          @names_menu ||= Vedeu.trigger(:_menu_view_, :contacts)
+          Vedeu.trigger(:_menu_view_, :contacts)
         end
 
         def render
