@@ -12,9 +12,9 @@ CodeClimate::TestReporter.start
 require 'spiced_rumby'
 
 SimpleCov.start do
-  add_filter "/lib/spiced_rumby/display/bash/"
-  add_filter "/lib/spiced_rumby/display/null/"
-  add_filter "/lib/spiced_rumby/display/terminal_curses/"
+  add_filter '/lib/spiced_rumby/display/bash/'
+  add_filter '/lib/spiced_rumby/display/null/'
+  add_filter '/lib/spiced_rumby/display/terminal_curses/'
 end
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |file| require file }

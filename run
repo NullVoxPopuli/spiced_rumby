@@ -6,7 +6,6 @@ current_dir = File.dirname(__FILE__)
 lib = current_dir + '/lib/'
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-
 require current_dir + '/lib/spiced_rumby'
 
 SpicedRumby.start

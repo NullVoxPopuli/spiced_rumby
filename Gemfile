@@ -5,4 +5,4 @@ source 'https://rubygems.org'
 gemspec
 
 # gem 'vedeu', git: 'git@github.com:gavinlaking/vedeu.git'
-#gem 'vedeu', path: '/media/Ubuntu-Data/OpenSource/vedeu'
+# gem 'vedeu', path: '/media/Ubuntu-Data/OpenSource/vedeu'

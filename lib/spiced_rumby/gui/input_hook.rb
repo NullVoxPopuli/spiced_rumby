@@ -3,8 +3,8 @@ module SpicedRumby
     class InputHook < MeshChat::CLI::Base
       class << self
         def autocompletes
-          commands = MeshChat::CLI::COMMAND_MAP.map{ |k, v| "/#{k}" }
-          aliases = MeshChat::Node.all.map{ |n| "#{n.alias_name}" }
+          commands = MeshChat::CLI::COMMAND_MAP.map { |k, _v| "/#{k}" }
+          aliases = MeshChat::Node.all.map { |n| "#{n.alias_name}" }
           commands + aliases
         end
       end
@@ -13,7 +13,6 @@ module SpicedRumby
       def get_input
         Vedeu.read(nil, mode: :fake)
       end
-
     end
   end
 end

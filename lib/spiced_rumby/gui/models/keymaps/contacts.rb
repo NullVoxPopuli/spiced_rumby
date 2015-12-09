@@ -1,14 +1,22 @@
 Vedeu.keymap :contacts do
   key(:ctrl_c) { Vedeu.exit }
-  key('t') { } # to chat
-  key('b') { } # to block
-  key('w') { } # to whisper
-  keys(:up, :left){ Vedeu.trigger(:_menu_prev_, :contacts) }
-  keys(:down, :right){ Vedeu.trigger(:_menu_next_, :contacts) }
-  key(:enter){
+  key('t') do # to chat
+    Vedeu.trigger(:_focus_by_name_, :input)
+  end
+
+  key('b') {} # to block
+  key('w') {} # to whisper
+
+  keys(:up, :left) do
+    Vedeu.trigger(:_menu_prev_, :contacts)
+    Vedeu.trigger(:update)
+  end
+  keys(:down, :right) do
+    Vedeu.trigger(:_menu_next_, :contacts)
+    Vedeu.trigger(:update)
+  end
+  key(:enter) do
     Vedeu.trigger(:_menu_select_, :contacts)
-    # Vedeu.trigger(:select, Vedeu.trigger(:_menu_selected_, :contacts))
-    # Vedeu.trigger(:update)
-    # log(type: :info, message: 'enter pressed')
-  }
+    Vedeu.trigger(:update)
+  end
 end

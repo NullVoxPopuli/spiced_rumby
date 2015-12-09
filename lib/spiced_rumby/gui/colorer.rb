@@ -13,90 +13,96 @@ module SpicedRumby
       ALERT = '#ff0000'
       INFO = '#999999'
       SUCCESS = '#00ff00'
+      ONLINE_CONTACT = FOREGROUND
+      OFFLINE_CONTACT = '#444444'
+      SELECTED_CONTACT_BACKGROUND = '#333333'
 
       module_function
 
       def add_line(renderer, msg)
-        renderer.line {
-          stream{
+        renderer.line do
+          stream do
             foreground CHAT
             left msg
-          }
-        }
+          end
+        end
       end
 
       def alert(renderer, msg)
-        renderer.line {
-          stream{
+        renderer.line do
+          stream do
             foreground ALERT
             left msg
-          }
-        }
+          end
+        end
       end
 
       def info(renderer, msg)
-        renderer.line {
-          stream{
+        renderer.line do
+          stream do
             foreground INFO
             left msg
-          }
-        }
+          end
+        end
       end
 
       def warning(renderer, msg)
-        renderer.line {
-          stream{
+        renderer.line do
+          stream do
             foreground WARNING
             left msg
-          }
-        }
+          end
+        end
       end
 
       def success(renderer, msg)
-        renderer.line {
-          stream{
+        renderer.line do
+          stream do
             foreground SUCCESS
             left msg
-          }
-        }
+          end
+        end
       end
 
       def chat(renderer, msg)
         time, name, message = split_chat(msg)
-        renderer.line{
+        Vedeu.log(type: :info, message: 'coloring message pieces:')
+        Vedeu.log(type: :info, message: time.to_s)
+        Vedeu.log(type: :info, message: name.to_s)
+        Vedeu.log(type: :info, message: message.to_s)
 
-          stream {
+        renderer.line do
+          stream do
             foreground TIME
             left time
-          }
-          stream{
+          end
+          stream do
             foreground NAME
             left name
-          }
-          stream {
+          end
+          stream do
             foreground CHAT
             left message
-          }
-        }
+          end
+        end
       end
 
       def whisper(renderer, msg)
         time, name, message = split_chat(msg)
-        renderer.line{
-
-          stream {
+        renderer.line do
+          stream do
             foreground WHISPER_TIME
             left time
-          }
-          stream{
+          end
+          stream do
             foreground WHISPER_NAME
             left name
-          }
-          stream {
+          end
+          stream do
             foreground WHISPER_CHAT
             left message
-          }
-        }
+          end
+        end
       end
 
       def split_chat(msg)

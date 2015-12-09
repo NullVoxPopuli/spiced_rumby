@@ -11,11 +11,10 @@ require 'spiced_rumby/notifier'
 module SpicedRumby
   NAME = 'Spiced Rumby'
 
-
   module_function
 
   def start
-    is_debugging = ['nogui', 'bash', 'b', 'd', 'debug'].include?(ARGV.first)
+    is_debugging = %w(nogui bash b d debug).include?(ARGV.first)
     is_debugging ? debug_start : gui_start
   end
 
@@ -29,7 +28,7 @@ module SpicedRumby
       display: Debug::CLIOutput,
       input: Debug::CLIInput,
       notifier: Notifier,
-      on_display_start: ->{ MeshChat::CLI.check_startup_settings }
+      on_display_start: -> { MeshChat::CLI.check_startup_settings }
     )
   end
 
@@ -44,8 +43,7 @@ module SpicedRumby
       display: GUI::MeshChatHook,
       input:  GUI::InputHook,
       notifier: Notifier,
-      on_display_start: ->{ MeshChat::CLI.check_startup_settings }
+      on_display_start: -> { MeshChat::CLI.check_startup_settings }
     )
   end
-
 end
