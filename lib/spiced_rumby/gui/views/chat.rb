@@ -18,8 +18,11 @@ module SpicedRumby
           Vedeu.log(type: :info, message: kind.to_s + ': ' + text.to_s)
           Vedeu.log(type: :info, message: 'num: ' + messages.count.to_s)
 
+          # update the current chat
           SpicedRumby::GUI::Controllers::Chat.chats[:all].render(messages)
+          # update the contacts list (incase of disconnections / reconnections)
           SpicedRumby::GUI::Controllers::Chat.contacts_list.render
+          # scroll to the bottom of the chat
           Vedeu.trigger(:_cursor_bottom_, :chat)
         end
 
@@ -27,13 +30,9 @@ module SpicedRumby
           Vedeu.render do
             view :chat do
               messages ||= SpicedRumby::GUI::Views::Chat.messages
-
-              # lines do
               messages.each do |message|
                 SpicedRumby::GUI::Colorer.send(message[:kind], self, message[:message])
               end
-              # end
-              background SpicedRumby::GUI::Colorer::BACKGROUND
             end
           end
         end

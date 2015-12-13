@@ -9,14 +9,14 @@ Vedeu.keymap :contacts do
 
   keys(:up, :left) do
     Vedeu.trigger(:_menu_prev_, :contacts)
-    Vedeu.trigger(:update)
+    Vedeu.trigger(:redraw_contacts)
   end
   keys(:down, :right) do
     Vedeu.trigger(:_menu_next_, :contacts)
-    Vedeu.trigger(:update)
+    Vedeu.trigger(:redraw_contacts)
   end
   key(:enter) do
     Vedeu.trigger(:_menu_select_, :contacts)
-    Vedeu.trigger(:update)
+    Vedeu.trigger(:redraw_contacts)
   end
 end

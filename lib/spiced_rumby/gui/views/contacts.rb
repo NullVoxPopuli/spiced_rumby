@@ -7,51 +7,47 @@ module SpicedRumby
         end
 
         def self.contacts
-          ['All Chat'] + nodes
+          ['All Chat', "Other Chat"] + nodes
         end
 
-        def self.names
+        def names
           Vedeu.trigger(:_menu_view_, :contacts)
         end
 
         def render
-          Vedeu.render do
+          Vedeu.renders do
             view :contacts do
               background SpicedRumby::GUI::Colorer::BACKGROUND
 
-              Views::Contacts.names.each do |sel, cur, node|
-                is_all_chat = (node == 'All Chat')
+              names.each do |sel, cur, node|
+                is_node = node.is_a?(MeshChat::Node)
+                name = is_node ? node.alias_name : node
+
+                is_online = node.respond_to?(:online?) ? node.online? : true
+                name_color = is_online ? Colorer::ONLINE_CONTACT : Colorer::OFFLINE_CONTACT
+
                 line do
+                  # the selector
                   if sel && cur
                     stream do
                       foreground '#bb0000'
-                      left '* '
+                      text '* '
                     end
                   elsif cur
                     stream do
                       foreground '#00bb00'
-                      left '> '
+                      text '> '
                     end
                   elsif sel
                     stream do
                       foreground '#0000bb'
-                      left '* '
+                      text '* '
                     end
                   end
 
                   stream do
-                    if is_all_chat
-                      foreground SpicedRumby::GUI::Colorer::ONLINE_CONTACT
-                      left node
-                    else
-                      if node.online?
-                        foreground SpicedRumby::GUI::Colorer::ONLINE_CONTACT
-                      else
-                        foreground SpicedRumby::GUI::Colorer::OFFLINE_CONTACT
-                      end
-
-                      left node.alias_name
-                    end
+                    foreground name_color
+                    text name
                   end
                 end
               end

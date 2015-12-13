@@ -23,7 +23,7 @@ module SpicedRumby
         renderer.line do
           stream do
             foreground CHAT
-            left msg
+            text msg, mode: :wrap
           end
         end
       end
@@ -32,7 +32,7 @@ module SpicedRumby
         renderer.line do
           stream do
             foreground ALERT
-            left msg
+            text msg#, mode: :wrap
           end
         end
       end
@@ -41,7 +41,7 @@ module SpicedRumby
         renderer.line do
           stream do
             foreground INFO
-            left msg
+            text msg, mode: :wrap
           end
         end
       end
@@ -50,7 +50,7 @@ module SpicedRumby
         renderer.line do
           stream do
             foreground WARNING
-            left msg
+            text msg, mode: :wrap
           end
         end
       end
@@ -59,7 +59,7 @@ module SpicedRumby
         renderer.line do
           stream do
             foreground SUCCESS
-            left msg
+            text msg, mode: :wrap
           end
         end
       end
@@ -74,15 +74,15 @@ module SpicedRumby
         renderer.line do
           stream do
             foreground TIME
-            left time
+            text time
           end
           stream do
             foreground NAME
-            left name
+            text name
           end
           stream do
             foreground CHAT
-            left message
+            text message
           end
         end
       end
@@ -92,15 +92,15 @@ module SpicedRumby
         renderer.line do
           stream do
             foreground WHISPER_TIME
-            left time
+            text time
           end
           stream do
             foreground WHISPER_NAME
-            left name
+            text name
           end
           stream do
             foreground WHISPER_CHAT
-            left message
+            text message, mode: :wrap
           end
         end
       end
