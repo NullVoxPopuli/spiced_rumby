@@ -1,6 +1,11 @@
 # Spiced Rumby [![Build Status](https://travis-ci.org/NullVoxPopuli/spiced_rumby.svg)](https://travis-ci.org/NullVoxPopuli/spiced_rumby) [![Code Climate](https://codeclimate.com/github/NullVoxPopuli/spiced_rumby/badges/gpa.svg)](https://codeclimate.com/github/NullVoxPopuli/spiced_rumby) [![Test Coverage](https://codeclimate.com/github/NullVoxPopuli/spiced_rumby/badges/coverage.svg)](https://codeclimate.com/github/NullVoxPopuli/spiced_rumby/coverage)
 A ruby gem that acts as a [mesh-chat](https://github.com/neuravion/mesh-chat) client.
 
+## Update May 11, 2016
+This gem is changing a bit to just be a GUI wrapper around the core functionality ([found here](https://github.com/NullVoxPopuli/meshchat)]. I'm still looking in to whether or not I want to do a GTK3 Native app, or if I want to transpile everything into javascript to run on electrode. 
+
+To get started with the 'core' component, 'Meshchat', just run `gem install meshchat`
+
 ![Screenshot](http://i.imgur.com/Y88P4mw.png)
 # Installation
 
