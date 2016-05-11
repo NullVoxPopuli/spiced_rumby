@@ -6,6 +6,8 @@ This gem is changing a bit to just be a GUI wrapper around the core functionalit
 
 To get started with the 'core' component, 'Meshchat', just run `gem install meshchat`
 
+----------------------------------------------------------------
+
 ![Screenshot](http://i.imgur.com/Y88P4mw.png)
 # Installation
 
